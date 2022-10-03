@@ -29,7 +29,7 @@
 #            {input.query} \
 #                > {output[0]}
 #        """
-
+#
 rule bwa_mem2_mem_F0:
     input:
         reads = lambda wildcards: F0_samples.loc[(wildcards.F0_sample, wildcards.unit), ["fq1", "fq2"]].dropna().tolist(),
@@ -51,7 +51,7 @@ rule bwa_mem2_mem_F0:
     resources:
         mem_mb = 10000
     threads:
-        1
+        8
     shell:
         """
         bwa-mem2 mem \
@@ -62,7 +62,6 @@ rule bwa_mem2_mem_F0:
                 > {output} \
                     2> {log}
         """
-
 #rule replace_rg_F0:
 #    input:
 #        rules.map_reads_F0.output,
@@ -217,4 +216,30 @@ rule samtools_index_F0:
             {input[0]} \
             {output[0]} \
                 &> {log}
+        """
+
+rule get_coverage_F0:
+    input:
+        bam = rules.merge_bams_F0.output,
+        ind = rules.samtools_index_F0.output,
+    output:
+        os.path.join(
+            config["working_dir"],
+            "coverage/{ref}/bwamem2/{F0_sample}.txt"
+        ),
+    log:
+        os.path.join(
+            config["working_dir"], 
+            "logs/get_coverage/{ref}/{F0_sample}.log"
+        ),
+    resources:
+        mem_mb = 2000
+    container:
+        config["samtools"]
+    shell:
+        """
+        samtools coverage \
+            {input.bam} >\
+                {output[0]} \
+                    2> {log}
         """

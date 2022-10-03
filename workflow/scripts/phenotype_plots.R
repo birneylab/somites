@@ -13,6 +13,8 @@ library(tidyverse)
 ## Debug
 IN_F01 = here::here("data/F0_F1_period.xlsx")
 IN_F2 = here::here("config/phenos_with_reporter_genoandpheno.csv")
+OUT_PNG = here::here("book/plots/phenotypes/phenotypes.png")
+OUT_PDF = here::here("book/plots/phenotypes/phenotypes.pdf")
 
 ## True
 IN_F01 = snakemake@input[["f01"]]
@@ -26,11 +28,9 @@ OUT_PDF = snakemake@output[["pdf"]]
 
 # Intercept
 intercept_pal = c("#8D99AE", "#2b2d42")
-#names(intercept_pal) = c("even chr", "odd chr")
 
 # Mean
-mean_pal = c("#8AA399", "#084C61")
-#names(mean_pal) = c("even chr", "odd chr")
+mean_pal = c("#177E89", "#084C61")
 
 # PSM
 unsegmented_psm_area_pal = c("#D9D0DE", "#401F3E")
@@ -63,7 +63,22 @@ df_all = dplyr::bind_rows(df_f01, df_f2) %>%
 # Kruskal-Wallis test
 ########################
 
+## Difference in period intercept and mean between F2
+
+df_all %>% 
+  # take only F2 individuals
+  dplyr::filter(GEN == "F2") %>% 
+  # pivot longer to put phenotypes values in one column
+  tidyr::pivot_longer(cols = c(mean, intercept, unsegmented_psm_area),
+                      names_to = "phenotype",
+                      values_to = "value") %>% 
+  dplyr::filter(phenotype %in% c("intercept", "mean")) %>% 
+  dplyr::group_by(phenotype, Microscope) %>% 
+  dplyr::summarise(mean = mean(value))
+
 kw_df = df_all %>% 
+  # take only F2 individuals
+  dplyr::filter(GEN == "F2") %>% 
   # pivot longer to put phenotypes values in one column
   tidyr::pivot_longer(cols = c(mean, intercept, unsegmented_psm_area),
                       names_to = "phenotype",
@@ -100,8 +115,8 @@ mean_fig = df_all %>%
   geom_boxplot(width = 0.3) +
   ggbeeswarm::geom_beeswarm(aes(GEN, mean, colour = Microscope), size = 0.4, alpha = 0.5) +
   facet_wrap(~Microscope, ncol = 2) + 
-  scale_colour_manual(values = lighter(c("#8D99AE", "#2b2d42"), amount = 50)) +
-  scale_fill_manual(values = darker(c("#8D99AE", "#2b2d42"), amount = 50)) +
+  scale_colour_manual(values = lighter(mean_pal, amount = 50)) +
+  scale_fill_manual(values = darker(mean_pal, amount = 50)) +
   cowplot::theme_cowplot() +
   theme(strip.background.x = element_blank(),
         strip.text.x = element_text(face = "bold")) +
@@ -126,8 +141,8 @@ intercept_fig = df_all %>%
   geom_boxplot(width = 0.3) +
   ggbeeswarm::geom_beeswarm(aes(GEN, intercept, colour = Microscope), size = 0.4, alpha = 0.5) +
   facet_grid(cols = vars(Microscope)) + 
-  scale_colour_manual(values = lighter(c("#177e89", "#084c61"), amount = 50)) +
-  scale_fill_manual(values = darker(c("#177e89", "#084c61"), amount = 50)) +
+  scale_colour_manual(values = lighter(intercept_pal, amount = 50)) +
+  scale_fill_manual(values = darker(intercept_pal, amount = 50)) +
   cowplot::theme_cowplot() +
   theme(strip.background.x = element_blank(),
         strip.text.x = element_text(face = "bold")) +
@@ -152,8 +167,8 @@ psm_fig = df_all %>%
   geom_boxplot(width = 0.3) +
   ggbeeswarm::geom_beeswarm(aes(GEN, unsegmented_psm_area, colour = Microscope), size = 0.4, alpha = 0.5) +
   facet_grid(cols = vars(Microscope)) + 
-  scale_colour_manual(values = lighter(c("#D9D0DE", "#401F3E"), amount = 50)) +
-  scale_fill_manual(values = darker(c("#D9D0DE", "#401F3E"), amount = 50)) +
+  scale_colour_manual(values = lighter(unsegmented_psm_area_pal, amount = 50)) +
+  scale_fill_manual(values = darker(unsegmented_psm_area_pal, amount = 50)) +
   cowplot::theme_cowplot() +
   theme(strip.background.x = element_blank(),
         strip.text.x = element_text(face = "bold")) +

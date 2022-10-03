@@ -14,6 +14,8 @@ include: "rules/06_1_GWAS_GCTA.smk"
 include: "rules/06_2_GWAS_GCTA_split_invnorm.smk"
 include: "rules/06_3_GWAS_GCTA_split_microscope.smk"
 include: "rules/06_4_GWAS_GCTA_micr-adj.smk"
+include: "rules/08_relationship_metrics.smk"
+include: "rules/07_GCTA_reml.smk"
 include: "rules/07_annotations.smk"
 include: "rules/08_extra.smk"
 #include: "rules/05_F2_recomb_blocks.smk"
@@ -52,21 +54,32 @@ rule all:
 #                ref = config["refs"]
 #        ),
 ################
+## 02_2_F0_mapping.smk
+################
+#        expand(rules.get_coverage_F0.output,
+#                ref = "hdrr",
+#                F0_sample = ["Cab", "Kaga"]
+#        ),
+################
 ## 02_2_F0_calling.smk
 ################
 #        expand(rules.merge_variants.output,
 #                ref = config["refs"]
 #        ),
-        expand(rules.convert_F0_to_fasta.output,
-                ref = config["refs"],
-                F0_sample = "Kaga"
-        ),
+#        expand(rules.convert_F0_to_fasta.output,
+#                ref = config["refs"],
+#                F0_sample = "Kaga"
+#        ),
 ################
 ## 03_1_F1_mapping.smk
 ################
 #        expand(rules.samtools_index_F1.output,
 #                ref = config["refs"],
 #                F1_sample = F1_samples['SAMPLE']
+#        ),
+#        expand(rules.get_coverage_F1.output,
+#                ref = "hdrr",
+#                F1_sample = ["F1"]
 #        ),
 ################
 ## 03_2_F1_calling.smk
@@ -88,7 +101,7 @@ rule all:
 #                sample = ["Cab", "Kaga", "F1"],
 #                bin_length = 5000
 #        ),
-#        expand(rules.circos_homozygosity.output.plot,
+#        expand(rules.circos_homozygosity.output,
 #                ref = config["refs"],
 #                bin_length = 5000,
 #                sample = ["Cab", "Kaga", "F1"]
@@ -337,6 +350,25 @@ rule all:
 #                microscope = config["microscopes"]
 #        ),
 ################
+## 05_2_F2_calling.smk
+################
+        expand(rules.make_grm_man.output,
+            ref = "hdrr",
+            max_reads = "None",
+            bin_length = 5000,
+            cov = 0.8
+        ),
+################
+## 07_GCTA_reml.smk
+################
+        expand(rules.run_reml_invnorm.output,
+            ref = "hdrr",
+            max_reads = "None",
+            bin_length = 5000,
+            cov = 0.8,
+            phenotype = "intercept"
+        ),
+################
 ## 06_4_GWAS_GCTA_micr-adj.smk
 ################
 #        expand(rules.get_manhattan_gcta_micr_adj.output,
@@ -371,4 +403,6 @@ rule all:
 #                cov = 0.8,
 #                phenotype = "intercept",
 #        ),
-        rules.phenotype_plots.output,
+#        rules.phenotype_plots.output,
+#        rules.mean_hom_and_het_F0_F1.output,
+

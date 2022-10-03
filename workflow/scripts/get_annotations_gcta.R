@@ -12,11 +12,14 @@ library(biomaRt)
 # Get variables
 
 ## Debug
-#RES = "/hps/nobackup/birney/users/ian/somites/gcta/mlma_loco_invnorm/true/hdrr/None/5000/0.8/intercept.loco.mlma"
-#MIN_P = "/hps/nobackup/birney/users/ian/somites/gcta/mlma_loco_invnorm/min_p/hdrr/None/5000/0.8/intercept.csv"
-#SITES = "/hps/nobackup/birney/users/ian/somites/sites_files/F0_Cab_Kaga/hdrr/homo_divergent/F1_het_min_DP.txt"
-#BIN_LENGTH = "5000" %>% 
-#  as.numeric()
+RES = "/hps/nobackup/birney/users/ian/somites/gcta/mlma_loco_invnorm/true/hdrr/None/5000/0.8/intercept.loco.mlma"
+RES = "/hps/nobackup/birney/users/ian/somites/gcta/mlma_loco/true/hdrr/None/5000/0.8/unsegmented_psm_area/None.loco.mlma"
+MIN_P = "/hps/nobackup/birney/users/ian/somites/gcta/mlma_loco_invnorm/min_p/hdrr/None/5000/0.8/intercept.csv"
+MIN_P = "/hps/nobackup/birney/users/ian/somites/gcta/mlma_loco/min_p/hdrr/None/5000/0.8/unsegmented_psm_area/None.csv"
+REGIONS = "/hps/software/users/birney/ian/repos/somites/results/annotations_psm/hdrr/None/5000/0.8/unsegmented_psm_area/regions.csv"
+SITES = "/hps/nobackup/birney/users/ian/somites/sites_files/F0_Cab_Kaga/hdrr/homo_divergent/F1_het_min_DP.txt"
+BIN_LENGTH = "5000" %>% 
+  as.numeric()
 
 ## True
 RES = snakemake@input[["res"]]
@@ -46,6 +49,14 @@ results = readr::read_tsv(RES) %>%
   dplyr::mutate(BIN = as.numeric(BIN)) %>% 
   # Get columns in correct order
   dplyr::select(CHROM = Chr, BIN, BIN_START, BIN_END, everything(), -bp)
+
+# Send regions to file
+results %>% 
+  group_by(CHROM) %>% 
+  summarise(`Bin start` = min(BIN_START), `Bin end` = max(BIN_END)) %>% 
+  mutate('Length (kb)' = round((`Bin end` - `Bin start`) / 1e3)) %>% 
+  readr::write_csv(REGIONS)
+  
 
 
 sites = readr::read_tsv(SITES,

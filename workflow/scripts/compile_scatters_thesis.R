@@ -165,7 +165,8 @@ out = cowplot::plot_grid(fig_list[[1]] +
                            theme(legend.position='none') +
                             theme(axis.title.y = element_blank()),
                           align = "hv", ncol = 2, axis = "tblr",
-                         labels = c("A", "B", "C", "D", "E", "F"))
+                         labels = c("A", "B", "C", "D", "E", "F"),
+                         label_size = 16)
 
 # Add legend
 out = cowplot::plot_grid(out,

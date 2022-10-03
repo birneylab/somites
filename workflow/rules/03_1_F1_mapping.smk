@@ -145,3 +145,29 @@ rule samtools_index_F1:
             {output[0]} \
                 2> {log}
         """
+
+rule get_coverage_F1:
+    input:
+        bam = rules.mark_duplicates_F1.output.bam,
+        ind = rules.samtools_index_F1.output,
+    output:
+        os.path.join(
+            config["working_dir"],
+            "coverage/{ref}/bwamem2/{F1_sample}.txt"
+        ),
+    log:
+        os.path.join(
+            config["working_dir"], 
+            "logs/get_coverage/{ref}/{F1_sample}.log"
+        ),
+    resources:
+        mem_mb = 2000
+    container:
+        config["samtools"]
+    shell:
+        """
+        samtools coverage \
+            {input.bam} >\
+                {output[0]} \
+                    2> {log}
+        """

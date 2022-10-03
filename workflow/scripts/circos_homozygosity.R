@@ -12,12 +12,12 @@ library(circlize)
 # Get variables
 
 ## Debug
-#IN_FILE = "/hps/nobackup/birney/users/ian/somites/genos/F0_and_F1/hdrr/counts/Cab/5000.csv"
-#CHROM_LENGTHS = here::here("config/hdrr_chrom_lengths.csv")
-#REF = "hdrr"
-#SAMPLE = "Cab"
-#BIN_LENGTH = 5000
-#PAL = "#43AA8B"
+IN_FILE = "/hps/nobackup/birney/users/ian/somites/genos/F0_and_F1/hdrr/counts/Cab/5000.csv"
+CHROM_LENGTHS = here::here("config/hdrr_chrom_lengths.csv")
+REF = "hdrr"
+SAMPLE = "Cab"
+BIN_LENGTH = 5000
+PAL = "#43AA8B"
 
 ## True
 IN_FILE = snakemake@input[["gt_counts"]]
@@ -27,7 +27,8 @@ SAMPLE = snakemake@params[["sample"]]
 BIN_LENGTH = snakemake@params[["bin_length"]] %>% 
   as.numeric()
 PAL = snakemake@params[["palette"]]
-OUT_PLOT = snakemake@output[["plot"]]
+OUT_PNG = snakemake@output[["png"]]
+OUT_PDF = snakemake@output[["pdf"]]
 
 # Get lighter/darker functions
 
@@ -77,9 +78,13 @@ n_vars = genos %>%
                 BIN_END = BIN * BIN_LENGTH) %>% 
   dplyr::select(CHROM, BIN_START, BIN_END, TOT_HITS) 
 
+########################
+# PNG
+########################
+
 # Set output
 
-png(OUT_PLOT,
+png(OUT_PNG,
     width = 20,
     height = 20,
     units = "cm",
@@ -186,3 +191,121 @@ circos.text(0, 0,
             facing = "clockwise",
             adj = c(0, -0.5),
             cex = 0.3*par("cex"))
+
+dev.off()
+
+########################
+# PDF
+########################
+
+# Set output
+
+pdf(OUT_PDF,
+    width = 7.8,
+    height = 7.8)
+
+# Create Circos plots
+
+circos.par(cell.padding = c(0, 0, 0, 0),
+           track.margin = c(0, 0),
+           gap.degree = c(rep(1, nrow(chroms) - 1), 8))
+
+# Initialize plot
+
+circos.initializeWithIdeogram(chroms,
+                              plotType = c("axis", "labels"),
+                              major.by = 1e7,
+                              axis.labels.cex = 0.25*par("cex"))
+
+if (SAMPLE == "F1"){
+  CENTER_LAB = paste(SAMPLE,
+                     "\nheterozygosity\nand\nvariant count",
+                     "\nwithin\n",
+                     BIN_LENGTH / 1000,
+                     "kb bins",
+                     "\n\n",
+                     REF,
+                     " reference",
+                     sep = "")
+} else {
+  CENTER_LAB = paste(SAMPLE,
+                     "\nhomozygosity\nand\nvariant count",
+                     "\nwithin\n",
+                     BIN_LENGTH / 1000,
+                     "kb bins",
+                     "\n\n",
+                     REF,
+                     " reference",
+                     sep = "")
+}
+# Add label to center
+text(0, 0, CENTER_LAB)
+
+# Add proportion of homozygosity
+
+circos.genomicTrack(homozyg,
+                    panel.fun = function(region, value, ...) {
+                      circos.genomicLines(region,
+                                          value,
+                                          type = "h",
+                                          col = PAL,
+                                          cex = 0.05)
+                    },
+                    track.height = 0.12,
+                    bg.border = NA,
+                    ylim = c(0, 1))
+# y-axis label
+circos.yaxis(side = "right",
+             at = c(0, 0.5, 1),
+             labels.cex = 0.25*par("cex"),
+             tick.length = 2
+)
+# y-axis title
+
+if (SAMPLE == "F1"){
+  AXIS_LAB = "proportion\nheterozygous"
+} else {
+  AXIS_LAB = "proportion\nhomozygous"
+}
+
+circos.text(0, 0.25,
+            labels = AXIS_LAB,
+            sector.index = "chr1",
+            facing = "clockwise",
+            adj = c(0, -0.5),
+            cex = 0.3*par("cex"))
+
+# Add number of hits
+
+## get max number of variants
+
+MAX_VARS = max(n_vars$TOT_HITS, na.rm = T)
+
+circos.genomicTrack(n_vars,
+                    panel.fun = function(region, value, ...) {
+                      circos.genomicLines(region,
+                                          value,
+                                          type = "h",
+                                          col = "#F3B700",
+                                          cex = 0.05)
+                    },
+                    track.height = 0.12,
+                    bg.border = NA,
+                    ylim = c(0, MAX_VARS))
+# y-axis label
+circos.yaxis(side = "right",
+             at = c(0, 500),
+             labels.cex = 0.25*par("cex"),
+             tick.length = 2
+)
+
+circos.text(0, 0,
+            labels = "N variants\nper bin",
+            sector.index = "chr1",
+            facing = "clockwise",
+            adj = c(0, -0.5),
+            cex = 0.3*par("cex"))
+
+dev.off()
+
+

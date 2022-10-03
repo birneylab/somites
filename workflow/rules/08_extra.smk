@@ -68,28 +68,28 @@ rule F2_chr3_pheno_by_gt:
     script:
         "../scripts/F2_chr3_pheno_by_gt.R"
 
-#rule compile_scatters_thesis:
-#    input:
-#        standard = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/A.csv",
-#        trans_probs = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/B.csv",
-#        var_0.01 = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/D.csv",
-#        var_0.33 = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/C.csv",
-#        var_0.8 = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/F.csv",
-#        var_1 = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/G.csv"
-#    output:
-#        png = "book/plots/thesis/scatter_collage.png",
-#        pdf = "book/plots/thesis/scatter_collage.pdf"
-#    log:
-#        os.path.join(
-#            config["working_dir"],
-#            "logs/compile_scatters_thesis/all.log"
-#        ),
-#    resources:
-#        mem_mb = 10000
-#    container:
-#        config["R_4.1.3"]
-#    script:
-#        "../scripts/compile_scatters_thesis.R"
+rule compile_scatters_thesis:
+    input:
+        standard = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/A.csv",
+        trans_probs = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/B.csv",
+        var_0_01 = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/D.csv",
+        var_0_33 = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/C.csv",
+        var_0_8 = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/F.csv",
+        var_1 = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/G.csv"
+    output:
+        png = "book/plots/thesis/scatter_collage.png",
+        pdf = "book/plots/thesis/scatter_collage.pdf"
+    log:
+        os.path.join(
+            config["working_dir"],
+            "logs/compile_scatters_thesis/all.log"
+        ),
+    resources:
+        mem_mb = 10000
+    container:
+        config["R_4.1.3"]
+    script:
+        "../scripts/compile_scatters_thesis.R"
 
 rule phenotype_plots:
     input:
@@ -109,4 +109,61 @@ rule phenotype_plots:
         config["R_4.1.3"]
     script:
         "../scripts/phenotype_plots.R"
-    
+
+rule invnorm_intercept_plot:
+    input:
+        f2 = config["phenotypes_file"]
+    output:
+        png = "book/plots/phenotypes/invnorm_intercept.png",
+        pdf = "book/plots/phenotypes/invnorm_intercept.pdf"
+    log:
+        os.path.join(
+            config["working_dir"],
+            "logs/invnorm_intercept_plot/all.log"
+        ),
+    resources:
+        mem_mb = 5000
+    container:
+        config["R_4.1.3"]
+    script:
+        "../scripts/invnorm_intercept_plot.R"
+
+rule mean_hom_and_het_F0_F1:
+    input:
+        expand(rules.trio_gt_counts_in_bins.output,
+            ref = "hdrr",
+            bin_length = 5000,
+            sample = ["Cab", "Kaga", "F1"]
+        ),
+    output:
+        csv = "data/mean_hom_het_F0_F1.csv",
+    log:
+        os.path.join(
+            config["working_dir"],
+            "logs/mean_hom_and_het_F0_F1/all.log"
+        ),
+    resources:
+        mem_mb = 5000
+    container:
+        config["R_4.1.3"]
+    script:
+        "../scripts/mean_hom_and_het_F0.R"
+
+rule coverage_plot_F0:
+    input:
+        rules.get_coverage_F0.output,
+    output:
+        png = "book/plots/coverage/F0_coverage.png",
+        pdf = "book/plots/coverage/F0_coverage.pdf",
+    log:
+        os.path.join(
+            config["working_dir"],
+            "logs/coverage_plot_F0/all.log"
+        ),
+    resources:
+        mem_mb = 2000
+    container:
+        config["R_4.1.3"]
+    script:
+        "../scripts/coverage_plot.R"    
+

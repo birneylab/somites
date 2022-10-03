@@ -13,11 +13,11 @@ library(ggbeeswarm)
 # Get variables
 
 ## Debug
-#BIN_LENGTH = as.numeric("5000")
-#IN_FILE = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn_true/None/5000/0.8.csv"
-#LOW_COV_SAMPLES = here::here("config/low_cov_samples.list")
-#COV = as.numeric("0.8")
-#MAX_READS = "None"
+BIN_LENGTH = as.numeric("5000")
+IN_FILE = "/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn_true/None/5000/0.8.csv"
+LOW_COV_SAMPLES = here::here("config/low_cov_samples.list")
+COV = as.numeric("0.8")
+MAX_READS = "None"
 
 ## True
 IN_FILE = snakemake@input[["input"]]
@@ -203,7 +203,7 @@ lane_cutoffs = cut(0:1, breaks = length(block_bounds_list), dig.lab = 7) %>%
 
 png(file=KARYOPLOT_NOMISS,
     width=7800,
-    height=round(37.6*N_SAMPLES),
+    height=round(32*N_SAMPLES),
     units = "px",
     res = 400)
 

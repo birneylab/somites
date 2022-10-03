@@ -93,7 +93,8 @@ rule circos_homozygosity:
         gt_counts = rules.trio_gt_counts_in_bins.output,
         chrom_lens = rules.get_chrom_lengths.output,
     output:
-        plot = "book/plots/circos/trio_homo/{ref}/{bin_length}/{sample}.png",
+        png = "book/plots/circos/trio_homo/{ref}/{bin_length}/{sample}.png",
+        pdf = "book/plots/circos/trio_homo/{ref}/{bin_length}/{sample}.pdf",
     log:
         os.path.join(
             config["working_dir"],
@@ -146,14 +147,15 @@ rule plot_SNP_counts_per_chr:
     input:
         rules.extract_homo_div_snps.output.sites,
     output:
-        plot = "book/plots/sites/snp_counts_per_chr/{ref}.png"
+        png = "book/plots/sites/snp_counts_per_chr/snp_counts_per_chr_{ref}.png",
+        pdf = "book/plots/sites/snp_counts_per_chr/snp_counts_per_chr_{ref}.pdf"
     log:
         os.path.join(
             config["working_dir"],
             "logs/plot_SNP_counts_per_chr/{ref}.log"
         ),
     container:
-        config["tidyverse_4.1.3"]
+        config["R_4.1.3"]
     resources:
         mem_mb = 5000
     script:

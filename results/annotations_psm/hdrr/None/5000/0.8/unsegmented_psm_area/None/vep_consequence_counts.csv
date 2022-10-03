@@ -1,0 +1,15 @@
+Consequence,Count
+intron variant,23189
+intergenic variant,9171
+downstream gene variant,8894
+upstream gene variant,8491
+3 prime UTR variant,2104
+synonymous variant,1141
+missense variant,716
+5 prime UTR variant,433
+"splice region variant,intron variant",184
+"splice region variant,synonymous variant",18
+"missense variant,splice region variant",7
+stop gained,2
+splice donor variant,1
+start lost,1

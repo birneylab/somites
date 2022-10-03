@@ -12,13 +12,14 @@ library(tidyverse)
 
 ## Debug
 
-#IN = "/hps/nobackup/birney/users/ian/somites/sites_files/F0_Cab_Kaga/hdrr/homo_divergent/F1_het_min_DP.txt"
-#OUT = here::here("book/plots/sites/snp_counts_per_chr/hdrr.png")
+IN = "/hps/nobackup/birney/users/ian/somites/sites_files/F0_Cab_Kaga/hdrr/homo_divergent/F1_het_min_DP.txt"
+PNG = here::here("book/plots/sites/snp_counts_per_chr/hdrr.png")
 
 ## True
 
 IN = snakemake@input[[1]]
-OUT = snakemake@output[["plot"]]
+PNG = snakemake@output[["png"]]
+PDF = snakemake@output[["pdf"]]
 
 
 df = readr::read_tsv(IN,
@@ -32,12 +33,22 @@ out = df %>%
   ggplot() +
   geom_col(aes(CHROM, n, fill = CHROM)) +
   guides(fill = "none") +
-  theme_bw() +
-  ggtitle("SNP count per chromosome")
+  cowplot::theme_cowplot() +
+  xlab("chromosome") + 
+  ylab("count") +
+  scale_y_continuous(labels = scales::comma)
 
-ggsave(OUT,
+ggsave(PNG,
        out,
        device = "png",
+       width = 9.6,
+       height = 6,
+       units = "in",
+       dpi = 400)
+
+ggsave(PDF,
+       out,
+       device = "pdf",
        width = 9.6,
        height = 6,
        units = "in",
