@@ -147,7 +147,7 @@ intercept_fig = df_all %>%
   theme(strip.background.x = element_blank(),
         strip.text.x = element_text(face = "bold")) +
   xlab("generation") +
-  ylab("period intercept") +
+  ylab("period intercept (minutes)") +
   guides(fill = "none",
          colour = "none") +
   # add p-value
@@ -173,7 +173,7 @@ psm_fig = df_all %>%
   theme(strip.background.x = element_blank(),
         strip.text.x = element_text(face = "bold")) +
   xlab("generation") +
-  ylab("unsegmented PSM area") +
+  ylab("unsegmented PSM area (pixels)") +
   guides(fill = "none",
          colour = "none") +
   # add p-value
@@ -186,26 +186,48 @@ psm_fig = df_all %>%
 
 ########### Together
 
+## OLD (all three phenotypes)
+#period_final = cowplot::plot_grid(intercept_fig,
+#                                  mean_fig,
+#                                  psm_fig,
+#                                  align = "hv",
+#                                  nrow = 3,
+#                                  labels = c("A", "B", "C"),
+#                                  label_size = 16)
+#
+#ggsave(OUT_PNG,
+#       device = "png",
+#       width = 11,
+#       height = 13.5,
+#       units = "in",
+#       dpi = 400)
+#
+#ggsave(OUT_PDF,
+#       device = "pdf",
+#       width = 11,
+#       height = 13.5,
+#       units = "in",
+#       dpi = 400)
+
+# NEW (two phenotypes)
+
 period_final = cowplot::plot_grid(intercept_fig,
-                                  mean_fig,
                                   psm_fig,
                                   align = "hv",
-                                  nrow = 3,
-                                  labels = c("A", "B", "C"),
+                                  nrow = 2,
+                                  labels = c("A", "B"),
                                   label_size = 16)
 
 ggsave(OUT_PNG,
        device = "png",
        width = 11,
-       height = 13.5,
+       height = 9,
        units = "in",
        dpi = 400)
 
 ggsave(OUT_PDF,
        device = "pdf",
        width = 11,
-       height = 13.5,
+       height = 9,
        units = "in",
        dpi = 400)
-
-
