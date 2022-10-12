@@ -1,6 +1,9 @@
 project:
   type: book
   output-dir: "../docs"
+  preview:
+    port: 8787
+    browser: true
 
 #book_filename: "book"
 #new_session: yes
@@ -14,6 +17,10 @@ project:
 book:
   title: "Somite periodicity notebook"
   author: "Ian Brettell"
+  search: true
+  repo-url: https://github.com/brettellebi/somites
+  repo-subdir: book
+  repo-actions: [edit]
   chapters:
     - index.qmd
     - 07-references.qmd

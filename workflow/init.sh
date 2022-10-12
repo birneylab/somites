@@ -102,6 +102,14 @@ rserver \
 ssh -L 8787:hl-codon-37-04:8787 proxy-codon
 
 ####################
+# Quarto
+####################
+bsub -q short -Is bash
+module load singularity-3.7.0-gcc-9.3.0-dp5ffrp
+singularity shell /hps/nobackup/birney/users/ian/containers/somites/R_4.1.3.sif
+quarto render book
+
+####################
 # Copying data from FTP to Codon cluster
 ####################
 
