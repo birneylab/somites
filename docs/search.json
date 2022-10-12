@@ -4,6 +4,6 @@
     "href": "index.html",
     "title": "Somite periodicity notebook",
     "section": "",
-    "text": "This book sets out the analysis of somite development periods, for Ali Ahmed Seleit in the Aulehla Group at EMBL Heidelberg.\n\n\n\n\n\n\nVideo by Ali Ahmed Seleit"
+    "text": "This book sets out the analysis of somite development periods, for Ali Ahmed Seleit in the Aulehla Group at EMBL Heidelberg.\n\n\nWarning in knitr::include_graphics(here::here(\"book/plots/\nsomite_period_zamzar.gif\")): It is highly recommended to use relative paths for\nimages. You had absolute paths: \"/hps/software/users/birney/ian/repos/somites/\nbook/plots/somite_period_zamzar.gif\"\n\n\n\n\n\nVideo by Ali Ahmed Seleit\n\n\n\n\n\n\n\nVideo by Ali Ahmed Seleit"
   }
 ]
