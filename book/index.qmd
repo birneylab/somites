@@ -1,4 +1,4 @@
-# About
+# About {-}
 
 This book sets out the analysis of somite development periods, for Ali Ahmed Seleit in the Aulehla Group at EMBL Heidelberg.
 

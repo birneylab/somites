@@ -18,14 +18,17 @@ book:
   search: true
   repo-url: https://github.com/brettellebi/somites
   repo-subdir: book
+  repo-branch: master
   repo-actions: [edit]
   chapters:
     - index.qmd
     - 01-background.qmd
+    - 02-phenotypes.qmd
     - 07-references.qmd
 
 format:
   html:
+    toc: true
     theme: zephyr
     fontsize: 0.9em
     bibliography: book.bib

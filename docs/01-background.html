@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Somite periodicity notebook - 2&nbsp; Background</title>
+<title>Somite periodicity notebook - 1&nbsp; Background</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -49,7 +49,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./07-references.html" rel="next">
+<link href="./02-phenotypes.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -89,7 +89,7 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Background</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Background</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -104,7 +104,7 @@ div.csl-indent {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Somite periodicity notebook</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/brettellebi/somites/tree/main/book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/brettellebi/somites/tree/master/book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -117,12 +117,17 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">About</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-background.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Background</span></a>
+  <a href="./01-background.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Background</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-phenotypes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Phenotypes of interest</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -142,7 +147,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Background</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Background</span></h1>
 </div>
 
 
@@ -156,13 +161,32 @@ div.csl-indent {
 
 </header>
 
-<p>Somites are the earliest primitive segmental structures that form from presomatic mesoderm cells (<strong>PSM</strong>) in the embryo <span class="citation" data-cites="kimPeriodSomiteSegmentation2011">(<a href="07-references.html#ref-kimPeriodSomiteSegmentation2011" role="doc-biblioref">Kim et al. 2011</a>)</span>, later differentiating into vertebrae, ribs, and skeletal muscles. Somite formation occurs rhythmically and sequentially, with the time between the formation of each pair of somites referred to as the “period”. The period of somite formation varies greatly between species <span class="citation" data-cites="matsudaSpeciesspecificSegmentationClock2020">(<a href="07-references.html#ref-matsudaSpeciesspecificSegmentationClock2020" role="doc-biblioref"><strong>matsudaSpeciesspecificSegmentationClock2020?</strong></a>)</span>, and is controlled by a molecular oscillator, known as the ‘segmentation clock’, which drives waves of gene expression in developmental pathways.</p>
-<p>It is not fully understood how the phase waves of the segmentation clock are initially established <span class="citation" data-cites="falkImagingOnsetOscillatory2022">(<a href="07-references.html#ref-falkImagingOnsetOscillatory2022" role="doc-biblioref"><strong>falkImagingOnsetOscillatory2022?</strong></a>)</span>. To identify the genetic basis of these phase waves, our collaborators Ali Seleit and Alexander Aulehla at EMBL-Heidelberg used a CRISPR-Cas9 knock-in approach <span class="citation" data-cites="seleitEndogenousProteinTagging2021">(<a href="07-references.html#ref-seleitEndogenousProteinTagging2021" role="doc-biblioref"><strong>seleitEndogenousProteinTagging2021?</strong></a>)</span> to establish a medaka <em>Cab</em> strain with an endogenous, fluorescing reporter gene (Her7-Venus) for the oscillation signalling pathway. This method allows them to image somite formation and extract quantitative measures for segmentation clock dynamics. They determined that the southern Japanese <em>Cab</em> strain and the northern Japanese <em>Kaga</em> strain have divergent somite periodicity, where <em>Kaga</em>’s tends to be faster, and <em>Cab</em>’s slower (<strong>Figure @ref(fig:F0-Cab-Kaga-HdrR)</strong>), and selected them as the parental strains in an F<sub>2</sub>-cross. This chapter sets out my bioinformatic contributions to the project by identifying the genetic variations associated with differences in somite periodicity.</p>
+<p>Somites are the earliest primitive segmental structures that form from presomatic mesoderm cells (<strong>PSM</strong>) in the embryo <span class="citation" data-cites="kimPeriodSomiteSegmentation2011">(<a href="07-references.html#ref-kimPeriodSomiteSegmentation2011" role="doc-biblioref">Kim et al. 2011</a>)</span>, later differentiating into vertebrae, ribs, and skeletal muscles. Somite formation occurs rhythmically and sequentially, with the time between the formation of each pair of somites referred to as the “period”. The period of somite formation varies greatly between species <span class="citation" data-cites="matsudaSpeciesspecificSegmentationClock2020">(<a href="07-references.html#ref-matsudaSpeciesspecificSegmentationClock2020" role="doc-biblioref">Matsuda et al. 2020</a>)</span>, and is controlled by a molecular oscillator, known as the ‘segmentation clock’, which drives waves of gene expression in developmental pathways.</p>
+<p>It is not fully understood how the phase waves of the segmentation clock are initially established <span class="citation" data-cites="falkImagingOnsetOscillatory2022">(<a href="07-references.html#ref-falkImagingOnsetOscillatory2022" role="doc-biblioref">Falk et al. 2022</a>)</span>. To identify the genetic basis of these phase waves, our collaborators Ali Seleit and Alexander Aulehla at EMBL-Heidelberg used a CRISPR-Cas9 knock-in approach <span class="citation" data-cites="seleitEndogenousProteinTagging2021">(<a href="07-references.html#ref-seleitEndogenousProteinTagging2021" role="doc-biblioref">Seleit, Aulehla, and Paix 2021</a>)</span> to establish a medaka <em>Cab</em> strain with an endogenous, fluorescing reporter gene (Her7-Venus) for the oscillation signalling pathway. This method allows them to image somite formation and extract quantitative measures for segmentation clock dynamics. They determined that the southern Japanese <em>Cab</em> strain and the northern Japanese <em>Kaga</em> strain have divergent somite periodicity, where <em>Kaga</em>’s tends to be faster, and <em>Cab</em>’s slower (<strong><a href="#fig-ali-f0-period">Figure&nbsp;<span>1.1</span></a></strong>), and selected them as the parental strains in an F<sub>2</sub>-cross. This chapter sets out my bioinformatic contributions to the project by identifying the genetic variations associated with differences in somite periodicity.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-ali-f0-period" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/ali/ali_period_F0_Cab_Kaga.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.1: Comparison of period for three inbred medaka strains (<em>Cab</em>, <em>Kaga</em> and <em>HdrR</em>). Kaga’s period is lower, and therefore it takes less time to form each somite than <em>Cab</em>. Figure generated by Ali Seleit.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-falkImagingOnsetOscillatory2022" class="csl-entry" role="doc-biblioentry">
+Falk, Henning J, Takehito Tomita, Gregor Mönke, Katie McDole, and Alexander Aulehla. 2022. <span>“Imaging the Onset of Oscillatory Signaling Dynamics During Mouse Embryo Gastrulation.”</span> <em>Development (Cambridge, England)</em> 149 (13): dev200083. <a href="https://doi.org/10.1242/dev.200083">https://doi.org/10.1242/dev.200083</a>.
+</div>
 <div id="ref-kimPeriodSomiteSegmentation2011" class="csl-entry" role="doc-biblioentry">
 Kim, Woong, Takaaki Matsui, Masataka Yamao, Makoto Ishibashi, Kota Tamada, Toru Takumi, Kenji Kohno, et al. 2011. <span>“The Period of the Somite Segmentation Clock Is Sensitive to <span>Notch</span> Activity.”</span> <em>Molecular Biology of the Cell</em> 22 (18): 3541–49. <a href="https://doi.org/10.1091/mbc.e11-02-0139">https://doi.org/10.1091/mbc.e11-02-0139</a>.
+</div>
+<div id="ref-matsudaSpeciesspecificSegmentationClock2020" class="csl-entry" role="doc-biblioentry">
+Matsuda, Mitsuhiro, Hanako Hayashi, Jordi Garcia-Ojalvo, Kumiko Yoshioka-Kobayashi, Ryoichiro Kageyama, Yoshihiro Yamanaka, Makoto Ikeya, Junya Toguchida, Cantas Alev, and Miki Ebisuya. 2020. <span>“Species-Specific Segmentation Clock Periods Are Due to Differential Biochemical Reaction Speeds.”</span> <em>Science</em> 369 (6510): 1450–55.
+</div>
+<div id="ref-seleitEndogenousProteinTagging2021" class="csl-entry" role="doc-biblioentry">
+Seleit, Ali, Alexander Aulehla, and Alexandre Paix. 2021. <span>“Endogenous Protein Tagging in Medaka Using a Simplified <span>CRISPR</span>/<span>Cas9</span> Knock-in Approach.”</span> <em>eLife</em> 10 (December): e75050. <a href="https://doi.org/10.7554/elife.75050">https://doi.org/10.7554/elife.75050</a>.
 </div>
 </div>
 
@@ -268,12 +292,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">About</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">About</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07-references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./02-phenotypes.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Phenotypes of interest</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
