@@ -1,9 +1,6 @@
 project:
   type: book
   output-dir: "../docs"
-  preview:
-    port: 8787
-    browser: true
 
 #book_filename: "book"
 #new_session: yes
@@ -13,6 +10,7 @@ project:
 #  ui:
 #    chapter_name: "Chapter "
 
+highlight-style: atom-one
 
 book:
   title: "Somite periodicity notebook"
@@ -23,11 +21,15 @@ book:
   repo-actions: [edit]
   chapters:
     - index.qmd
+    - 01-background.qmd
     - 07-references.qmd
 
 format:
   html:
-    theme: cosmo
+    theme: zephyr
+    fontsize: 0.9em
+    bibliography: book.bib
+    #backgroundcolor: "#3C1642"
 
 #  - "01-Data_processing_with_Snakemake.Rmd",
 #  - "02-F0_homozygosity.Rmd",

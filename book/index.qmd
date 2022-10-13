@@ -12,8 +12,6 @@ library(here)
 knitr::include_graphics(here::here("book/plots/somite_period_zamzar.gif"))
 ```
 
-![Video by Ali Ahmed Seleit](`r here::here("book/plots/somite_period_zamzar.gif")`)
-
 ```{r}
 #| include: FALSE
 # automatically create a bib database for R packages

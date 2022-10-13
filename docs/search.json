@@ -4,6 +4,20 @@
     "href": "index.html",
     "title": "Somite periodicity notebook",
     "section": "",
-    "text": "This book sets out the analysis of somite development periods, for Ali Ahmed Seleit in the Aulehla Group at EMBL Heidelberg.\n\n\nWarning in knitr::include_graphics(here::here(\"book/plots/\nsomite_period_zamzar.gif\")): It is highly recommended to use relative paths for\nimages. You had absolute paths: \"/hps/software/users/birney/ian/repos/somites/\nbook/plots/somite_period_zamzar.gif\"\n\n\n\n\n\nVideo by Ali Ahmed Seleit\n\n\n\n\n\n\n\nVideo by Ali Ahmed Seleit"
+    "text": "This book sets out the analysis of somite development periods, for Ali Ahmed Seleit in the Aulehla Group at EMBL Heidelberg.\n\n\n\n\n\nVideo by Ali Ahmed Seleit"
+  },
+  {
+    "objectID": "01-background.html",
+    "href": "01-background.html",
+    "title": "2  Background",
+    "section": "",
+    "text": "It is not fully understood how the phase waves of the segmentation clock are initially established (falkImagingOnsetOscillatory2022?). To identify the genetic basis of these phase waves, our collaborators Ali Seleit and Alexander Aulehla at EMBL-Heidelberg used a CRISPR-Cas9 knock-in approach (seleitEndogenousProteinTagging2021?) to establish a medaka Cab strain with an endogenous, fluorescing reporter gene (Her7-Venus) for the oscillation signalling pathway. This method allows them to image somite formation and extract quantitative measures for segmentation clock dynamics. They determined that the southern Japanese Cab strain and the northern Japanese Kaga strain have divergent somite periodicity, where Kaga’s tends to be faster, and Cab’s slower (Figure @ref(fig:F0-Cab-Kaga-HdrR)), and selected them as the parental strains in an F2-cross. This chapter sets out my bioinformatic contributions to the project by identifying the genetic variations associated with differences in somite periodicity.\n\n\n\n\nKim, Woong, Takaaki Matsui, Masataka Yamao, Makoto Ishibashi, Kota Tamada, Toru Takumi, Kenji Kohno, et al. 2011. “The Period of the Somite Segmentation Clock Is Sensitive to Notch Activity.” Molecular Biology of the Cell 22 (18): 3541–49. https://doi.org/10.1091/mbc.e11-02-0139."
+  },
+  {
+    "objectID": "07-references.html",
+    "href": "07-references.html",
+    "title": "References",
+    "section": "",
+    "text": "Kim, Woong, Takaaki Matsui, Masataka Yamao, Makoto Ishibashi, Kota\nTamada, Toru Takumi, Kenji Kohno, et al. 2011. “The Period of the\nSomite Segmentation Clock Is Sensitive to Notch\nActivity.” Molecular Biology of the Cell 22 (18):\n3541–49. https://doi.org/10.1091/mbc.e11-02-0139."
   }
 ]

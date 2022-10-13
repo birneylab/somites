@@ -74,6 +74,15 @@ singularity build --remote \
     $CONT \
     workflow/envs/R_4.1.3/R_4.1.3.def
 
+# Even newer R version with Quarto
+module load singularity-3.7.0-gcc-9.3.0-dp5ffrp
+bsub -M 20000 -Is bash
+cd /hps/software/users/birney/ian/repos/somites
+CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.2.1.sif
+singularity build --remote \
+    $CONT \
+    workflow/envs/R_4.2.1/R_4.2.1.def
+
 # Build R container for PhenotypeSimulator
 CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.1.0_PhenotypeSimulator.sif
 module load singularity-3.7.0-gcc-9.3.0-dp5ffrp
@@ -88,14 +97,15 @@ cd /hps/software/users/birney/ian/repos/somites
 module load singularity-3.7.0-gcc-9.3.0-dp5ffrp
 CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.1.0.sif
 CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.1.3.sif
-singularity shell --bind /hps/nobackup/birney/users/ian/R_tmp/R_4.1.3/rstudio_db:/var/lib/rstudio-server \
-                  --bind /hps/nobackup/birney/users/ian/R_tmp/R_4.1.3/tmp:/tmp \
-                  --bind /hps/nobackup/birney/users/ian/R_tmp/R_4.1.3/run:/run \
+CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.2.1.sif
+singularity shell --bind /hps/nobackup/birney/users/ian/R_tmp/R_4.2.1/rstudio_db:/var/lib/rstudio-server \
+                  --bind /hps/nobackup/birney/users/ian/R_tmp/R_4.2.1/tmp:/tmp \
+                  --bind /hps/nobackup/birney/users/ian/R_tmp/R_4.2.1/run:/run \
                   $CONT
 # Then run rserver, setting path of config file containing library path
 rstudio-server kill-all
 rserver \
-    --rsession-config-file /hps/software/users/birney/ian/repos/somites/workflow/envs/R_4.1.3/rsession.conf \
+    --rsession-config-file /hps/software/users/birney/ian/repos/somites/workflow/envs/R_4.2.1/rsession.conf \
     --server-user brettell
 
 
