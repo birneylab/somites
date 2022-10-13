@@ -20,6 +20,88 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -30,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./07-references.html" rel="next">
+<link href="./03-F0-homozygosity.html" rel="next">
 <link href="./01-background.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -114,6 +196,16 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./03-F0-homozygosity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">F<sub>0</sub> homozygosity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-F1-heterozygosity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">F<sub>1</sub> heterozygosity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./07-references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
@@ -153,7 +245,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="somite-development-period" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="somite-development-period"><span class="header-section-number">2.1</span> Somite development period</h2>
-<p><strong>fig-ali-somite-period-lines</strong> shows the period data generated by pyBOAT for this study, for 100 illustrative F<sub>2</sub> samples over 300 minutes. The same data can be represented by boxplots as shown in <strong><a href="#fig-ali-somite-period-box">Figure&nbsp;<span>2.2</span></a></strong>. I experimented with using the F<sub>2</sub> individuals’ mean period and period intercept as the phenotype of interest. The two measures are highly correlated (<span class="math inline">\(Pearson's~r =\)</span> 0.84, <span class="math inline">\(p\)</span> &lt; 2.2 x 10<sup>-16</sup>), so after displaying the distributions for both measures in Figure @ref(fig:somite-phenos), I proceed to only discuss the analysis of period intercept, as it would appear to potentially be more robust to the changes in slope that can be observed in <a href="#fig-ali-somite-period-lines">Figure&nbsp;<span>2.1</span></a>.</p>
+<p><strong><a href="#fig-ali-somite-period-lines">Figure&nbsp;<span>2.1</span></a></strong> shows the period data generated by pyBOAT for this study, for 100 illustrative F<sub>2</sub> samples over 300 minutes. The same data can be represented by boxplots as shown in <strong><a href="#fig-ali-somite-period-box">Figure&nbsp;<span>2.2</span></a></strong>. I experimented with using the F<sub>2</sub> individuals’ mean period and period intercept as the phenotype of interest. The two measures are highly correlated (<span class="math inline">\(Pearson's~r =\)</span> 0.84, <span class="math inline">\(p\)</span> &lt; 2.2 x 10<sup>-16</sup>), so after displaying the distributions for both measures in <a href="#fig-somite-phenos">Figure&nbsp;<span>2.4</span></a>, I proceed to only discuss the analysis of period intercept, as it would appear to potentially be more robust to the changes in slope that can be observed in <a href="#fig-ali-somite-period-lines">Figure&nbsp;<span>2.1</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-ali-somite-period-lines" class="quarto-figure quarto-figure-center anchored">
@@ -177,8 +269,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="unsegmented-presomitic-mesoderm-area-psm" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="unsegmented-presomitic-mesoderm-area-psm"><span class="header-section-number">2.2</span> Unsegmented presomitic mesoderm area (PSM)</h2>
-<p>In the proceeding analyses, I also included a second phenotype of interest: the total area of the unsegmented tissue at the stage where 10-11 somites had been formed (<strong>PSM area</strong>). As the measure is simply based on the total number of pixels covered by the embryo object, I considered it to be potentially more robust than the period measurements, and therefore included it as a type of positive control for the genetic association analyses on the period phenotype. The measurements for PSM area comparing F<sub>0</sub> <em>Cab</em> and <em>Kaga</em> strains are shown in <strong>fig-ali-psm-f0</strong>.</p>
-<p>Measurements of unsegmented PSM area in pixels for the F<sub>0</sub> individuals from the <em>Cab</em> strain (<span class="math inline">\(N = 19\)</span>) and <em>Kaga</em> strain (<span class="math inline">\(N = 10\)</span>). <em>Kaga</em> tends to have a smaller PSM than <em>Cab</em>. Figure generated by Ali Seleit.</p>
+<p>In the proceeding analyses, I also included a second phenotype of interest: the total area of the unsegmented tissue at the stage where 10-11 somites had been formed (<strong>PSM area</strong>). As the measure is simply based on the total number of pixels covered by the embryo object, I considered it to be potentially more robust than the period measurements, and therefore included it as a type of positive control for the genetic association analyses on the period phenotype. The measurements for PSM area comparing F<sub>0</sub> <em>Cab</em> and <em>Kaga</em> strains are shown in <strong><a href="#fig-ali-psm-f0">Figure&nbsp;<span>2.3</span></a></strong>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-ali-psm-f0" class="quarto-figure quarto-figure-center anchored">
@@ -192,7 +283,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="comparisons-between-f0-f1-and-f2-generations" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="comparisons-between-f0-f1-and-f2-generations"><span class="header-section-number">2.3</span> Comparisons between F<sub>0</sub>, F<sub>1</sub> and F<sub>2</sub> generations</h2>
-<p><strong>fig-somite-phenos</strong> shows the distributions of the period intercept and unsegmented PSM area phenotypes across the F<sub>0</sub>, F<sub>1</sub> and F<sub>2</sub> generations. In relation to the period intercept phenotype, only the <em>Cab</em> strain in shown for F<sub>0</sub> because only the <em>Cab</em> strain carries the reporter gene, which prohibited the collection of data for <em>Kaga</em> using this pyBOAT method. However, from previous bright field image analyses (which did not require the reporter), my collaborators determined that the <em>Kaga</em> strain has a lower (i.e.&nbsp;faster) period than <em>Cab</em> by around 10 minutes (see Figure @ref(fig:F0-Cab-Kaga-HdrR) in the Introduction). Given these differences, the F<sub>1</sub> generation shows the expected intermediate median between the <em>Cab</em> and <em>Kaga</em> F<sub>0</sub> strains. I also expected to observe that the F<sub>2</sub> generation has a similar median to the F<sub>1</sub> generation, but with a wider variance that spans across the extremes of the two F<sub>0</sub> parental strains. Instead, I observed that the F<sub>2</sub> generation has a median that is slightly <em>slower</em> than the median of the slower-period F<sub>0</sub> <em>Cab</em> strain. My collaborators assured me that these observations were unlikely to be caused by technical issues. A possible biological explanation of this is that there are more genetic combinations that slow down the clock rather than speed it up <span class="citation" data-cites="sanchezArnoldTongueEntrainment2022 schroterSegmentNumberAxial2010">(<a href="07-references.html#ref-sanchezArnoldTongueEntrainment2022" role="doc-biblioref"><strong>sanchezArnoldTongueEntrainment2022?</strong></a>; <a href="07-references.html#ref-schroterSegmentNumberAxial2010" role="doc-biblioref"><strong>schroterSegmentNumberAxial2010?</strong></a>)</span>. This phenomenon could be exacerbated by the fact that the <em>Cab</em> and <em>Kaga</em> strains originate from different Japanese medaka populations (southern and northern respectively), which are understood to be at the point of speciation (see Chapter @ref(MIKK-genomes-chap)), so this slower period may be driven by a biological incompatibility between their genomes in cases where they do not have a complete chromosome from each parent (as the F<sub>1</sub> generation does). I nevertheless proceeded with the genetic analysis with a view to potentially discovering the reason for this unusual distribution.</p>
+<p><strong><a href="#fig-somite-phenos">Figure&nbsp;<span>2.4</span></a></strong> shows the distributions of the period intercept and unsegmented PSM area phenotypes across the F<sub>0</sub>, F<sub>1</sub> and F<sub>2</sub> generations. In relation to the period intercept phenotype, only the <em>Cab</em> strain in shown for F<sub>0</sub> because only the <em>Cab</em> strain carries the reporter gene, which prohibited the collection of data for <em>Kaga</em> using this pyBOAT method. However, from previous bright field image analyses (which did not require the reporter), my collaborators determined that the <em>Kaga</em> strain has a lower (i.e.&nbsp;faster) period than <em>Cab</em> by around 10 minutes (see Figure @ref(fig:F0-Cab-Kaga-HdrR) in the Introduction). Given these differences, the F<sub>1</sub> generation shows the expected intermediate median between the <em>Cab</em> and <em>Kaga</em> F<sub>0</sub> strains. I also expected to observe that the F<sub>2</sub> generation has a similar median to the F<sub>1</sub> generation, but with a wider variance that spans across the extremes of the two F<sub>0</sub> parental strains. Instead, I observed that the F<sub>2</sub> generation has a median that is slightly <em>slower</em> than the median of the slower-period F<sub>0</sub> <em>Cab</em> strain. My collaborators assured me that these observations were unlikely to be caused by technical issues. A possible biological explanation of this is that there are more genetic combinations that slow down the clock rather than speed it up <span class="citation" data-cites="sanchezArnoldTongueEntrainment2022 schroterSegmentNumberAxial2010">(<a href="07-references.html#ref-sanchezArnoldTongueEntrainment2022" role="doc-biblioref">Sanchez et al. 2022</a>; <a href="07-references.html#ref-schroterSegmentNumberAxial2010" role="doc-biblioref">Schröter and Oates 2010</a>)</span>. This phenomenon could be exacerbated by the fact that the <em>Cab</em> and <em>Kaga</em> strains originate from different Japanese medaka populations (southern and northern respectively), which are understood to be at the point of speciation (see Chapter @ref(MIKK-genomes-chap)), so this slower period may be driven by a biological incompatibility between their genomes in cases where they do not have a complete chromosome from each parent (as the F<sub>1</sub> generation does). I nevertheless proceeded with the genetic analysis with a view to potentially discovering the reason for this unusual distribution.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-somite-phenos" class="quarto-figure quarto-figure-center anchored">
@@ -206,9 +297,39 @@ ul.task-list li input[type="checkbox"] {
 <p>Another important issue to note is that the F<sub>2</sub> individuals were sequenced using different microscopes of the same model (Zeiss LSM 780) but with different temperature control units and incubator boxes, denoted as ‘AU’ and ‘DB’.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Our collaborators noticed that there was a difference between the microscopes in their temperatures of 0.7-0.8°C, translating to a 4-minute difference in the F<sub>2</sub> means for the period intercept measure (Kruskal-Wallis = 177.97, <span class="math inline">\(p\)</span> = 1.34 x 10<sup>-40</sup>), and a 3.5-minute difference in the F<sub>2</sub> means for the period mean measure (Kruskal-Wallis = 141.79, <span class="math inline">\(p\)</span> = 1.08 x 10<sup>-32</sup>). This difference would need to be accounted for in the downstream analysis through either adjusting the phenotype prior to running the genetic association model, or by including microscope as a covariate in the model. For unsegmentated PSM area, I did not find a significant difference between microscopes, so I determined that it was not necessary to control for microscope in the downstream analysis for this phenotype.</p>
 <section id="inverse-norm-sec" class="level4" data-number="2.3.0.1">
 <h4 data-number="2.3.0.1" class="anchored" data-anchor-id="inverse-norm-sec"><span class="header-section-number">2.3.0.1</span> Inverse-normalisation</h4>
-<p>To resolve this difference between microscopes for the period intercept data, I elected to transform it for the F<sub>2</sub> generation by “inverse-normalising” the period intercept within each microscope (<strong>Figure @ref(fig:invnorm-intercept)</strong>), and used this transformed phenotype for the downstream analysis. Inverse-normalisation is a rank-based normalisation approach which involves replacing the values in the phenotype vector with their rank (where ties are averaged), then converting the ranks into a normal distribution with the quantile function <span class="citation" data-cites="wichuraAlgorithm241Percentage1988">(<a href="07-references.html#ref-wichuraAlgorithm241Percentage1988" role="doc-biblioref"><strong>wichuraAlgorithm241Percentage1988?</strong></a>)</span>. The inverse-normalisation function I used for this analysis is set out in the following <code>R</code> code:</p>
+<p>To resolve this difference between microscopes for the period intercept data, I elected to transform it for the F<sub>2</sub> generation by “inverse-normalising” the period intercept within each microscope (<strong><a href="#fig-invnorm-intercept">Figure&nbsp;<span>2.5</span></a></strong>), and used this transformed phenotype for the downstream analysis. Inverse-normalisation is a rank-based normalisation approach which involves replacing the values in the phenotype vector with their rank (where ties are averaged), then converting the ranks into a normal distribution with the quantile function <span class="citation" data-cites="wichuraAlgorithm241Percentage1988">(<a href="07-references.html#ref-wichuraAlgorithm241Percentage1988" role="doc-biblioref">Wichura 1988</a>)</span>. The inverse-normalisation function I used for this analysis is set out in the following <code>R</code> code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>invnorm <span class="ot">=</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">=</span> <span class="fu">rank</span>(x)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The arbitrary 0.5 value is added to the denominator below </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># to avoid `qnorm()` returning 'Inf' for the last-ranked value</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">=</span> <span class="fu">qnorm</span>(res<span class="sc">/</span>(<span class="fu">length</span>(res)<span class="sc">+</span><span class="fl">0.5</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-invnorm-intercept" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/phenotypes/invnorm_intercept.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2.5: Comparison of the period intercept phenotype data for the F<sub>2</sub> generation before (<strong>A</strong>) and after (<strong>B</strong>) inverse-normalisation, with vertical lines marking the mean of each group.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-sanchezArnoldTongueEntrainment2022" class="csl-entry" role="doc-biblioentry">
+Sanchez, Paul Gerald Layague, Victoria Mochulska, Christian Mauffette Denis, Gregor Mönke, Takehito Tomita, Nobuko Tsuchida-Straeten, Yvonne Petersen, Katharina F. Sonnen, Paul François, and Alexander Aulehla. 2022. <span>“Arnold Tongue Entrainment Reveals Dynamical Principles of the Embryonic Segmentation Clock.”</span> <span>bioRxiv</span>. <a href="https://doi.org/10.1101/2021.10.20.465101">https://doi.org/10.1101/2021.10.20.465101</a>.
+</div>
+<div id="ref-schroterSegmentNumberAxial2010" class="csl-entry" role="doc-biblioentry">
+Schröter, Christian, and Andrew C. Oates. 2010. <span>“Segment <span>Number</span> and <span>Axial Identity</span> in a <span>Segmentation Clock Period Mutant</span>.”</span> <em>Current Biology</em> 20 (14): 1254–58. <a href="https://doi.org/10.1016/j.cub.2010.05.071">https://doi.org/10.1016/j.cub.2010.05.071</a>.
+</div>
+<div id="ref-wichuraAlgorithm241Percentage1988" class="csl-entry" role="doc-biblioentry">
+Wichura, Michael J. 1988. <span>“Algorithm <span>AS</span> 241: <span>The Percentage Points</span> of the <span>Normal Distribution</span>.”</span> <em>Journal of the Royal Statistical Society. Series C (Applied Statistics)</em> 37 (3): 477–84. <a href="https://doi.org/10.2307/2347330">https://doi.org/10.2307/2347330</a>.
+</div>
+</div>
 </section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
@@ -324,8 +445,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07-references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./03-F0-homozygosity.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">F<sub>0</sub> homozygosity</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

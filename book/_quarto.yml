@@ -15,6 +15,8 @@ highlight-style: atom-one
 book:
   title: "Somite periodicity notebook"
   author: "Ian Brettell"
+  date: "`r Sys.Date()`"
+  date-format: "D MMM YYYY"
   search: true
   repo-url: https://github.com/brettellebi/somites
   repo-subdir: book
@@ -24,11 +26,15 @@ book:
     - index.qmd
     - 01-background.qmd
     - 02-phenotypes.qmd
+    - 03-F0-homozygosity.qmd
+    - 04-F1-heterozygosity.qmd
+    - 05-genotyping.qmd
     - 07-references.qmd
 
 format:
   html:
     toc: true
+    toc-title: "Table of contents"
     theme: zephyr
     fontsize: 0.9em
     bibliography: book.bib

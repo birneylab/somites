@@ -1,0 +1,46 @@
+# F~0~ homozygosity
+
+## F~0~ coverage
+
+Our collaborators extracted DNA from the F~0~, F~1~, and F~2~, and sequenced the F~0~ and F~1~ samples with the Illumina platform at high coverage (~26x for *Cab* and ~29x for *Kaga*), as measured by *SAMtools* [@danecekTwelveYearsSAMtools2021]. **@fig-F0-coverage** sets out the mean sequencing depth within each chromosome and across the whole genome for the *Cab* and *Kaga* F~0~ samples. Our collaborators then sequenced the F~2~ samples at low coverage (~1x), which would be sufficient to map their genotypes back to the genotypes of their parental strains (see section \@ref(somite-f2-sequencing) below for further details).
+
+```{r}
+#| label: fig-F0-coverage
+#| echo: false
+#| fig.cap: "Mean sequencing depth per chromosome for *Cab* and *Kaga* F~0~ strains, with genome-wide mean depth across all chromosomes shown under the subtitles."
+knitr::include_graphics(here::here("book/plots/coverage/F0_coverage.png"), auto_pdf = T)
+```
+
+## F~0~ homozygosity
+
+Before proceeding to map the F~2~ sequences to the genotypes of the F~0~ generation, I first investigated the levels of homozygosity in the F~0~ *Cab* and *Kaga* strains, as this would affect our ability to accurately call the F~2~ generation. That is to say, for regions where either F~0~ parent is consistently heterozygous, it would be difficult to determine the parent from which a particular F~2~ individual derived its chromosomes at that locus. I therefore aligned the high-coverage sequencing data for the F~0~ *Cab* and *Kaga* strains to the medaka *HdrR* reference (Ensembl release 104, build ASM223467v1) using *BWA-MEM2* [@vasimuddinEfficientArchitectureawareAcceleration2019], sorted the aligned .sam files, marked duplicate reads, and merged the paired reads with picard [@Picard2019toolkit], and indexed the .bam files with *SAMtools* [@liSequenceAlignmentMap2009]. 
+
+To call variants, I followed the GATK best practices (to the extent they were applicable) [@mckennaGenomeAnalysisToolkit2010; @depristoFrameworkVariationDiscovery2011; @vanderauweraGenomicsCloudUsing2020] with GATK's HaplotypeCaller and GenotypeGVCFs tools [@poplinScalingAccurateGenetic2018], then merged all calls into a single .vcf file with picard [@Picard2019toolkit]. Finally, I extracted the biallelic calls for *Cab* and *Kaga* with bcftools [@danecekTwelveYearsSAMtools2021], counted the number of SNPs within non-overlapping, 5-kb bins, and calculated the proportion of SNPs within each bin that were homozgyous. 
+
+**Figure \@ref(fig:somite-f0-cab)** is a circos plot generated with circlize [@guCirclizeImplementsEnhances2014] for the *Cab* F~0~ strain used in this experiment, featuring the proportion of homozygous SNPs per 5-kb bin (green), and the total number of SNPs in each bin (yellow). As expected for a strain that has been inbred for over 10 generations, the mean homozygosity for this strain is high, with a mean proportion of homozygosity across all bins of 83%. 
+
+```{r}
+#| label: somite-f0-cab
+#| echo: false
+#| fig.cap: 'Proportion of homozygous SNPs within 5 kb bins in the *Cab* F~0~ generation genome (*green*), and number of SNPs in each bin (*yellow*).'
+knitr::include_graphics(here::here("book/plots/circos/trio_homo/hdrr/5000/Cab.png"), auto_pdf = T)
+```
+
+However, the levels of homozygosity in the *Kaga* strain used in this experiment was far lower, with a mean homozygosity across all bins of only 31% (**@fig-somite-f0-kaga**). This was a surprise, as it is an established strain that has been extant for decades, and we therefore expected the level of homozygosity to be commensurate with that observed in the *Cab* strain. An obvious exception is chr22, for which *Kaga* appears to be homozygous across its entire length.
+
+```{r}
+#| label: fig-somite-f0-kaga
+#| echo: false
+#| fig.cap: 'Proportion of homozygous SNPs within 5 kb bins in the *Kaga* F~0~ generation genome (*red*), and number of SNPs in each bin (*yellow*).'
+knitr::include_graphics(here::here("book/plots/circos/trio_homo/hdrr/5000/Kaga.png"), auto_pdf = T)
+```
+
+To determine whether the low levels of observed homozygosity in Kaga was affected by its alignments to the southern Japanese *HdrR* reference, we also aligned the F~0~ samples to the northern Japanese *HNI* reference (**@fig-somite-f0-kaga-hni**). This did not make differences to the levels of observed homozygosity in either sample, which gave us confidence that the low homozygosity observed in *Kaga* was not driven by reference bias. I understand from our collaborators that the low homozygosity of this *Kaga* individual must have resulted from the strain having been contaminated at some stage by breeding with a different inbred strain prior to when they received the individuals. 
+
+```{r}
+#| label: fig-somite-f0-kaga-hni
+#| echo: false
+#| fig.cap: 'Proportion of homozygous SNPs within 5 kb bins in the *Kaga* F~0~ generation genome when aligned to the *HNI* reference (*red*), and number of SNPs in each bin (*yellow*).'
+#| out.width: '100%'
+knitr::include_graphics(here::here("book/plots/circos/trio_homo/hni/5000/Kaga.png"), auto_pdf = T)
+```

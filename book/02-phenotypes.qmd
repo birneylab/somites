@@ -48,4 +48,25 @@ Another important issue to note is that the F~2~ individuals were sequenced usin
 
 #### Inverse-normalisation {#inverse-norm-sec}
 
-To resolve this difference between microscopes for the period intercept data, I elected to transform it for the F~2~ generation by "inverse-normalising" the period intercept within each microscope (**Figure \@ref(fig:invnorm-intercept)**), and used this transformed phenotype for the downstream analysis. Inverse-normalisation is a rank-based normalisation approach which involves replacing the values in the phenotype vector with their rank (where ties are averaged), then converting the ranks into a normal distribution with the quantile function [@wichuraAlgorithm241Percentage1988]. The inverse-normalisation function I used for this analysis is set out in the following `R` code:
+To resolve this difference between microscopes for the period intercept data, I elected to transform it for the F~2~ generation by "inverse-normalising" the period intercept within each microscope (**@fig-invnorm-intercept**), and used this transformed phenotype for the downstream analysis. Inverse-normalisation is a rank-based normalisation approach which involves replacing the values in the phenotype vector with their rank (where ties are averaged), then converting the ranks into a normal distribution with the quantile function [@wichuraAlgorithm241Percentage1988]. The inverse-normalisation function I used for this analysis is set out in the following `R` code:
+
+```{r}
+#| eval: false
+invnorm = function(x) {
+  res = rank(x)
+  # The arbitrary 0.5 value is added to the denominator below 
+  # to avoid `qnorm()` returning 'Inf' for the last-ranked value
+  res = qnorm(res/(length(res)+0.5))
+  return(res)
+}
+```
+
+```{r}
+#| label: fig-invnorm-intercept
+#| echo: false
+#| fig.cap: 'Comparison of the period intercept phenotype data for the F~2~ generation before (**A**) and after (**B**) inverse-normalisation, with vertical lines marking the mean of each group.'
+#| out.width: '100%'
+knitr::include_graphics(here::here("book/plots/phenotypes/invnorm_intercept.png"), auto_pdf = T)
+```
+
+

@@ -1,0 +1,104 @@
+# GWAS {#somite-assoc-tests}
+
+Finally, I used the called recombination blocks as pseudo-SNPs in a genetic linkage analysis. To detect associations between the pseudo-SNPs and the three phenotypes of interest, I used a linear mixed model (**LMM**) as implemented in GCTA [@yangGCTAToolGenomewide2011], which follows the form set out in the Introduction in section \@ref(GWAS), equations \@ref(eq:gwaslmm) to \@ref(eq:gwaslmme). For the genetic relationship matrix (**GRM**), I additionally used the leave-one-chromosome-out implementation of GCTA's LMM, with excludes the chromosome on which the candidate SNP is located when calculating the GRM. A GRM constructed from the entire genome is presented in **@fig-somite-grm**. The square in the top right-hand corner is created by samples ~550-648, which, based on Figure \@ref(fig:karyo-no-missing) above, clearly have distinct genotypes to the rest of the samples due to their having been bred from different F~1~ parents. 
+
+```{r}
+#| label: fig-somite-grm
+#| echo: false
+#| fig.cap: 'GRM generated for 600 F~2~ samples using Equations \@ref(eq:grmstd) and \@ref(eq:grm).'
+knitr::include_graphics(here::here("book/figs/somites/grm_man_0.8.png"), auto_pdf = T)
+```
+
+As described above in **section \@ref(somite-phenotype)**, the microscope used to image the embryos (either AU or DB) differed by several degrees in heat, which likely caused differences in the measurements observed. I accordingly experimented with including microscope as a covariate, either alone or together with the genotype for the reporter locus (either homozygous or heterozygous), or excluding it altogether. In an attempt to avoid complications resulting from its inclusion, I also tried inverse-normalising the period phenotype within each microscope group, transforming the phenotype to fit a normal distribution across both microscopes. I onlyshow the results from this transformed phenotype in the following section. 
+
+To set the significance threshold, I permuted the phenotype across samples using 10 different random seeds, together with all covariates when included, and ran a separate linkage model for each permutation. I then set the lowest $p$-value from all 10 permutation as the significance threshold for the non-permuted model. I additionally applied a Bonferroni correction to our $p$-values by dividing $\alpha$ (0.05) by the number of pseudo-SNPs in the model, and set this as a secondary threshold. 
+
+## Period intercept
+
+**@fig-somite-manhattan** is a Manhattan plot of the genetic linkage results for the period intercept phenotype, inverse-normalised across microscopes. The regions found to be significant based on the permutations' minimum $p$-value are set out in **tbl-somite-sig-int**.
+
+```{r}
+#| label: fig-somite-manhattan
+#| echo: false
+#| fig.cap: 'Manhattan plot of the genetic linkage results for the period intercept phenotype, inverse-normalised across microscopes. Pseudo-SNPs with $p$-values lower than the permutation significance threshold are highlighted in red.'
+knitr::include_graphics(here::here("book/plots/gcta_invnorm/hdrr/None/5000/0.8/intercept.png"), auto_pdf = T)
+```
+
+```{r}
+#| label: tbl-somite-sig-int
+#| echo: false
+#| message: false
+#| warning: false
+#| fig.cap = 'Significant 5-kb bin ranges for period intercept below the minimum p-value from 10 permutations.'
+readr::read_csv(here::here("results/sig_regions_intercept.csv")) %>% 
+  DT::datatable()
+```
+
+These regions contained a total of 46,872 SNPs imputed from the genotype of the F~0~ parental strains. 
+I ran Ensembl's Variant Effect Predictor [@mclarenEnsemblVariantEffect2016] over these SNPs to identify those that would be most likely to have functional consequences. The full counts of SNPs falling into each category of 'consequence' are set out in **tbl-int-consequence**. From this process I identified 38 genes that included a missense variant, 1 that included a missense variant and a start lost (ENSORLG00000014616), ane 1 that included a missense variant and a stop lost (ENSORLG00000015149).
+
+```{r}
+#| label: tbl-int-consequence
+#| echo: false
+#| fig.cap: 'Variant Effect Predictor results for SNPs in the bins.'
+readr::read_csv(here::here("results/somites/intercept/vep_consequence_counts.csv")) %>% 
+  DT::datatable()
+```
+
+My collaborators then combined these results with bulk RNA-seq that they had performed on F~0~ *Cab* and *Kaga* individuals, to determine which of these genes are expressed in the tail during embryogenesis. This allowed them to reduce to the list to 29 genes, and a gene ontology analysis of this found that the list of genes was enriched for body axis, somitogenesis, and segmentation (**tbl-psm-final-genes**). For this list of genes, our collaborators are now in the process of knocking out the protein-altering *Cab* allele into *Kaga* embryos, and *vice versa*, to functionally validate these variants.
+
+```{r}
+#| label: tbl-psm-final-genes
+#| echo: false
+#| fig.cap: '(ref:Target genes for functional validation expressed in the unsegmented PSM and containing protein alterations. Table generated by Ali Seleit.)'
+readr::read_csv(here::here("results/somites/intercept/final_gene_list.csv")) %>% 
+  # remove the 'Source:...' in square brackets
+  dplyr::mutate(description = stringr::str_remove_all(description, "\\[.*\\]")) %>% 
+  # rename columns
+  dplyr::rename(Chromosome = "chromosome_name",
+                `Ensembl gene ID` = "ensembl_gene_id",
+                Description  = description) %>% 
+  DT::datatable()
+```
+
+My collaborators have begun the process of using the CRISPR-Cas9 system [@campenhoutGuidelinesOptimizedGene2019] to knock out some of these candidate genes to determine their effect on the period phenotype. The *mespb* (ENSORLG00000014656) and *pcdh10b* (ENSORLG00000020474) genes have both been found to be involved in segmental boundary formation and somite patterning [@hitachiPhysicalInteractionTbx62008; @rangarajanPCNSNovelProtocadherin2006], and are highly conserved in vertebrates [@gulEvolutionDiversityCadherins2017; @satouAscidianMespGene2004]. Preliminary results have shown that knocking out either of these genes from the *Cab* strain significantly speeds up somite period development by 2-3 minutes (**Figure \@ref(fig:ko-period)**), providing promising evidence that these genes are involved in the establishment of the segmentation clock. 
+
+(ref:ko-period) Period intercept for *Cab* embryos with CRISPR-Cas9 knock-outs [@campenhoutGuidelinesOptimizedGene2019] of *mespb* and *pcdh10b* compared to controls. Figure generated by Ali Seleit.
+
+```{r ko-period, echo = F, fig.cap = '(ref:ko-period)', out.width='100%'}
+knitr::include_graphics(here::here("book/figs/somites/ko_results.png"), auto_pdf = T)
+```
+
+## PSM area
+
+**Figure \@ref(fig:psm-manhattan)** is a Manhattan plot of the genetic linkage results for the PSM area phenotype. The regions found to be significant based on the permutations' minimum $p$-value are set out in **Table \@ref(tab:somite-sig-psm-tbl)**, although they exceed the Bonferroni correction threshold as well. I note that this ~6 Mb significant region on chromosome 3 does not overlap at all with the significant region discovered for the period intercept phenotype. 
+
+(ref:psm-manhattan) Manhattan plot of the genetic linkage results for the PSM area phenotype. Pseudo-SNPs with $p$-values lower than the permutation significance threshold are highlighted in yellow.
+
+```{r psm-manhattan, echo = F, fig.cap = '(ref:psm-manhattan)', out.width='100%'}
+knitr::include_graphics(here::here("book/figs/somites/manhattan_psm_no-covariates.png"), auto_pdf = T)
+```
+
+```{r somite-sig-psm-tbl, echo = F, message = F, warning = F, fig.cap = '(ref:somite-sig-psm-tbl)', out.width='100%'}
+kableExtra::kbl(
+  readr::read_csv(here::here("results/somites/sig_regions_psm.csv")) %>% 
+    dplyr::rename(Chromosome = CHROM),
+  caption = 'Significant 5-kb bin range for PSM area below the minimum p-value from 10 permutations.',
+  booktabs = T
+) %>% 
+  kableExtra::kable_styling(latex_options = "striped")
+```
+
+This region contained a total of 29,096 SNPs imputed from the genotype of the F~0~ parental strains. 
+I ran Ensembl's Variant Effect Predictor [@mclarenEnsemblVariantEffect2016] over these SNPs to identify those that would be most likely to have functional consequences. The full counts of SNPs falling into each category of 'consequence' are set out in **Table \@ref(tab:psm-consequence-tbl)**. From this process I identified 114 genes that included a missense variant, and 1 that included a both a missense variant and a start lost (ENSORLG00000010863, a centriole, cilia and spindle-associated protein).
+
+```{r psm-consequence-tbl, echo = F, message = F, warning = F, fig.cap = '(ref:psm-consequence-tbl)', out.width='100%'}
+kableExtra::kbl(
+  readr::read_csv(here::here("results/somites/psm/vep_consequence_counts.csv")),
+  caption = 'Variant Effect Predictor results for SNPs in the bins.',
+  booktabs = T
+) %>% 
+  kableExtra::kable_styling(latex_options = "striped")
+```
+
+Our collaborators then combined these results with bulk RNA-seq that they had performed on F~0~ *Cab* and *Kaga* individuals, to determine which of these genes are expressed in the unsegmented tail during embryogenesis. This allowed them to reduce to the list to 96 genes, although they were not apparently associated with a specific gene ontology as perhaps expected, given this is a single locus that is potentially driven by just one gene. As with the period intercept phenotype, our collaborators are now in the process of knocking in the *Cab* allele into *Kaga* embryos, and *vice versa*, to functionally validate these variants.

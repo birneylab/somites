@@ -1,0 +1,30 @@
+﻿chromosome_name,ensembl_gene_id,description,Role
+3,ENSORLG00000014656,mesoderm posterior protein 2-like [Source:NCBI gene;Acc:101162828],Somitogenesis
+3,ENSORLG00000014659,mesp [Source:NCBI gene;Acc:101170013],Somitogenesis
+10,ENSORLG00000020474,protocadherin 10b [Source:ZFIN;Acc:ZDB-GENE-030721-4],Somitogenesis
+3,ENSORLG00000014616,NA,Possible role in Somitogenesis (MAP-kinase)
+10,ENSORLG00000020551,FAT atypical cadherin 4 [Source:NCBI gene;Acc:101165038],"Possible role in Somitogenesis (PCP, Yap1 regulator)"
+10,ENSORLG00000020531,neurogenin 1 [Source:NCBI gene;Acc:101164039],Possible role in Somitogenesis (BHLH-TF regulation of Wnt)
+3,ENSORLG00000015149,ADAM metallopeptidase with thrombospondin type 1 motif 18 [Source:NCBI gene;Acc:101167025],Extracellular matrix
+3,ENSORLG00000015418,matrix metallopeptidase 15 [Source:NCBI gene;Acc:100125423],Extracellular matrix
+10,ENSORLG00000020488,transforming growth factor beta induced [Source:NCBI gene;Acc:101170658],Extracellular matrix
+3,ENSORLG00000028055,NA, Signal trasduction (Rho)
+10,ENSORLG00000020481,"ArfGAP with RhoGAP domain, ankyrin repeat and PH domain 3 [Source:NCBI gene;Acc:101162821]", Signal transduction (GTPase activator RhoGap)
+10,ENSORLG00000020525,TBC1 domain family member 2A-like [Source:NCBI gene;Acc:101163797],"Signal transduction Gtpase activator, cadherin recycling"
+3,ENSORLG00000015260,synapse associated protein 1 [Source:NCBI gene;Acc:101174494],TOR acitivity
+10,ENSORLG00000028553,NA,NA
+3,ENSORLG00000015460,dpy-19 like C-mannosyltransferase 3 [Source:NCBI gene;Acc:101169775],glycosylation
+10,ENSORLG00000022010,"beta-1,4-galactosyltransferase 1 [Source:NCBI gene;Acc:101171148]",glycosylation
+10,ENSORLG00000020498,protein NipSnap homolog 3A [Source:NCBI gene;Acc:101171648],Mitochondria
+10,ENSORLG00000020494,nitric oxide associated 1 [Source:NCBI gene;Acc:101163064],Mitochondria
+10,ENSORLG00000020504,ATP-binding cassette sub-family A member 1 [Source:NCBI gene;Acc:101163308],Metabolism (cholestrol efflux)
+3,ENSORLG00000015118,phosphorylase kinase regulatory subunit beta [Source:NCBI gene;Acc:101174012],Metabolism
+10,ENSORLG00000020493,RE1 silencing transcription factor [Source:NCBI gene;Acc:101171397],RNA pol II (transcritpion regulation
+3,ENSORLG00000015365,solute carrier family 7 member 6 opposite strand [Source:NCBI gene;Acc:101168030],RNA pol II (nuclear export)
+10,ENSORLG00000029052,exosome component 3 [Source:NCBI gene;Acc:101170911],rRNA + RNA binding
+3,ENSORLG00000015278,adhesion G protein-coupled receptor G3 [Source:NCBI gene;Acc:101174736],G-protein coupled receptor
+3,ENSORLG00000015287,adhesion G-protein coupled receptor G5 [Source:NCBI gene;Acc:101167777],G-protein coupled receptor
+10,ENSORLG00000025674,matrin-3 [Source:NCBI gene;Acc:101164288],inner nuclear protein (chromatin architecture
+10,ENSORLG00000023325,matrin-3 [Source:NCBI gene;Acc:101164538],inner nuclear protein (chromatin architecture
+10,ENSORLG00000022388,poly(A) binding protein interacting protein 2 [Source:NCBI gene;Acc:101171896],Translation repressor
+3,ENSORLG00000015096,integrin alpha FG-GAP repeat containing 1 [Source:NCBI gene;Acc:101166782],NA possibly T cell activation

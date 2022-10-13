@@ -49,7 +49,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02-phenotypes.html" rel="prev">
+<link href="./04-F1-heterozygosity.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -131,6 +131,16 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./03-F0-homozygosity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">F<sub>0</sub> homozygosity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-F1-heterozygosity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">F<sub>1</sub> heterozygosity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./07-references.html" class="sidebar-item-text sidebar-link active">References</a>
   </div>
 </li>
@@ -161,11 +171,30 @@ div.csl-indent {
 </header>
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-danecekTwelveYearsSAMtools2021" class="csl-entry" role="doc-biblioentry">
+Danecek, Petr, James K Bonfield, Jennifer Liddle, John Marshall, Valeriu
+Ohan, Martin O Pollard, Andrew Whitwham, et al. 2021. <span>“Twelve
+Years of <span>SAMtools</span> and <span>BCFtools</span>.”</span>
+<em>GigaScience</em> 10 (2): giab008. <a href="https://doi.org/10.1093/gigascience/giab008">https://doi.org/10.1093/gigascience/giab008</a>.
+</div>
+<div id="ref-depristoFrameworkVariationDiscovery2011" class="csl-entry" role="doc-biblioentry">
+DePristo, Mark A., Eric Banks, Ryan Poplin, Kiran V. Garimella, Jared R.
+Maguire, Christopher Hartl, Anthony A. Philippakis, et al. 2011.
+<span>“A Framework for Variation Discovery and Genotyping Using
+Next-Generation <span>DNA</span> Sequencing Data.”</span> <em>Nature
+Genetics</em> 43 (5, 5): 491–98. <a href="https://doi.org/10.1038/ng.806">https://doi.org/10.1038/ng.806</a>.
+</div>
 <div id="ref-falkImagingOnsetOscillatory2022" class="csl-entry" role="doc-biblioentry">
 Falk, Henning J, Takehito Tomita, Gregor Mönke, Katie McDole, and
 Alexander Aulehla. 2022. <span>“Imaging the Onset of Oscillatory
 Signaling Dynamics During Mouse Embryo Gastrulation.”</span>
 <em>Development (Cambridge, England)</em> 149 (13): dev200083. <a href="https://doi.org/10.1242/dev.200083">https://doi.org/10.1242/dev.200083</a>.
+</div>
+<div id="ref-guCirclizeImplementsEnhances2014" class="csl-entry" role="doc-biblioentry">
+Gu, Zuguang, Lei Gu, Roland Eils, Matthias Schlesner, and Benedikt
+Brors. 2014. <span>“Circlize Implements and Enhances Circular
+Visualization in <span>R</span>.”</span> <em>Bioinformatics</em> 30
+(19): 2811–12. <a href="https://doi.org/10.1093/bioinformatics/btu393">https://doi.org/10.1093/bioinformatics/btu393</a>.
 </div>
 <div id="ref-kimPeriodSomiteSegmentation2011" class="csl-entry" role="doc-biblioentry">
 Kim, Woong, Takaaki Matsui, Masataka Yamao, Makoto Ishibashi, Kota
@@ -173,6 +202,13 @@ Tamada, Toru Takumi, Kenji Kohno, et al. 2011. <span>“The Period of the
 Somite Segmentation Clock Is Sensitive to <span>Notch</span>
 Activity.”</span> <em>Molecular Biology of the Cell</em> 22 (18):
 3541–49. <a href="https://doi.org/10.1091/mbc.e11-02-0139">https://doi.org/10.1091/mbc.e11-02-0139</a>.
+</div>
+<div id="ref-liSequenceAlignmentMap2009" class="csl-entry" role="doc-biblioentry">
+Li, Heng, Bob Handsaker, Alec Wysoker, Tim Fennell, Jue Ruan, Nils
+Homer, Gabor Marth, Goncalo Abecasis, Richard Durbin, and 1000 Genome
+Project Data Processing Subgroup. 2009. <span>“The <span>Sequence</span>
+Alignment/Map (<span>SAM</span>) Format and
+<span>SAMtools</span>.”</span> <em>Bioinformatics</em> 25 (16): 2078–79.
 </div>
 <div id="ref-matsudaSpeciesspecificSegmentationClock2020" class="csl-entry" role="doc-biblioentry">
 Matsuda, Mitsuhiro, Hanako Hayashi, Jordi Garcia-Ojalvo, Kumiko
@@ -182,11 +218,61 @@ Ikeya, Junya Toguchida, Cantas Alev, and Miki Ebisuya. 2020.
 Differential Biochemical Reaction Speeds.”</span> <em>Science</em> 369
 (6510): 1450–55.
 </div>
+<div id="ref-mckennaGenomeAnalysisToolkit2010" class="csl-entry" role="doc-biblioentry">
+McKenna, Aaron, Matthew Hanna, Eric Banks, Andrey Sivachenko, Kristian
+Cibulskis, Andrew Kernytsky, Kiran Garimella, et al. 2010. <span>“The
+<span>Genome Analysis Toolkit</span>: <span>A MapReduce</span> Framework
+for Analyzing Next-Generation <span>DNA</span> Sequencing Data.”</span>
+<em>Genome Research</em> 20 (9): 1297–1303. <a href="https://doi.org/10.1101/gr.107524.110">https://doi.org/10.1101/gr.107524.110</a>.
+</div>
+<div id="ref-Picard2019toolkit" class="csl-entry" role="doc-biblioentry">
+<span>“Picard Toolkit.”</span> 2019. <em>Broad Institute, GitHub
+Repository</em>. <a href="https://broadinstitute.github.io/picard/" class="uri">https://broadinstitute.github.io/picard/</a>; Broad
+Institute.
+</div>
+<div id="ref-poplinScalingAccurateGenetic2018" class="csl-entry" role="doc-biblioentry">
+Poplin, Ryan, Valentin Ruano-Rubio, Mark A. DePristo, Tim J. Fennell,
+Mauricio O. Carneiro, Geraldine A. Van der Auwera, David E. Kling, et
+al. 2018. <span>“Scaling Accurate Genetic Variant Discovery to Tens of
+Thousands of Samples.”</span> <span>bioRxiv</span>. <a href="https://doi.org/10.1101/201178">https://doi.org/10.1101/201178</a>.
+</div>
+<div id="ref-sanchezArnoldTongueEntrainment2022" class="csl-entry" role="doc-biblioentry">
+Sanchez, Paul Gerald Layague, Victoria Mochulska, Christian Mauffette
+Denis, Gregor Mönke, Takehito Tomita, Nobuko Tsuchida-Straeten, Yvonne
+Petersen, Katharina F. Sonnen, Paul François, and Alexander Aulehla.
+2022. <span>“Arnold Tongue Entrainment Reveals Dynamical Principles of
+the Embryonic Segmentation Clock.”</span> <span>bioRxiv</span>. <a href="https://doi.org/10.1101/2021.10.20.465101">https://doi.org/10.1101/2021.10.20.465101</a>.
+</div>
+<div id="ref-schroterSegmentNumberAxial2010" class="csl-entry" role="doc-biblioentry">
+Schröter, Christian, and Andrew C. Oates. 2010. <span>“Segment
+<span>Number</span> and <span>Axial Identity</span> in a
+<span>Segmentation Clock Period Mutant</span>.”</span> <em>Current
+Biology</em> 20 (14): 1254–58. <a href="https://doi.org/10.1016/j.cub.2010.05.071">https://doi.org/10.1016/j.cub.2010.05.071</a>.
+</div>
 <div id="ref-seleitEndogenousProteinTagging2021" class="csl-entry" role="doc-biblioentry">
 Seleit, Ali, Alexander Aulehla, and Alexandre Paix. 2021.
 <span>“Endogenous Protein Tagging in Medaka Using a Simplified
 <span>CRISPR</span>/<span>Cas9</span> Knock-in Approach.”</span>
 <em>eLife</em> 10 (December): e75050. <a href="https://doi.org/10.7554/elife.75050">https://doi.org/10.7554/elife.75050</a>.
+</div>
+<div id="ref-vanderauweraGenomicsCloudUsing2020" class="csl-entry" role="doc-biblioentry">
+Van der Auwera, Geraldine A., and Brian D. O’Connor. 2020. <em>Genomics
+in the Cloud: Using <span>Docker</span>, <span>GATK</span>, and
+<span>WDL</span> in <span>Terra</span></em>. <span>O’Reilly
+Media</span>.
+</div>
+<div id="ref-vasimuddinEfficientArchitectureawareAcceleration2019" class="csl-entry" role="doc-biblioentry">
+Vasimuddin, Md, Sanchit Misra, Heng Li, and Srinivas Aluru. 2019.
+<span>“Efficient Architecture-Aware Acceleration of <span>BWA-MEM</span>
+for Multicore Systems.”</span> In <em>2019 <span>IEEE International
+Parallel</span> and <span>Distributed Processing Symposium</span>
+(<span>IPDPS</span>)</em>, 314–24. <span>IEEE</span>.
+</div>
+<div id="ref-wichuraAlgorithm241Percentage1988" class="csl-entry" role="doc-biblioentry">
+Wichura, Michael J. 1988. <span>“Algorithm <span>AS</span> 241:
+<span>The Percentage Points</span> of the <span>Normal
+Distribution</span>.”</span> <em>Journal of the Royal Statistical
+Society. Series C (Applied Statistics)</em> 37 (3): 477–84. <a href="https://doi.org/10.2307/2347330">https://doi.org/10.2307/2347330</a>.
 </div>
 </div>
 
@@ -293,8 +379,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./02-phenotypes.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Phenotypes of interest</span></span>
+      <a href="./04-F1-heterozygosity.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">F<sub>1</sub> heterozygosity</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
