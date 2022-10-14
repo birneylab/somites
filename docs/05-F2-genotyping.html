@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Somite periodicity notebook - 5&nbsp; F2 genotyping</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./06-GWAS.html" rel="next">
+<link href="./04-F1-heterozygosity.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">F<sub>2</sub> genotyping</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Somite periodicity notebook</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/brettellebi/somites/tree/master/book/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">About</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-background.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Background</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-phenotypes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Phenotypes of interest</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-F0-homozygosity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">F<sub>0</sub> homozygosity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-F1-heterozygosity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">F<sub>1</sub> heterozygosity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-F2-genotyping.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">F<sub>2</sub> genotyping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-GWAS.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GWAS</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-somite-f2-sequencing" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">F<sub>2</sub> genotyping</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>To maximise the efficiency of our sequencing runs, our collaborators “shallow-sequenced” the F<sub>2</sub> generation with the short-read Illumina platform at a depth of ~1x. I then aligned these sequences to the <em>HdrR</em> reference with <em>BWA-MEM2</em> <span class="citation" data-cites="vasimuddinEfficientArchitectureawareAcceleration2019">(<a href="07-references.html#ref-vasimuddinEfficientArchitectureawareAcceleration2019" role="doc-biblioref">Vasimuddin et al. 2019</a>)</span>, sorted the reads and marked duplicates with <em>Picard</em> <span class="citation" data-cites="Picard2019toolkit">(<a href="07-references.html#ref-Picard2019toolkit" role="doc-biblioref"><span>“Picard Toolkit”</span> 2019</a>)</span>, then indexed the resulting BAM files with <em>SAMtools</em> <span class="citation" data-cites="danecekTwelveYearsSAMtools2021">(<a href="07-references.html#ref-danecekTwelveYearsSAMtools2021" role="doc-biblioref">Danecek et al. 2021</a>)</span>. Genotyping these shallow sequences with the same method as used for the high-coverage sequences for the F<sub>0</sub> and F<sub>1</sub> generation would be inappropriate. We therefore used a different method whereby we used <em>bam-readcount</em> <span class="citation" data-cites="khannaBamreadcountRapidGeneration2022">(<a href="07-references.html#ref-khannaBamreadcountRapidGeneration2022" role="doc-biblioref">Khanna et al. 2022</a>)</span> to count the reads that supported either the <em><span style="     color: #43AA8B !important;">Cab</span></em> or the <em><span style="     color: #DE3C4B !important;">Kaga</span></em> allele for all SNPs that met the criteria described above in section @f1-heterozygosity above, summed the read counts within 5 kb blocks, and calculated the frequency of reads within each bin that supported the <em><span style="     color: #DE3C4B !important;">Kaga</span></em> allele. This generated a value for each bin between 0 and 1, where 0 signified that all reads within that bin supported the <em><span style="     color: #43AA8B !important;">Cab</span></em> allele, and 1 signified that all reads within that bin supported the <em><span style="     color: #DE3C4B !important;">Kaga</span></em> allele. Bins containing no reads were imputed with a value of 0.5.</p>
+<p>I then used these values for all F<sub>2</sub> individuals as the input to a Hidden Markov Model (HMM) with the software package <em>hmmlearn</em> <span class="citation" data-cites="HmmlearnHmmlearn2022">(<a href="07-references.html#ref-HmmlearnHmmlearn2022" role="doc-biblioref"><em>Hmmlearn/Hmmlearn</em> [2014] 2022</a>)</span>, which I applied to classify each bin as one of three states, with state 0 corresponding to homozygous-<em><span style="     color: #43AA8B !important;">Cab</span></em>, 1 corresponding to heterozygous, and 2 corresponding to homozygous-<em><span style="     color: #DE3C4B !important;">Kaga</span></em>. Across each chromosome of every sample, the output of the HMM was expected to produce a sequence of states. Based on previous biological knowledge that crossover events occur on average less than once per chromosome <span class="citation" data-cites="haenelMetaanalysisChromosomescaleCrossover2018">(<a href="07-references.html#ref-haenelMetaanalysisChromosomescaleCrossover2018" role="doc-biblioref">Haenel et al. 2018</a>)</span> (see <strong><a href="#fig-zebrafish-co-per-chrom">Figure&nbsp;<span>5.1</span></a></strong> for the average crossover rates per chromosome in zebrafish), I expected to observe the same state persisting for long stretches of the chromosome, only changing to another state between 0 and 3 times, and rarely more. To achieve this, I adjusted the HMM’s transition probabilities to be extremely low, and the Gaussian emission probabilities for each state to have a variance of 0.8, which resulted in long “blocks” of the same genotype call across the chromosome with only a small number of average transitions (i.e.&nbsp;crossover events) per chromosome.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-zebrafish-co-per-chrom" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="05-F2-genotyping_files/figure-html/fig-zebrafish-co-per-chrom-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.1: Crossovers per chromosome based on data provided in <span class="citation" data-cites="haenelMetaanalysisChromosomescaleCrossover2018">Haenel et al. (<a href="07-references.html#ref-haenelMetaanalysisChromosomescaleCrossover2018" role="doc-biblioref">2018</a>)</span>, where “crossovers per chromosome” for each chromosome <span class="math inline">\(c\)</span> was calculated by <span class="math inline">\(\frac{crossover~rate_{c}(cM / Mb) \times length_{c}(Mb)} {100}\)</span>. The medaka genome is shorter in length than the zebrafish genome (~800 Mb compared to ~1,300 Mb), which according to the authors would suggest that medaka likely has a higher average crossover rate than what is presented in this figure.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong><a href="#fig-hmm-scat">Figure&nbsp;<span>5.2</span></a></strong> shows how adjusting the HMM parameters changed the called genotypes for 10 F<sub>2</sub> samples on chromosome 18, by way of an example. Allowing the HMM to train itself for the transition probabilities and emission variances, the HMM produced an apparently noisy output (A). Fixing the transition probabilities to make it very likely for a state to transition back to itself rather than to another state did not appear to change the output (B). However, increasing the Gaussian emission variances created the “blocks” that I expected, and the higher the emission variances, the “tighter” the blocks (C-F).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-hmm-scat" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/thesis/scatter_collage.png" class="img-fluid figure-img" width="2400"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.2: HMM states called for each bin across chr18 for 10 F<sub>2</sub> samples, to illustrate the effect of changing the HMM’s transition probabilities and emission variances. States 0, 1, and 2 correspond to homozygous <em>Cab</em>, heterozygous, and homozygous <em>Kaga</em>. Each point represents a 5-kb bin. Y-axis is the proportion of reads within each bin that align to the <em>Kaga</em> allele. X-axis is the bp location of the start of each bin. <strong>A</strong>: Standard HMM with all model parameters trained on the data. <strong>B</strong>. HMM with fixed transition probabilities of 0 <span class="math inline">\(\rightarrow\)</span> 0 or 1 <span class="math inline">\(\rightarrow\)</span> 1 or 2 <span class="math inline">\(\rightarrow\)</span> 2 = 0.999; 0 <span class="math inline">\(\rightarrow\)</span> 1 or 2 <span class="math inline">\(\rightarrow\)</span> 1 = 0.00066; 0 <span class="math inline">\(\rightarrow\)</span> 2 or 2 <span class="math inline">\(\rightarrow\)</span> 0 = 0.000333; 1 <span class="math inline">\(\rightarrow\)</span> 0 or 1 <span class="math inline">\(\rightarrow\)</span> 2 = 0.0005. <strong>C</strong>-<strong>F</strong> retain those transition probabilities but with different fixed emission variances of 0.01 (<strong>C</strong>), 0.33 (<strong>D</strong>), 0.8 (<strong>E</strong>), and 1 (<strong>F</strong>).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>I used these genotype-block calls to generate the recombination karyoplot shown in <strong><a href="#fig-karyo-wi-missing">Figure&nbsp;<span>5.3</span></a></strong>, with homozygous-<em><span style="     color: #43AA8B !important;">Cab</span></em> blocks in green, heterozoygous blocks in navy blue, and homozygous <em><span style="     color: #DE3C4B !important;">Kaga</span></em> blocks in red. Missing calls are blank, where the vertical blank lines indicate that the region could not be called for any F<sub>2</sub> individuals, likely due to an insufficient number of informative SNPs residing in those 5-kb blocks; and horizontal blank lines indicate that the sample could not be called, likely due to low sequencing coverage for that sample.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-karyo-wi-missing" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/karyoplots_cropped/karyoplot_wi_missing_cropped.png" class="img-fluid figure-img" width="3622"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.3: Recombination blocks in 622 F<sub>2</sub> samples based on the ratio of reads mapping to either the <em>Cab</em> or <em>Kaga</em> allele within 5-kb bins, with homozygous-<em>Cab</em> blocks in green, heterozoygous blocks in navy blue, and homozygous <em>Kaga</em> blocks in red. Most blocks show 0-2 crossover events, as expected, with some regions showing higher numbers of crossovers interpreted as noise. Unfilled regions are those with no state called by the HMM due to a lack of reads mapping to SNPs within those 5-kb bins.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the downstream analysis, I excluded the 22 samples that showed poor coverage across the genome. For the remaining samples, I “filled” the bins with missing genotypes based on the call of the previous called bin, or if unavailable (e.g.&nbsp;the missing bin was at the start of the chromosome), then the next called bin (<strong><a href="#fig-karyo-no-missing">Figure&nbsp;<span>5.4</span></a></strong>); note that this figure retains the low-coverage samples (horizontal blank lines) that were excluded from further analysis to allow for a direct comparison with <strong><a href="#fig-karyo-wi-missing">Figure&nbsp;<span>5.3</span></a></strong>. I used these filled genotype calls for the association tests described below in section <strong><span class="citation" data-cites="somite-assoc-tests">(<a href="07-references.html#ref-somite-assoc-tests" role="doc-biblioref"><strong>somite-assoc-tests?</strong></a>)</span></strong>. As a rough way to estimate the accuracy of this genotyping method, we checked the genotypes called by the HMM for the reporter region on chr16 ~28.7Mb against our collaborators’ manual recording of reporter gene counts based on the intensity of the <em>Her7</em>-Venus reporter’s fluorescence. The confusion matrix is set out in <strong><a href="#tbl-reporter-conc">Table&nbsp;<span>5.1</span></a></strong>, showing that 83% of genotypes called by the HMM were consistent with the reporter genotypes as inferred from fluorescence brightness.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-reporter-conc" class="anchored">
+
+<table><caption>Table&nbsp;5.1:  Confusion matrix for reporter genotype as called by the HMM, and as inferred from the fluorescence brightness. </caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> HMM state </th>
+   <th style="text-align:right;"> Reporter phenotype </th>
+   <th style="text-align:right;"> Count </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 252 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 91 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 245 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>These karyoplots show interesting recombination patterns for several chromosomes. Given the F<sub>2</sub> individuals were selected for the reporter gene on chr16, as expected, there appears to be a strong strong skew towards those genotypes across the whole chromosome. On chr3, most samples are homozygous-<em><span style="     color: #43AA8B !important;">Cab</span></em> for the second half of the chromosome, with a consistent breakpoint around ~22 Mb. However, the final fifth of samples which show a different recombination pattern. The samples are sorted based on the order that they were phenotyped and sequenced, so this difference could have been caused by their being generated from different F<sub>1</sub> individuals with distinct haplotypes.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-karyo-no-missing" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/karyoplots_cropped/karyoplot_no_missing_cropped.png" class="img-fluid figure-img" width="3618"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.4: Recombination blocks in 622 F<sub>2</sub> samples based on the ratio of reads mapping to either the <em>Cab</em> or <em>Kaga</em> allele within 5-kb bins, with homozygous-<em>Cab</em> blocks in green, heterozoygous blocks in navy blue, and homozygous <em>Kaga</em> blocks in red. Most blocks show 0-2 crossover events, as expected, with some regions showing higher numbers of crossovers interpreted as noise. Bins with missing genotypes were “filled” based on the call of the previous called bin, or if unavailable (e.g.&nbsp;the missing bin was at the start of the chromosome), then the next called bin.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong><a href="#fig-prop-sites-total">Figure&nbsp;<span>5.5</span></a></strong> shows the proportion of 5-kb bins called as either homozygous-<em><span style="     color: #43AA8B !important;">Cab</span></em>, heterozygous, or homozygous-<em><span style="     color: #DE3C4B !important;">Kaga</span></em> within each F<sub>2</sub> sample (points). The ordinary expectation for the ratios would be 0.25, 0.5, and 0.25 respectively. However, we observe a skew towards homozygous-<em><span style="     color: #43AA8B !important;">Cab</span></em> and away from homozygous <em><span style="     color: #DE3C4B !important;">Kaga</span></em>. This was likely caused by the hybrid incompatibility between <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em>, given the two strains were derived from populations that are thought to be at the point of speciation.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-prop-sites-total" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/hdrr/F1_het_min_DP/hmmlearn_true/None/5000/0.8/prop_sites_total.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.5: Proportions of 5-kb blocks called as either homozygous-<em>Cab</em>, heterozygous, or homozygous-<em>Kaga</em>.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-danecekTwelveYearsSAMtools2021" class="csl-entry" role="doc-biblioentry">
+Danecek, Petr, James K Bonfield, Jennifer Liddle, John Marshall, Valeriu Ohan, Martin O Pollard, Andrew Whitwham, et al. 2021. <span>“Twelve Years of <span>SAMtools</span> and <span>BCFtools</span>.”</span> <em>GigaScience</em> 10 (2): giab008. <a href="https://doi.org/10.1093/gigascience/giab008">https://doi.org/10.1093/gigascience/giab008</a>.
+</div>
+<div id="ref-haenelMetaanalysisChromosomescaleCrossover2018" class="csl-entry" role="doc-biblioentry">
+Haenel, Quiterie, Telma G. Laurentino, Marius Roesti, and Daniel Berner. 2018. <span>“Meta-Analysis of Chromosome-Scale Crossover Rate Variation in Eukaryotes and Its Significance to Evolutionary Genomics.”</span> <em>Molecular Ecology</em> 27 (11): 2477–97. <a href="https://doi.org/10.1111/mec.14699">https://doi.org/10.1111/mec.14699</a>.
+</div>
+<div id="ref-HmmlearnHmmlearn2022" class="csl-entry" role="doc-biblioentry">
+<em>Hmmlearn/Hmmlearn</em>. (2014) 2022. <span>hmmlearn</span>. <a href="https://github.com/hmmlearn/hmmlearn">https://github.com/hmmlearn/hmmlearn</a>.
+</div>
+<div id="ref-khannaBamreadcountRapidGeneration2022" class="csl-entry" role="doc-biblioentry">
+Khanna, Ajay, David E. Larson, Sridhar Nonavinkere Srivatsan, Matthew Mosior, Travis E. Abbott, Susanna Kiwala, Timothy J. Ley, et al. 2022. <span>“Bam-Readcount - Rapid Generation of Basepair-Resolution Sequence Metrics.”</span> <em>Journal of Open Source Software</em> 7 (69): 3722. <a href="https://doi.org/10.21105/joss.03722">https://doi.org/10.21105/joss.03722</a>.
+</div>
+<div id="ref-Picard2019toolkit" class="csl-entry" role="doc-biblioentry">
+<span>“Picard Toolkit.”</span> 2019. <em>Broad Institute, GitHub Repository</em>. <a href="https://broadinstitute.github.io/picard/" class="uri">https://broadinstitute.github.io/picard/</a>; Broad Institute.
+</div>
+<div id="ref-vasimuddinEfficientArchitectureawareAcceleration2019" class="csl-entry" role="doc-biblioentry">
+Vasimuddin, Md, Sanchit Misra, Heng Li, and Srinivas Aluru. 2019. <span>“Efficient Architecture-Aware Acceleration of <span>BWA-MEM</span> for Multicore Systems.”</span> In <em>2019 <span>IEEE International Parallel</span> and <span>Distributed Processing Symposium</span> (<span>IPDPS</span>)</em>, 314–24. <span>IEEE</span>.
+</div>
+</div>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./04-F1-heterozygosity.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">F<sub>1</sub> heterozygosity</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./06-GWAS.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GWAS</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

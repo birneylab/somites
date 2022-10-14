@@ -1,4 +1,4 @@
-# Phenotypes of interest {#somite-phenotype}
+# Phenotypes of interest {#sec-somite-phenotype}
 
 ## Somite development period
 

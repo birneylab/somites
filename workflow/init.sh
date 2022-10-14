@@ -92,7 +92,7 @@ singularity build --remote \
 
 # Run container
 ssh proxy-codon
-bsub -M 50000 -Is bash
+bsub -q short -M 50000 -Is bash
 cd /hps/software/users/birney/ian/repos/somites
 module load singularity-3.7.0-gcc-9.3.0-dp5ffrp
 CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.1.0.sif

@@ -15,8 +15,10 @@ highlight-style: atom-one
 book:
   title: "Somite periodicity notebook"
   author: "Ian Brettell"
-  date: "`r Sys.Date()`"
-  date-format: "D MMM YYYY"
+  date: today
+  date-format: "D MMMM YYYY"
+  csl: chicago-fullnote-bibliography.csl
+  number-sections: true
   search: true
   repo-url: https://github.com/brettellebi/somites
   repo-subdir: book
@@ -28,16 +30,18 @@ book:
     - 02-phenotypes.qmd
     - 03-F0-homozygosity.qmd
     - 04-F1-heterozygosity.qmd
-    - 05-genotyping.qmd
+    - 05-F2-genotyping.qmd
+    - 06-GWAS.qmd
     - 07-references.qmd
 
 format:
   html:
     toc: true
-    toc-title: "Table of contents"
+    toc-title: "On this page"
     theme: zephyr
-    fontsize: 0.9em
+    fontsize: 0.95em
     bibliography: book.bib
+    linkcolor: "#3C1642"
     #backgroundcolor: "#3C1642"
 
 #  - "01-Data_processing_with_Snakemake.Rmd",

@@ -142,6 +142,16 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./05-F2-genotyping.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">F<sub>2</sub> genotyping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-GWAS.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GWAS</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./07-references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
@@ -172,13 +182,13 @@ div.csl-indent {
 </header>
 
 <p>Somites are the earliest primitive segmental structures that form from presomatic mesoderm cells (<strong>PSM</strong>) in the embryo <span class="citation" data-cites="kimPeriodSomiteSegmentation2011">(<a href="07-references.html#ref-kimPeriodSomiteSegmentation2011" role="doc-biblioref">Kim et al. 2011</a>)</span>, later differentiating into vertebrae, ribs, and skeletal muscles. Somite formation occurs rhythmically and sequentially, with the time between the formation of each pair of somites referred to as the “period”. The period of somite formation varies greatly between species <span class="citation" data-cites="matsudaSpeciesspecificSegmentationClock2020">(<a href="07-references.html#ref-matsudaSpeciesspecificSegmentationClock2020" role="doc-biblioref">Matsuda et al. 2020</a>)</span>, and is controlled by a molecular oscillator, known as the ‘segmentation clock’, which drives waves of gene expression in developmental pathways.</p>
-<p>It is not fully understood how the phase waves of the segmentation clock are initially established <span class="citation" data-cites="falkImagingOnsetOscillatory2022">(<a href="07-references.html#ref-falkImagingOnsetOscillatory2022" role="doc-biblioref">Falk et al. 2022</a>)</span>. To identify the genetic basis of these phase waves, our collaborators Ali Seleit and Alexander Aulehla at EMBL-Heidelberg used a CRISPR-Cas9 knock-in approach <span class="citation" data-cites="seleitEndogenousProteinTagging2021">(<a href="07-references.html#ref-seleitEndogenousProteinTagging2021" role="doc-biblioref">Seleit, Aulehla, and Paix 2021</a>)</span> to establish a medaka <em>Cab</em> strain with an endogenous, fluorescing reporter gene (Her7-Venus) for the oscillation signalling pathway. This method allows them to image somite formation and extract quantitative measures for segmentation clock dynamics. They determined that the southern Japanese <em>Cab</em> strain and the northern Japanese <em>Kaga</em> strain have divergent somite periodicity, where <em>Kaga</em>’s tends to be faster, and <em>Cab</em>’s slower (<strong><a href="#fig-ali-f0-period">Figure&nbsp;<span>1.1</span></a></strong>), and selected them as the parental strains in an F<sub>2</sub>-cross. This chapter sets out my bioinformatic contributions to the project by identifying the genetic variations associated with differences in somite periodicity.</p>
+<p>It is not fully understood how the phase waves of the segmentation clock are initially established <span class="citation" data-cites="falkImagingOnsetOscillatory2022">(<a href="07-references.html#ref-falkImagingOnsetOscillatory2022" role="doc-biblioref">Falk et al. 2022</a>)</span>. To identify the genetic basis of these phase waves, our collaborators Ali Seleit and Alexander Aulehla at EMBL-Heidelberg used a CRISPR-Cas9 knock-in approach <span class="citation" data-cites="seleitEndogenousProteinTagging2021">(<a href="07-references.html#ref-seleitEndogenousProteinTagging2021" role="doc-biblioref">Seleit, Aulehla, and Paix 2021</a>)</span> to establish a medaka <em><span style="     color: #43AA8B !important;">Cab</span></em> strain with an endogenous, fluorescing reporter gene (Her7-Venus) for the oscillation signalling pathway. This method allows them to image somite formation and extract quantitative measures for segmentation clock dynamics. They determined that the southern Japanese <em><span style="     color: #43AA8B !important;">Cab</span></em> strain and the northern Japanese <em><span style="     color: #DE3C4B !important;">Kaga</span></em> strain have divergent somite periodicity, where <em><span style="     color: #DE3C4B !important;">Kaga</span></em>’s tends to be faster, and <em><span style="     color: #43AA8B !important;">Cab</span></em>’s slower (<strong><a href="#fig-ali-f0-period">Figure&nbsp;<span>1.1</span></a></strong>), and selected them as the parental strains in an F<sub>2</sub>-cross. This chapter sets out my bioinformatic contributions to the project by identifying the genetic variations associated with differences in somite periodicity.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-ali-f0-period" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="plots/ali/ali_period_F0_Cab_Kaga.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1.1: Comparison of period for three inbred medaka strains (<em>Cab</em>, <em>Kaga</em> and <em>HdrR</em>). Kaga’s period is lower, and therefore it takes less time to form each somite than <em>Cab</em>. Figure generated by Ali Seleit.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.1: Comparison of period for three inbred medaka strains <em>Cab</em>, <em>Kaga</em> and <em>HdrR</em>. <em>Kaga</em>’s period is lower, and therefore it takes less time to form each somite than <em>Cab</em>. Figure generated by Ali Seleit.</figcaption><p></p>
 </figure>
 </div>
 </div>

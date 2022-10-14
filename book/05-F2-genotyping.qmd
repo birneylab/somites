@@ -1,28 +1,27 @@
-# F~2~ genotyping {#somite-f2-sequencing}
+# F~2~ genotyping {#sec-somite-f2-sequencing}
 
 ```{r}
-#| echo: false
+#| include: false
 library(tidyverse)
 ```
 
+To maximise the efficiency of our sequencing runs, our collaborators "shallow-sequenced" the F~2~ generation with the short-read Illumina platform at a depth of ~1x. I then aligned these sequences to the *HdrR* reference with *BWA-MEM2* [@vasimuddinEfficientArchitectureawareAcceleration2019], sorted the reads and marked duplicates with *Picard* [@Picard2019toolkit], then indexed the resulting BAM files with *SAMtools* [@danecekTwelveYearsSAMtools2021]. Genotyping these shallow sequences with the same method as used for the high-coverage sequences for the F~0~ and F~1~ generation would be inappropriate. We therefore used a different method whereby we used *bam-readcount* [@khannaBamreadcountRapidGeneration2022] to count the reads that supported either the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* or the *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* allele for all SNPs that met the criteria described above in section \@f1-heterozygosity above, summed the read counts within 5 kb blocks, and calculated the frequency of reads within each bin that supported the *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* allele. This generated a value for each bin between 0 and 1, where 0 signified that all reads within that bin supported the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* allele, and 1 signified that all reads within that bin supported the *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* allele. Bins containing no reads were imputed with a value of 0.5. 
 
-To maximise the efficiency of our sequencing runs, our collaborators "shallow-sequenced" the F~2~ generation with the short-read Illumina platform at a depth of ~1x. I then aligned these sequences to the *HdrR* reference with *BWA-MEM2* [@vasimuddinEfficientArchitectureawareAcceleration2019], sorted the reads and marked duplicates with *Picard* [@Picard2019toolkit], then indexed the resulting BAM files with *SAMtools* [@danecekTwelveYearsSAMtools2021]. Genotyping these shallow sequences with the same method as used for the high-coverage sequences for the F~0~ and F~1~ generation would be inappropriate. We therefore used a different method whereby we used *bam-readcount* [@khannaBamreadcountRapidGeneration2022] to count the reads that supported either the *Cab* or the *Kaga* allele for all SNPs that met the criteria described above in section \@f1-heterozygosity above, summed the read counts within 5 kb blocks, and calculated the frequency of reads within each bin that supported the *Kaga* allele. This generated a value for each bin between 0 and 1, where 0 signified that all reads within that bin supported the *Cab* allele, and 1 signified that all reads within that bin supported the *Kaga* allele. Bins containing no reads were imputed with a value of 0.5. 
-
-I then used these values for all F~2~ individuals as the input to a Hidden Markov Model (HMM) with the software package *hmmlearn* [@HmmlearnHmmlearn2022], which I applied to classify each bin as one of three states, with state 0 corresponding to homozygous-*Cab*, 1 corresponding to heterozygous, and 2 corresponding to homozygous-*Kaga*. Across each chromosome of every sample, the output of the HMM was expected to produce a sequence of states. Based on previous biological knowledge that crossover events occur on average less than once per chromosome [@haenelMetaanalysisChromosomescaleCrossover2018]<!-- (see **Figure \@ref(fig:zebrafish-co-per-chrom)** for the average crossover rates per chromosome in zebrafish)-->, I expected to observe the same state persisting for long stretches of the chromosome, only changing to another state between 0 and 3 times, and rarely more. To achieve this, I adjusted the HMM's transition probabilities to be extremely low, and the Gaussian emission probabilities for each state to have a variance of 0.8, which resulted in long "blocks" of the same genotype call across the chromosome with only a small number of average transitions (i.e. crossover events) per chromosome. 
+I then used these values for all F~2~ individuals as the input to a Hidden Markov Model (HMM) with the software package *hmmlearn* [@HmmlearnHmmlearn2022], which I applied to classify each bin as one of three states, with state 0 corresponding to homozygous-*`r kableExtra::text_spec("Cab", color = "#43AA8B")`*, 1 corresponding to heterozygous, and 2 corresponding to homozygous-*`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`*. Across each chromosome of every sample, the output of the HMM was expected to produce a sequence of states. Based on previous biological knowledge that crossover events occur on average less than once per chromosome [@haenelMetaanalysisChromosomescaleCrossover2018] (see **@fig-zebrafish-co-per-chrom** for the average crossover rates per chromosome in zebrafish), I expected to observe the same state persisting for long stretches of the chromosome, only changing to another state between 0 and 3 times, and rarely more. To achieve this, I adjusted the HMM's transition probabilities to be extremely low, and the Gaussian emission probabilities for each state to have a variance of 0.8, which resulted in long "blocks" of the same genotype call across the chromosome with only a small number of average transitions (i.e. crossover events) per chromosome. 
 
 ```{r}
 #| include: false
 # Data from S4, haenelMetaanalysisChromosomescaleCrossover2018
 
 ## Which species have a genome length of nearly 800 Mb?
-readr::read_tsv(here::here("results/somites/haenel_2018_S4.txt"),
+readr::read_tsv(here::here("results/haenel_2018_S4.txt"),
                        comment = "#") %>% 
   dplyr::group_by(Species) %>% 
   dplyr::summarise(TOT_LEN = sum(Physical.map.length.Mb)) %>% 
   dplyr::arrange(desc(TOT_LEN))
 
 # Cyprinus carpio (common carp) has a total genome length of 847.66 Mb (similar to 800 Mb in medaka)
-df = readr::read_tsv(here::here("results/somites/haenel_2018_S4.txt"),
+df = readr::read_tsv(here::here("results/haenel_2018_S4.txt"),
                        comment = "#") %>% 
   dplyr::filter(Species %in% c("Danio.renio")) %>%
   dplyr::mutate(Species = dplyr::recode(Species,
@@ -39,10 +38,12 @@ df = readr::read_tsv(here::here("results/somites/haenel_2018_S4.txt"),
 mean_crossovers = mean(df$`crossovers per chromosome`)
 
 ```
-<!--
-(ref:zebrafish-co-per-chrom) Crossovers per chromosome based on data provided in @haenelMetaanalysisChromosomescaleCrossover2018, where "crossovers per chromosome" for each chromosome $c$ was calculated by $\frac{crossover~rate_{c}(cM / Mb) \times length_{c}(Mb)} {100}$. The medaka genome is shorter in length than the zebrafish genome (~800 Mb compared to ~1,300 Mb), which according to the authors would suggest that medaka likely has a higher average crossover rate than what is presented in this figure.
 
-```{r zebrafish-co-per-chrom, echo=F, fig.cap = '(ref:zebrafish-co-per-chrom)', out.width='100%'}
+
+```{r}
+#| label: fig-zebrafish-co-per-chrom
+#| echo: false
+#| fig.cap: 'Crossovers per chromosome based on data provided in @haenelMetaanalysisChromosomescaleCrossover2018, where "crossovers per chromosome" for each chromosome $c$ was calculated by $\frac{crossover~rate_{c}(cM / Mb) \times length_{c}(Mb)} {100}$. The medaka genome is shorter in length than the zebrafish genome (~800 Mb compared to ~1,300 Mb), which according to the authors would suggest that medaka likely has a higher average crossover rate than what is presented in this figure.'
 # Plot
 df %>% 
   ggplot() +
@@ -54,49 +55,48 @@ df %>%
        subtitle = paste("mean: ", mean_crossovers, sep = ""))
 ```
 
-**Figure \@ref(fig:hmm-scat)** shows how adjusting the HMM parameters changed the called genotypes for 10 F~2~ samples on chromosome 18, by way of an example. Allowing the HMM to train itself for the transition probabilities and emission variances, the HMM produced an apparently noisy output (**Figure \@ref(fig:hmm-scat)A**). Fixing the transition probabilities to make it very likely for a state to transition back to itself rather than to another state did not appear to change the output (**Figure \@ref(fig:hmm-scat)A**). However, increasing the Gaussian emission variances created the "blocks" that I expected, and the higher the emission variances, the "tighter" the blocks (**Figure \@ref(fig:hmm-scat)C-F**). 
+**@fig-hmm-scat** shows how adjusting the HMM parameters changed the called genotypes for 10 F~2~ samples on chromosome 18, by way of an example. Allowing the HMM to train itself for the transition probabilities and emission variances, the HMM produced an apparently noisy output (A). Fixing the transition probabilities to make it very likely for a state to transition back to itself rather than to another state did not appear to change the output (B). However, increasing the Gaussian emission variances created the "blocks" that I expected, and the higher the emission variances, the "tighter" the blocks (C-F). 
 
-(ref:hmm-scat) HMM states called for each bin across chr18 for 10 F~2~ samples, to illustrate the effect of changing the HMM's transition probabilities and emission variances. States 0, 1, and 2 correspond to homozygous *Cab*, heterozygous, and homozygous *Kaga*. Each point represents a 5-kb bin. Y-axis is the proportion of reads within each bin that align to the *Kaga* allele. X-axis is the bp location of the start of each bin. **A**: Standard HMM with all model parameters trained on the data. **B**. HMM with fixed transition probabilities of 0 $\rightarrow$ 0 or 1 $\rightarrow$ 1 or 2 $\rightarrow$ 2 = 0.999; 0 $\rightarrow$ 1 or 2 $\rightarrow$ 1 = 0.00066; 0 $\rightarrow$ 2 or 2 $\rightarrow$ 0 = 0.000333; 1 $\rightarrow$ 0 or 1 $\rightarrow$ 2 = 0.0005. **C**-**F** retain those transition probabilities but with different fixed emission variances of 0.01 (**C**), 0.33 (**D**), 0.8 (**E**), and 1 (**F**). 
-
-```{r hmm-scat, echo = F, fig.cap = '(ref:hmm-scat)', out.width='100%'}
-knitr::include_graphics(here::here("book/figs/somites/scatter_collage.png"), auto_pdf = T)
+```{r}
+#| label: fig-hmm-scat
+#| echo: false
+#| fig.cap: "HMM states called for each bin across chr18 for 10 F~2~ samples, to illustrate the effect of changing the HMM's transition probabilities and emission variances. States 0, 1, and 2 correspond to homozygous *Cab*, heterozygous, and homozygous *Kaga*. Each point represents a 5-kb bin. Y-axis is the proportion of reads within each bin that align to the *Kaga* allele. X-axis is the bp location of the start of each bin. **A**: Standard HMM with all model parameters trained on the data. **B**. HMM with fixed transition probabilities of 0 $\\rightarrow$ 0 or 1 $\\rightarrow$ 1 or 2 $\\rightarrow$ 2 = 0.999; 0 $\\rightarrow$ 1 or 2 $\\rightarrow$ 1 = 0.00066; 0 $\\rightarrow$ 2 or 2 $\\rightarrow$ 0 = 0.000333; 1 $\\rightarrow$ 0 or 1 $\\rightarrow$ 2 = 0.0005. **C**-**F** retain those transition probabilities but with different fixed emission variances of 0.01 (**C**), 0.33 (**D**), 0.8 (**E**), and 1 (**F**)."
+knitr::include_graphics(here::here("book/plots/thesis/scatter_collage.png"), auto_pdf = T)
 ```
--->
-I used these genotype-block calls to generate the recombination karyoplot shown in **@fig-karyo-wi-missing**, with homozygous-*Cab* blocks in green, heterozoygous blocks in navy blue, and homozygous *Kaga* blocks in red. Missing calls are blank, where the vertical blank lines indicate that the region could not be called for any F~2~ individuals, likely due to an insufficient number of informative SNPs residing in those 5-kb blocks; and horizontal blank lines indicate that the sample could not be called, likely due to low sequencing coverage for that sample. 
+
+I used these genotype-block calls to generate the recombination karyoplot shown in **@fig-karyo-wi-missing**, with homozygous-*`r kableExtra::text_spec("Cab", color = "#43AA8B")`* blocks in green, heterozoygous blocks in navy blue, and homozygous *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* blocks in red. Missing calls are blank, where the vertical blank lines indicate that the region could not be called for any F~2~ individuals, likely due to an insufficient number of informative SNPs residing in those 5-kb blocks; and horizontal blank lines indicate that the sample could not be called, likely due to low sequencing coverage for that sample. 
 
 ```{r}
 #| label: fig-karyo-wi-missing
 #| echo: false
-#| fig.cap = 'Recombination blocks in 622 F~2~ samples based on the ratio of reads mapping to either the *Cab* or *Kaga* allele within 5-kb bins, with homozygous-*Cab* blocks in green, heterozoygous blocks in navy blue, and homozygous *Kaga* blocks in red. Most blocks show 0-2 crossover events, as expected, with some regions showing higher numbers of crossovers interpreted as noise. Unfilled regions are those with no state called by the HMM due to a lack of reads mapping to SNPs within those 5-kb bins.'
-#| fig.align='center'}
+#| fig.cap: 'Recombination blocks in 622 F~2~ samples based on the ratio of reads mapping to either the *Cab* or *Kaga* allele within 5-kb bins, with homozygous-*Cab* blocks in green, heterozoygous blocks in navy blue, and homozygous *Kaga* blocks in red. Most blocks show 0-2 crossover events, as expected, with some regions showing higher numbers of crossovers interpreted as noise. Unfilled regions are those with no state called by the HMM due to a lack of reads mapping to SNPs within those 5-kb bins.'
+#| fig.align: 'center'
 knitr::include_graphics(here::here("book/plots/karyoplots_cropped/karyoplot_wi_missing_cropped.png"), auto_pdf = T)
 ```
 
-In the downstream analysis, I excluded the 22 samples that showed poor coverage across the genome. For the remaining samples, I "filled" the bins with missing genotypes based on the call of the previous called bin, or if unavailable (e.g. the missing bin was at the start of the chromosome), then the next called bin (**@fig-karyo-no-missing**); note that this figure retains the low-coverage samples (horizontal blank lines) that were excluded from further analysis to allow for a direct comparison with **@fig-karyo-wi-missing**. I used these filled genotype calls for the association tests described below in section **@somite-assoc-tests**. As a rough way to estimate the accuracy of this genotyping method, we checked the genotypes called by the HMM for the reporter region on chr16 ~28.7Mb against our collaborators' manual recording of reporter gene counts based on the intensity of the *Her7*-Venus reporter's fluorescence. The confusion matrix is set out in **@tbl-reporter-conc-tbl**, showing that 83% of genotypes called by the HMM were consistent with the reporter genotypes as inferred from fluorescence brightness.
+In the downstream analysis, I excluded the 22 samples that showed poor coverage across the genome. For the remaining samples, I "filled" the bins with missing genotypes based on the call of the previous called bin, or if unavailable (e.g. the missing bin was at the start of the chromosome), then the next called bin (**@fig-karyo-no-missing**); note that this figure retains the low-coverage samples (horizontal blank lines) that were excluded from further analysis to allow for a direct comparison with **@fig-karyo-wi-missing**. I used these filled genotype calls for the association tests described below in section **@somite-assoc-tests**. As a rough way to estimate the accuracy of this genotyping method, we checked the genotypes called by the HMM for the reporter region on chr16 ~28.7Mb against our collaborators' manual recording of reporter gene counts based on the intensity of the *Her7*-Venus reporter's fluorescence. The confusion matrix is set out in **@tbl-reporter-conc**, showing that 83% of genotypes called by the HMM were consistent with the reporter genotypes as inferred from fluorescence brightness.
 
 ```{r}
-#| label: tbl-reporter-conc-tbl
+#| label: tbl-reporter-conc
 #| echo: false
 #| message: false
 #| warning: false
-#| fig.cap: 'Confusion matrix for reporter genotype as called by the HMM, and as inferred from the fluorescence brightness.'
-#| out.width: '100%'}
-readr::read_csv(here::here("results/hmm_reporter_conc.csv")) %>% 
-  janitor::adorn_totals("row",,,, -c("HMM state", "Reporter phenotype")) %>% 
-  DT::datatable()
+#| tbl-cap: 'Confusion matrix for reporter genotype as called by the HMM, and as inferred from the fluorescence brightness.'
+knitr::kable(readr::read_csv(here::here("results/hmm_reporter_conc.csv"))) #%>% 
+  #janitor::adorn_totals("row",,,, -c("HMM state", "Reporter phenotype")) %>% 
+  #DT::datatable()
 ```
 
-These karyoplots show interesting recombination patterns for several chromosomes. Given the F~2~ individuals were selected for the reporter gene on chr16, as expected, there appears to be a strong strong skew towards those genotypes across the whole chromosome. On chr3, most samples are homozygous-*Cab* for the second half of the chromosome, with a consistent breakpoint around ~22 Mb. However, the final fifth of samples which show a different recombination pattern. The samples are sorted based on the order that they were phenotyped and sequenced, so this difference could have been caused by their being generated from different F~1~ individuals with distinct haplotypes. 
+These karyoplots show interesting recombination patterns for several chromosomes. Given the F~2~ individuals were selected for the reporter gene on chr16, as expected, there appears to be a strong strong skew towards those genotypes across the whole chromosome. On chr3, most samples are homozygous-*`r kableExtra::text_spec("Cab", color = "#43AA8B")`* for the second half of the chromosome, with a consistent breakpoint around ~22 Mb. However, the final fifth of samples which show a different recombination pattern. The samples are sorted based on the order that they were phenotyped and sequenced, so this difference could have been caused by their being generated from different F~1~ individuals with distinct haplotypes. 
 
 ```{r}
 #| label: fig-karyo-no-missing
 #| echo: false
 #| fig.cap: 'Recombination blocks in 622 F~2~ samples based on the ratio of reads mapping to either the *Cab* or *Kaga* allele within 5-kb bins, with homozygous-*Cab* blocks in green, heterozoygous blocks in navy blue, and homozygous *Kaga* blocks in red. Most blocks show 0-2 crossover events, as expected, with some regions showing higher numbers of crossovers interpreted as noise. Bins with missing genotypes were "filled" based on the call of the previous called bin, or if unavailable (e.g. the missing bin was at the start of the chromosome), then the next called bin.'
-#| out.width: '100%'}
 knitr::include_graphics(here::here("book/plots/karyoplots_cropped/karyoplot_no_missing_cropped.png"), auto_pdf = T)
 ```
 
-**@fig-prop-sites-total)** shows the proportion of 5-kb bins called as either homozygous-*Cab*, heterozygous, or homozygous-*Kaga* within each F~2~ sample (points). The ordinary expectation for the ratios would be 0.25, 0.5, and 0.25 respectively. However, we observe a skew towards homozygous-*Cab* and away from homozygous *Kaga*. This was likely caused by the hybrid incompatibility between *Cab* and *Kaga*, given the two strains were derived from populations  that are thought to be at the point of speciation. 
+**@fig-prop-sites-total** shows the proportion of 5-kb bins called as either homozygous-*`r kableExtra::text_spec("Cab", color = "#43AA8B")`*, heterozygous, or homozygous-*`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* within each F~2~ sample (points). The ordinary expectation for the ratios would be 0.25, 0.5, and 0.25 respectively. However, we observe a skew towards homozygous-*`r kableExtra::text_spec("Cab", color = "#43AA8B")`* and away from homozygous *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`*. This was likely caused by the hybrid incompatibility between *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* and *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`*, given the two strains were derived from populations  that are thought to be at the point of speciation. 
 
 ```{r}
 #| label: fig-prop-sites-total

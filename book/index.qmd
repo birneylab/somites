@@ -1,6 +1,6 @@
 # About {-}
 
-This book sets out the analysis of somite development periods, for Ali Ahmed Seleit in the Aulehla Group at EMBL Heidelberg.
+This notebook sets out the bioinformatic analysis of somite development periods, for Ali Ahmed Seleit in the Aulehla Group at EMBL Heidelberg.
 
 ```{r}
 #| echo: false

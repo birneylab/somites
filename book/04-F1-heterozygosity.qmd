@@ -1,6 +1,6 @@
-## F~1~ heterozygosity {#f1-heterozygosity}
+## F~1~ heterozygosity {#sec-f1-heterozygosity}
 
-I next examined the level of heterozygosity in the F~1~ generation from the *Cab*-*Kaga* cross. **@fig-somite-f1** shows the level of heterozygosity across the genome of the F~1~ hybrid in brown measured by the proportion of heterozygous SNPs within 5-kb bins (brown), and the number of SNPs in each bin (yellow). Approximately half the chromosomes show inconsistent heterozygosity, with a mean heterozygosity across all bins of 67%. This lower level of apparent heterozygosity than expected was likely caused by the low levels of homozygosity in the *Kaga* F~0~ parent. 
+I next examined the level of heterozygosity in the F~1~ generation from the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`*-*`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* cross. **@fig-somite-f1** shows the level of heterozygosity across the genome of the F~1~ hybrid in brown measured by the proportion of heterozygous SNPs within 5-kb bins (brown), and the number of SNPs in each bin (yellow). Approximately half the chromosomes show inconsistent heterozygosity, with a mean heterozygosity across all bins of 67%. This lower level of apparent heterozygosity than expected was likely caused by the low levels of homozygosity in the *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* F~0~ parent. 
 
 ```{r}
 #| label: fig-somite-f1
@@ -9,7 +9,7 @@ I next examined the level of heterozygosity in the F~1~ generation from the *Cab
 knitr::include_graphics(here::here("book/plots/circos/trio_homo/hdrr/5000/F1.png"), auto_pdf = T)
 ```
 
-For the purpose of mapping the F~2~ sample sequences to the genomes of their parental strains, I selected only biallelic SNPs that were homozygous-divergent in the F~0~ generation (i.e. homozygous reference allele in *Cab* and homozygous alternative allele in *Kaga* or vice versa) *and* heterozygous in the F~1~ generation. The number of SNPs that met these criteria per chromosome are set out in **@fig-snp-counts-per-chrom**. The strong homozygosity of *Kaga* on chr22 is likely responsible for the much greater number of loci on that chromosome that can be used for calling genoytpes in the F~2~ generation, and highlights the importance of the parental strains being highly homozygous when used in experimental crosses such as this.
+For the purpose of mapping the F~2~ sample sequences to the genomes of their parental strains, I selected only biallelic SNPs that were homozygous-divergent in the F~0~ generation (i.e. homozygous reference allele in *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* and homozygous alternative allele in *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* or vice versa) *and* heterozygous in the F~1~ generation. The number of SNPs that met these criteria per chromosome are set out in **@fig-snp-counts-per-chrom**. The strong homozygosity of *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* on chr22 is likely responsible for the much greater number of loci on that chromosome that can be used for calling genoytpes in the F~2~ generation, and highlights the importance of the parental strains being highly homozygous when used in experimental crosses such as this.
 
 ```{r}
 #| label: fig-snp-counts-per-chrom
