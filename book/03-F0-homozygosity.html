@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>f0-homozygosity</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="03-F0-homozygosity_files/libs/clipboard/clipboard.min.js"></script>
+<script src="03-F0-homozygosity_files/libs/quarto-html/quarto.js"></script>
+<script src="03-F0-homozygosity_files/libs/quarto-html/popper.min.js"></script>
+<script src="03-F0-homozygosity_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="03-F0-homozygosity_files/libs/quarto-html/anchor.min.js"></script>
+<link href="03-F0-homozygosity_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="03-F0-homozygosity_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="03-F0-homozygosity_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="03-F0-homozygosity_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="03-F0-homozygosity_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="f0-homozygosity" class="level1">
+<h1>F<sub>0</sub> homozygosity</h1>
+<section id="f0-coverage" class="level2">
+<h2 class="anchored" data-anchor-id="f0-coverage">F<sub>0</sub> coverage</h2>
+<p>Our collaborators extracted DNA from the F<sub>0</sub>, F<sub>1</sub>, and F<sub>2</sub>, and sequenced the F<sub>0</sub> and F<sub>1</sub> samples with the Illumina platform at high coverage (~26x for <em><span style="     color: #43AA8B !important;">Cab</span></em> and ~29x for <em><span style="     color: #DE3C4B !important;">Kaga</span></em>), as measured by <em>SAMtools</em> <span class="citation" data-cites="danecekTwelveYearsSAMtools2021">[@danecekTwelveYearsSAMtools2021]</span>. <strong><a href="#fig-F0-coverage">Figure&nbsp;1</a></strong> sets out the mean sequencing depth within each chromosome and across the whole genome for the <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> F<sub>0</sub> samples. Our collaborators then sequenced the F<sub>2</sub> samples at low coverage (~1x), which would be sufficient to map their genotypes back to the genotypes of their parental strains (see section @ref(somite-f2-sequencing) below for further details).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-F0-coverage" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/coverage/F0_coverage.png" class="img-fluid figure-img" width="2000"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Mean sequencing depth per chromosome for <em>Cab</em> and <em>Kaga</em> F<sub>0</sub> strains, with genome-wide mean depth across all chromosomes shown under the subtitles.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="f0-homozygosity-1" class="level2">
+<h2 class="anchored" data-anchor-id="f0-homozygosity-1">F<sub>0</sub> homozygosity</h2>
+<p>Before proceeding to map the F<sub>2</sub> sequences to the genotypes of the F<sub>0</sub> generation, I first investigated the levels of homozygosity in the F<sub>0</sub> <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> strains, as this would affect our ability to accurately call the F<sub>2</sub> generation. That is to say, for regions where either F<sub>0</sub> parent is consistently heterozygous, it would be difficult to determine the parent from which a particular F<sub>2</sub> individual derived its chromosomes at that locus. I therefore aligned the high-coverage sequencing data for the F<sub>0</sub> <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> strains to the medaka <em>HdrR</em> reference (Ensembl release 104, build ASM223467v1) using <em>BWA-MEM2</em> <span class="citation" data-cites="vasimuddinEfficientArchitectureawareAcceleration2019">[@vasimuddinEfficientArchitectureawareAcceleration2019]</span>, sorted the aligned .sam files, marked duplicate reads, and merged the paired reads with picard <span class="citation" data-cites="Picard2019toolkit">[@Picard2019toolkit]</span>, and indexed the .bam files with <em>SAMtools</em> <span class="citation" data-cites="liSequenceAlignmentMap2009">[@liSequenceAlignmentMap2009]</span>.</p>
+<p>To call variants, I followed the GATK best practices (to the extent they were applicable) <span class="citation" data-cites="mckennaGenomeAnalysisToolkit2010 depristoFrameworkVariationDiscovery2011 vanderauweraGenomicsCloudUsing2020">[@mckennaGenomeAnalysisToolkit2010; @depristoFrameworkVariationDiscovery2011; @vanderauweraGenomicsCloudUsing2020]</span> with GATK’s HaplotypeCaller and GenotypeGVCFs tools <span class="citation" data-cites="poplinScalingAccurateGenetic2018">[@poplinScalingAccurateGenetic2018]</span>, then merged all calls into a single .vcf file with picard <span class="citation" data-cites="Picard2019toolkit">[@Picard2019toolkit]</span>. Finally, I extracted the biallelic calls for <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> with bcftools <span class="citation" data-cites="danecekTwelveYearsSAMtools2021">[@danecekTwelveYearsSAMtools2021]</span>, counted the number of SNPs within non-overlapping, 5-kb bins, and calculated the proportion of SNPs within each bin that were homozgyous.</p>
+<p><strong>fig-somite-f0-cab</strong> is a circos plot generated with circlize <span class="citation" data-cites="guCirclizeImplementsEnhances2014">[@guCirclizeImplementsEnhances2014]</span> for the <em><span style="     color: #43AA8B !important;">Cab</span></em> F<sub>0</sub> strain used in this experiment, featuring the proportion of homozygous SNPs per 5-kb bin (green), and the total number of SNPs in each bin (yellow). As expected for a strain that has been inbred for over 10 generations, the mean homozygosity for this strain is high, with a mean proportion of homozygosity across all bins of 83%.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-somite-f0-cab" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/circos/trio_homo/hdrr/5000/Cab.png" class="img-fluid figure-img" width="1968"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Proportion of homozygous SNPs within 5 kb bins in the <em>Cab</em> F<sub>0</sub> generation genome (<em>green</em>), and number of SNPs in each bin (<em>yellow</em>).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>However, the levels of homozygosity in the <em><span style="     color: #DE3C4B !important;">Kaga</span></em> strain used in this experiment was far lower, with a mean homozygosity across all bins of only 31% (<strong><a href="#fig-somite-f0-kaga">Figure&nbsp;3</a></strong>). This was a surprise, as it is an established strain that has been extant for decades, and we therefore expected the level of homozygosity to be commensurate with that observed in the <em><span style="     color: #43AA8B !important;">Cab</span></em> strain. An obvious exception is chr22, for which <em><span style="     color: #DE3C4B !important;">Kaga</span></em> appears to be homozygous across its entire length.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-somite-f0-kaga" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/circos/trio_homo/hdrr/5000/Kaga.png" class="img-fluid figure-img" width="1968"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: Proportion of homozygous SNPs within 5 kb bins in the <em>Kaga</em> F<sub>0</sub> generation genome (<em>red</em>), and number of SNPs in each bin (<em>yellow</em>).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To determine whether the low levels of observed homozygosity in <em><span style="     color: #DE3C4B !important;">Kaga</span></em> was affected by its alignments to the southern Japanese <em>HdrR</em> reference, we also aligned the F<sub>0</sub> samples to the northern Japanese <em>HNI</em> reference (<strong><a href="#fig-somite-f0-kaga-hni">Figure&nbsp;4</a></strong>). This did not make differences to the levels of observed homozygosity in either sample, which gave us confidence that the low homozygosity observed in <em><span style="     color: #DE3C4B !important;">Kaga</span></em> was not driven by reference bias. I understand from our collaborators that the low homozygosity of this <em><span style="     color: #DE3C4B !important;">Kaga</span></em> individual must have resulted from the strain having been contaminated at some stage by breeding with a different inbred strain prior to when they received the individuals.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-somite-f0-kaga-hni" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/circos/trio_homo/hni/5000/Kaga.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4: Proportion of homozygous SNPs within 5 kb bins in the <em>Kaga</em> F<sub>0</sub> generation genome when aligned to the <em>HNI</em> reference (<em>red</em>), and number of SNPs in each bin (<em>yellow</em>).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
