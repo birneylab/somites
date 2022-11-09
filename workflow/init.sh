@@ -78,10 +78,10 @@ singularity build --remote \
 module load singularity-3.7.0-gcc-9.3.0-dp5ffrp
 bsub -M 20000 -Is bash
 cd /hps/software/users/birney/ian/repos/somites
-CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.2.1.sif
+CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.2.2.sif
 singularity build --remote \
     $CONT \
-    workflow/envs/R_4.2.1/R_4.2.1.def
+    workflow/envs/R_4.2.2/R_4.2.2.def
 
 # Build R container for PhenotypeSimulator
 CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.1.0_PhenotypeSimulator.sif
