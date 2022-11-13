@@ -98,9 +98,10 @@ module load singularity-3.7.0-gcc-9.3.0-dp5ffrp
 CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.1.0.sif
 CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.1.3.sif
 CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.2.1.sif
-singularity shell --bind /hps/nobackup/birney/users/ian/R_tmp/R_4.2.1/rstudio_db:/var/lib/rstudio-server \
-                  --bind /hps/nobackup/birney/users/ian/R_tmp/R_4.2.1/tmp:/tmp \
-                  --bind /hps/nobackup/birney/users/ian/R_tmp/R_4.2.1/run:/run \
+CONT=/hps/nobackup/birney/users/ian/containers/somites/R_4.2.2.sif
+singularity shell --bind /hps/nobackup/birney/users/ian/R_tmp/R_4.2.2/rstudio_db:/var/lib/rstudio-server \
+                  --bind /hps/nobackup/birney/users/ian/R_tmp/R_4.2.2/tmp:/tmp \
+                  --bind /hps/nobackup/birney/users/ian/R_tmp/R_4.2.2/run:/run \
                   $CONT
 # Then run rserver, setting path of config file containing library path
 rstudio-server kill-all
