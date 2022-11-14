@@ -219,7 +219,7 @@ invnorm = function(x) {
 #| warning: false
 #| fig-width: 8
 #| fig-height: 8.5
-#| fig.cap: 'Comparison of the period intercept phenotype data for the F~2~ generation before (**A**) and after (**B**) inverse-normalisation, with vertical lines marking the mean of each group. Code adapted from `rule invnorm_intercept_plot' in https://github.com/brettellebi/somites/blob/master/workflow/rules/08_extra.smk.
+#| fig.cap: 'Comparison of the period intercept phenotype data for the F~2~ generation before (**A**) and after (**B**) inverse-normalisation, with vertical lines marking the mean of each group. Code adapted from `rule invnorm_intercept_plot` in https://github.com/brettellebi/somites/blob/master/workflow/rules/08_extra.smk.'
 #| out.width: '100%'
 
 # Set variables

@@ -34,17 +34,17 @@ dat_list = purrr::map(IN, function(FILE){
 
 # Plot
 
-fig = df %>% 
-  ggplot() + 
-  geom_col(aes(chrom, meandepth, fill = chrom)) + 
-  cowplot::theme_cowplot() +
-  facet_wrap(~SAMPLE, nrow = 2) + 
-  scale_x_discrete(breaks = 1:24) +
-  guides(fill = "none") +
-  xlab("chromosome") +
-  ylab("mean depth") +
-  theme(strip.background.x = element_blank(),
-        strip.text.x = element_text(face = "bold"))
+#fig = df %>% 
+#  ggplot() + 
+#  geom_col(aes(chrom, meandepth, fill = chrom)) + 
+#  cowplot::theme_cowplot() +
+#  facet_wrap(~SAMPLE, nrow = 2) + 
+#  scale_x_discrete(breaks = 1:24) +
+#  guides(fill = "none") +
+#  xlab("chromosome") +
+#  ylab("mean depth") +
+#  theme(strip.background.x = element_blank(),
+#        strip.text.x = element_text(face = "bold"))
 
 fig_cab = dat_list[["Cab"]] %>% 
   ggplot() + 

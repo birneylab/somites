@@ -1,14 +1,90 @@
 # F~0~ homozygosity
 
+```{r}
+#| include: false
+library(tidyverse)
+```
+
 ## F~0~ coverage
 
 Our collaborators extracted DNA from the F~0~, F~1~, and F~2~, and sequenced the F~0~ and F~1~ samples with the Illumina platform at high coverage (~26x for *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* and ~29x for *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`*), as measured by *SAMtools* [@danecekTwelveYearsSAMtools2021]. **@fig-F0-coverage** sets out the mean sequencing depth within each chromosome and across the whole genome for the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* and *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* F~0~ samples. Our collaborators then sequenced the F~2~ samples at low coverage (~1x), which would be sufficient to map their genotypes back to the genotypes of their parental strains (see section \@ref(somite-f2-sequencing) below for further details).
 
 ```{r}
 #| label: fig-F0-coverage
-#| echo: false
-#| fig.cap: "Mean sequencing depth per chromosome for *Cab* and *Kaga* F~0~ strains, with genome-wide mean depth across all chromosomes shown under the subtitles."
-knitr::include_graphics(here::here("book/plots/coverage/F0_coverage.png"), auto_pdf = T)
+#| #| message: false
+#| warning: false
+#| fig-width: 10
+#| fig-height: 7
+#| fig.cap: "Mean sequencing depth per chromosome for *Cab* and *Kaga* F~0~ strains, with genome-wide mean depth across all chromosomes shown under the subtitles. Code adapted from `rule coverage_plot_F0` in https://github.com/brettellebi/somites/blob/master/workflow/rules/08_extra.smk."
+# Set variables
+
+IN = list.files("/hps/nobackup/birney/users/ian/somites/coverage/hdrr/bwamem2",
+                     full.names = T) %>% 
+  as.list()
+OUT_PNG = "/hps/software/users/birney/ian/repos/somites/book/plots/coverage/F0_coverage.png"
+OUT_PDF = "/hps/software/users/birney/ian/repos/somites/book/plots/coverage/F0_coverage.pdf"
+
+# Read in files
+
+names(IN) = IN %>% 
+  unlist() %>% 
+  basename() %>% 
+  stringr::str_remove(".txt")
+
+dat_list = purrr::map(IN, function(FILE){
+  readr::read_tsv(FILE) %>% 
+    dplyr::rename(chrom = '#rname') %>% 
+    dplyr::filter(chrom != "MT") %>% 
+    dplyr::mutate(chrom = factor(chrom, levels = 1:24))
+})
+
+# Plot
+
+fig_cab = dat_list[["Cab"]] %>% 
+  ggplot() + 
+  geom_col(aes(chrom, meandepth, fill = chrom)) + 
+  cowplot::theme_cowplot() +
+  #facet_wrap(~SAMPLE, nrow = 2) + 
+  scale_x_discrete(breaks = 1:24) +
+  guides(fill = "none") +
+  xlab("chromosome") +
+  ylab("mean depth") +
+  ggtitle("Cab",
+          subtitle = paste("mean: ", 
+                           round(mean(dat_list[["Cab"]]$meandepth),
+                                 digits = 2),
+                           sep = "")
+          ) + 
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+
+fig_kaga = dat_list[["Kaga"]] %>% 
+  ggplot() + 
+  geom_col(aes(chrom, meandepth, fill = chrom)) + 
+  cowplot::theme_cowplot() +
+  #facet_wrap(~SAMPLE, nrow = 2) + 
+  scale_x_discrete(breaks = 1:24) +
+  guides(fill = "none") +
+  xlab("chromosome") +
+  ylab("mean depth") +
+  ggtitle("Kaga",
+          subtitle = paste("mean: ", 
+                           round(mean(dat_list[["Kaga"]]$meandepth),
+                                 digits = 2),
+                           sep = "")
+  ) + 
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+
+
+# Put together
+
+out = cowplot::plot_grid(fig_cab,
+                         fig_kaga,
+                         align = "hv",
+                         axis = "tblr",nrow = 2,labels = c("A", "B"),label_size = 16)
+
+out
 ```
 
 ## F~0~ homozygosity
@@ -21,7 +97,10 @@ To call variants, I followed the GATK best practices (to the extent they were ap
 
 ```{r}
 #| label: fig-somite-f0-cab
-#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 10
+#| fig-height: 7
 #| fig.cap: 'Proportion of homozygous SNPs within 5 kb bins in the *Cab* F~0~ generation genome (*green*), and number of SNPs in each bin (*yellow*).'
 knitr::include_graphics(here::here("book/plots/circos/trio_homo/hdrr/5000/Cab.png"), auto_pdf = T)
 ```
