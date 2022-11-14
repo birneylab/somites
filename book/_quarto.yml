@@ -2,14 +2,6 @@ project:
   type: book
   output-dir: "../docs"
 
-#book_filename: "book"
-#new_session: yes
-#before_chapter_script: _common.R
-#delete_merged_file: true
-#language:
-#  ui:
-#    chapter_name: "Chapter "
-
 highlight-style: atom-one
 
 book:
@@ -17,8 +9,8 @@ book:
   author: "Ian Brettell"
   date: today
   date-format: "D MMMM YYYY"
-  csl: chicago-fullnote-bibliography.csl
-  number-sections: true
+  #csl: chicago-fullnote-bibliography.csl
+  #number-sections: true
   search: true
   repo-url: https://github.com/brettellebi/somites
   repo-subdir: book
@@ -44,17 +36,3 @@ format:
     linkcolor: "#3C1642"
     code-fold: true
     #backgroundcolor: "#3C1642"
-
-#  - "01-Data_processing_with_Snakemake.Rmd",
-#  - "02-F0_homozygosity.Rmd",
-#  - "03-1-F2_recombination_all_sites.Rmd",
-#  - "03-5-F2_recombination_no_repeat_reads_or_pers_hets_filtered_for_read_count_and_cab_prop.Rmd",
-#  - "04-1-Phenotype_exploration.Rmd",
-#  - "04-2-Test_GWAS_code.Rmd",
-#  - "05-GWLS_results.Rmd",
-#  - "Period_intercept_with_AU.Rmd",
-#  - "Period_intercept_with_DB.Rmd",
-#  - "Inverse_normalise_by_microscope.Rmd",
-#  - "Reporter_as_covariate.Rmd",
-#  - "08-Annotations.Rmd",
-#  - "07-references.Rmd"
