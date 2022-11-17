@@ -1,4 +1,4 @@
-# Background
+# Background {#sec-background}
 
 Somites are the earliest primitive segmental structures that form from presomatic mesoderm cells (**PSM**) in the embryo [@kimPeriodSomiteSegmentation2011], later differentiating into vertebrae, ribs, and skeletal muscles. Somite formation occurs rhythmically and sequentially, with the time between the formation of each pair of somites referred to as the "period". The period of somite formation varies greatly between species [@matsudaSpeciesspecificSegmentationClock2020], and is controlled by a molecular oscillator, known as the 'segmentation clock', which drives waves of gene expression in developmental pathways. 
 

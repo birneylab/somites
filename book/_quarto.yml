@@ -35,4 +35,5 @@ format:
     bibliography: book.bib
     linkcolor: "#3C1642"
     code-fold: true
+    csl: chicago-fullnote-bibliography.csl
     #backgroundcolor: "#3C1642"

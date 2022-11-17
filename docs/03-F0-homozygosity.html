@@ -254,7 +254,7 @@ div.csl-indent {
 
 <section id="f0-coverage" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="f0-coverage"><span class="header-section-number">3.1</span> F<sub>0</sub> coverage</h2>
-<p>Our collaborators extracted DNA from the F<sub>0</sub>, F<sub>1</sub>, and F<sub>2</sub>, and sequenced the F<sub>0</sub> and F<sub>1</sub> samples with the Illumina platform at high coverage (~26x for <em><span style="     color: #43AA8B !important;">Cab</span></em> and ~29x for <em><span style="     color: #DE3C4B !important;">Kaga</span></em>), as measured by <em>SAMtools</em> <span class="citation" data-cites="danecekTwelveYearsSAMtools2021">(<a href="07-references.html#ref-danecekTwelveYearsSAMtools2021" role="doc-biblioref">Danecek et al. 2021</a>)</span>. <strong><a href="#fig-F0-coverage">Figure&nbsp;<span>3.1</span></a></strong> sets out the mean sequencing depth within each chromosome and across the whole genome for the <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> F<sub>0</sub> samples. Our collaborators then sequenced the F<sub>2</sub> samples at low coverage (~1x), which would be sufficient to map their genotypes back to the genotypes of their parental strains (see section @ref(somite-f2-sequencing) below for further details).</p>
+<p>Our collaborators extracted DNA from the F<sub>0</sub>, F<sub>1</sub>, and F<sub>2</sub>, and sequenced the F<sub>0</sub> and F<sub>1</sub> samples with the Illumina platform at high coverage (~26x for <em><span style="     color: #43AA8B !important;">Cab</span></em> and ~29x for <em><span style="     color: #DE3C4B !important;">Kaga</span></em>), as measured by <em>SAMtools</em>.<span class="citation" data-cites="danecekTwelveYearsSAMtools2021"><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></span> <a href="#fig-F0-coverage">Figure&nbsp;<span>3.1</span></a> sets out the mean sequencing depth within each chromosome and across the whole genome for the <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> F<sub>0</sub> samples. Our collaborators then sequenced the F<sub>2</sub> samples at low coverage (~1x), which would be sufficient to map their genotypes back to the genotypes of their parental strains (see section @ref(somite-f2-sequencing) below for further details).</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -332,7 +332,7 @@ div.csl-indent {
 <div id="fig-F0-coverage" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-F0-homozygosity_files/figure-html/fig-F0-coverage-1.png" class="img-fluid figure-img" width="960"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.1: Mean sequencing depth per chromosome for <em>Cab</em> and <em>Kaga</em> F<sub>0</sub> strains, with genome-wide mean depth across all chromosomes shown under the subtitles. Code adapted from <code>rule coverage_plot_F0</code> in https://github.com/brettellebi/somites/blob/master/workflow/rules/08_extra.smk.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.1: Mean sequencing depth per chromosome for <em>Cab</em> and <em>Kaga</em> F<sub>0</sub> strains, with genome-wide mean depth across all chromosomes shown under the subtitles. Code adapted from <code>rule coverage_plot_F0</code> in <a href="https://github.com/brettellebi/somites/blob/master/workflow/rules/08_extra.smk">https://github.com/brettellebi/somites/blob/master/workflow/rules/08_extra.smk</a>.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -340,19 +340,199 @@ div.csl-indent {
 </section>
 <section id="f0-homozygosity" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="f0-homozygosity"><span class="header-section-number">3.2</span> F<sub>0</sub> homozygosity</h2>
-<p>Before proceeding to map the F<sub>2</sub> sequences to the genotypes of the F<sub>0</sub> generation, I first investigated the levels of homozygosity in the F<sub>0</sub> <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> strains, as this would affect our ability to accurately call the F<sub>2</sub> generation. That is to say, for regions where either F<sub>0</sub> parent is consistently heterozygous, it would be difficult to determine the parent from which a particular F<sub>2</sub> individual derived its chromosomes at that locus. I therefore aligned the high-coverage sequencing data for the F<sub>0</sub> <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> strains to the medaka <em>HdrR</em> reference (Ensembl release 104, build ASM223467v1) using <em>BWA-MEM2</em> <span class="citation" data-cites="vasimuddinEfficientArchitectureawareAcceleration2019">(<a href="07-references.html#ref-vasimuddinEfficientArchitectureawareAcceleration2019" role="doc-biblioref">Vasimuddin et al. 2019</a>)</span>, sorted the aligned .sam files, marked duplicate reads, and merged the paired reads with picard <span class="citation" data-cites="Picard2019toolkit">(<a href="07-references.html#ref-Picard2019toolkit" role="doc-biblioref"><span>“Picard Toolkit”</span> 2019</a>)</span>, and indexed the .bam files with <em>SAMtools</em> <span class="citation" data-cites="liSequenceAlignmentMap2009">(<a href="07-references.html#ref-liSequenceAlignmentMap2009" role="doc-biblioref">Li et al. 2009</a>)</span>.</p>
-<p>To call variants, I followed the GATK best practices (to the extent they were applicable) <span class="citation" data-cites="mckennaGenomeAnalysisToolkit2010 depristoFrameworkVariationDiscovery2011 vanderauweraGenomicsCloudUsing2020">(<a href="07-references.html#ref-mckennaGenomeAnalysisToolkit2010" role="doc-biblioref">McKenna et al. 2010</a>; <a href="07-references.html#ref-depristoFrameworkVariationDiscovery2011" role="doc-biblioref">DePristo et al. 2011</a>; <a href="07-references.html#ref-vanderauweraGenomicsCloudUsing2020" role="doc-biblioref">Van der Auwera and O’Connor 2020</a>)</span> with GATK’s HaplotypeCaller and GenotypeGVCFs tools <span class="citation" data-cites="poplinScalingAccurateGenetic2018">(<a href="07-references.html#ref-poplinScalingAccurateGenetic2018" role="doc-biblioref">Poplin et al. 2018</a>)</span>, then merged all calls into a single .vcf file with picard <span class="citation" data-cites="Picard2019toolkit">(<a href="07-references.html#ref-Picard2019toolkit" role="doc-biblioref"><span>“Picard Toolkit”</span> 2019</a>)</span>. Finally, I extracted the biallelic calls for <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> with bcftools <span class="citation" data-cites="danecekTwelveYearsSAMtools2021">(<a href="07-references.html#ref-danecekTwelveYearsSAMtools2021" role="doc-biblioref">Danecek et al. 2021</a>)</span>, counted the number of SNPs within non-overlapping, 5-kb bins, and calculated the proportion of SNPs within each bin that were homozgyous.</p>
-<p><strong><a href="#fig-somite-f0-cab">Figure&nbsp;<span>3.2</span></a></strong> is a circos plot generated with circlize <span class="citation" data-cites="guCirclizeImplementsEnhances2014">(<a href="07-references.html#ref-guCirclizeImplementsEnhances2014" role="doc-biblioref">Gu et al. 2014</a>)</span> for the <em><span style="     color: #43AA8B !important;">Cab</span></em> F<sub>0</sub> strain used in this experiment, featuring the proportion of homozygous SNPs per 5-kb bin (green), and the total number of SNPs in each bin (yellow). As expected for a strain that has been inbred for over 10 generations, the mean homozygosity for this strain is high, with a mean proportion of homozygosity across all bins of 83%.</p>
+<p>Before proceeding to map the F<sub>2</sub> sequences to the genotypes of the F<sub>0</sub> generation, I first investigated the levels of homozygosity in the F<sub>0</sub> <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> strains, as this would affect our ability to accurately call the F<sub>2</sub> generation. That is to say, for regions where either F<sub>0</sub> parent is consistently heterozygous, it would be difficult to determine the parent from which a particular F<sub>2</sub> individual derived its chromosomes at that locus. I therefore aligned the high-coverage sequencing data for the F<sub>0</sub> <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> strains to the medaka <em>HdrR</em> reference (Ensembl release 104, build ASM223467v1) using <em>BWA-MEM2</em>,<span class="citation" data-cites="vasimuddinEfficientArchitectureawareAcceleration2019"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span> sorted the aligned .sam files, marked duplicate reads, and merged the paired reads with picard,<span class="citation" data-cites="Picard2019toolkit"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></span> and indexed the .bam files with <em>SAMtools</em>.<span class="citation" data-cites="liSequenceAlignmentMap2009"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></span></p>
+<p>To call variants, I followed the GATK best practices (to the extent they were applicable)<span class="citation" data-cites="mckennaGenomeAnalysisToolkit2010 depristoFrameworkVariationDiscovery2011 vanderauweraGenomicsCloudUsing2020"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span> with GATK’s HaplotypeCaller and GenotypeGVCFs tools,<span class="citation" data-cites="poplinScalingAccurateGenetic2018"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span> then merged all calls into a single .vcf file with picard.<span class="citation" data-cites="Picard2019toolkit"><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></span> Finally, I extracted the biallelic calls for <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> with bcftools,<span class="citation" data-cites="danecekTwelveYearsSAMtools2021"><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></span> counted the number of SNPs within non-overlapping, 5-kb bins, and calculated the proportion of SNPs within each bin that were homozgyous.</p>
+<p><strong><a href="#fig-somite-f0-cab">Figure&nbsp;<span>3.2</span></a></strong> is a circos plot generated with circlize<span class="citation" data-cites="guCirclizeImplementsEnhances2014"><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></span> for the <em><span style="     color: #43AA8B !important;">Cab</span></em> F<sub>0</sub> strain used in this experiment, featuring the proportion of homozygous SNPs per 5-kb bin (green), and the total number of SNPs in each bin (yellow). As expected for a strain that has been inbred for over 10 generations, the mean homozygosity for this strain is high, with a mean proportion of homozygosity across all bins of 83%.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"book/plots/circos/trio_homo/hdrr/5000/Cab.png"</span>), <span class="at">auto_pdf =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(circlize)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Set variables</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>IN_FILE <span class="ot">=</span> <span class="st">"/hps/nobackup/birney/users/ian/somites/genos/F0_and_F1/hdrr/counts/Cab/5000.csv"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>CHROM_LENGTHS <span class="ot">=</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"config/hdrr_chrom_lengths.csv"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>REF <span class="ot">=</span> <span class="st">"hdrr"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>SAMPLE <span class="ot">=</span> <span class="st">"Cab"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>BIN_LENGTH <span class="ot">=</span> <span class="dv">5000</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>PAL <span class="ot">=</span> <span class="st">"#43AA8B"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>OUT_PNG <span class="ot">=</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"book/plots/circos/trio_homo/hdrr/5000/Cab.png"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Get lighter/darker functions</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://gist.githubusercontent.com/brettellebi/c5015ee666cdf8d9f7e25fa3c8063c99/raw/91e601f82da6c614b4983d8afc4ef399fa58ed4b/karyoploteR_lighter_darker.R"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>genos <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(IN_FILE)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>chroms <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(CHROM_LENGTHS,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                         <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"CHROM"</span>, <span class="st">"LENGTH"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove MT</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(CHROM <span class="sc">!=</span> <span class="st">"MT"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> CHROM <span class="sc">%&gt;%</span> </span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"^"</span>, <span class="at">replacement =</span> <span class="st">"chr"</span>),</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                <span class="at">START =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CHROM, START, <span class="at">END =</span> LENGTH)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Process variables</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (SAMPLE <span class="sc">==</span> <span class="st">"F1"</span>){</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  TARGET_CHROM <span class="ot">=</span> <span class="st">"PROP_HET"</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  TARGET_CHROM <span class="ot">=</span> <span class="st">"PROP_HOM"</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (REF <span class="sc">==</span> <span class="st">"hdrr"</span>){</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  REF <span class="ot">=</span> <span class="st">"HdrR"</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (REF <span class="sc">==</span> <span class="st">"hni"</span>){</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  REF <span class="ot">=</span> <span class="st">"HNI"</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Process `genos`</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>homozyg <span class="ot">=</span> genos <span class="sc">%&gt;%</span> </span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> CHROM <span class="sc">%&gt;%</span> </span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>                  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"^"</span>, <span class="at">replacement =</span> <span class="st">"chr"</span>),</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_START =</span> (BIN <span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span> BIN_LENGTH <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_END =</span> BIN <span class="sc">*</span> BIN_LENGTH) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CHROM, BIN_START, BIN_END, dplyr<span class="sc">::</span><span class="fu">all_of</span>(TARGET_CHROM))</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>n_vars <span class="ot">=</span> genos <span class="sc">%&gt;%</span> </span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> CHROM <span class="sc">%&gt;%</span> </span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>                  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"^"</span>, <span class="at">replacement =</span> <span class="st">"chr"</span>),</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_START =</span> (BIN <span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span> BIN_LENGTH <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_END =</span> BIN <span class="sc">*</span> BIN_LENGTH) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CHROM, BIN_START, BIN_END, TOT_HITS) </span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="co"># PNG</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Set output</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(OUT_PNG,</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">20</span>,</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">20</span>,</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> <span class="st">"cm"</span>,</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">res =</span> <span class="dv">500</span>)</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Circos plots</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.par</span>(<span class="at">cell.padding =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>           <span class="at">track.margin =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>           <span class="at">gap.degree =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(chroms) <span class="sc">-</span> <span class="dv">1</span>), <span class="dv">8</span>))</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize plot</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initializeWithIdeogram</span>(chroms,</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>                              <span class="at">plotType =</span> <span class="fu">c</span>(<span class="st">"axis"</span>, <span class="st">"labels"</span>),</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>                              <span class="at">major.by =</span> <span class="fl">1e7</span>,</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>                              <span class="at">axis.labels.cex =</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>))</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (SAMPLE <span class="sc">==</span> <span class="st">"F1"</span>){</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>  CENTER_LAB <span class="ot">=</span> <span class="fu">paste</span>(SAMPLE,</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">heterozygosity</span><span class="sc">\n</span><span class="st">and</span><span class="sc">\n</span><span class="st">variant count"</span>,</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">within</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>                     BIN_LENGTH <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"kb bins"</span>,</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>,</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>                     REF,</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>                     <span class="st">" reference"</span>,</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>  CENTER_LAB <span class="ot">=</span> <span class="fu">paste</span>(SAMPLE,</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">homozygosity</span><span class="sc">\n</span><span class="st">and</span><span class="sc">\n</span><span class="st">variant count"</span>,</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">within</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>                     BIN_LENGTH <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"kb bins"</span>,</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>,</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>                     REF,</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>                     <span class="st">" reference"</span>,</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="co"># Add label to center</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">0</span>, <span class="dv">0</span>, CENTER_LAB)</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="co"># Add proportion of homozygosity</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.genomicTrack</span>(homozyg,</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>                    <span class="at">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">circos.genomicLines</span>(region,</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>                                          value,</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">type =</span> <span class="st">"h"</span>,</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">col =</span> PAL,</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">cex =</span> <span class="fl">0.05</span>)</span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>                    },</span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>                    <span class="at">track.height =</span> <span class="fl">0.12</span>,</span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>                    <span class="at">bg.border =</span> <span class="cn">NA</span>,</span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a><span class="co"># y-axis label</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.yaxis</span>(<span class="at">side =</span> <span class="st">"right"</span>,</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>             <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>             <span class="at">labels.cex =</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>),</span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>             <span class="at">tick.length =</span> <span class="dv">2</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a><span class="co"># y-axis title</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (SAMPLE <span class="sc">==</span> <span class="st">"F1"</span>){</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>  AXIS_LAB <span class="ot">=</span> <span class="st">"proportion</span><span class="sc">\n</span><span class="st">heterozygous"</span></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>  AXIS_LAB <span class="ot">=</span> <span class="st">"proportion</span><span class="sc">\n</span><span class="st">homozygous"</span></span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.text</span>(<span class="dv">0</span>, <span class="fl">0.25</span>,</span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> AXIS_LAB,</span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> <span class="st">"chr1"</span>,</span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>            <span class="at">facing =</span> <span class="st">"clockwise"</span>,</span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a>            <span class="at">adj =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>            <span class="at">cex =</span> <span class="fl">0.3</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>))</span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a><span class="co"># Add number of hits</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a><span class="do">## get max number of variants</span></span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>MAX_VARS <span class="ot">=</span> <span class="fu">max</span>(n_vars<span class="sc">$</span>TOT_HITS, <span class="at">na.rm =</span> T)</span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.genomicTrack</span>(n_vars,</span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>                    <span class="at">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">circos.genomicLines</span>(region,</span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>                                          value,</span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">type =</span> <span class="st">"h"</span>,</span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">col =</span> <span class="st">"#F3B700"</span>,</span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">cex =</span> <span class="fl">0.05</span>)</span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>                    },</span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>                    <span class="at">track.height =</span> <span class="fl">0.12</span>,</span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>                    <span class="at">bg.border =</span> <span class="cn">NA</span>,</span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, MAX_VARS))</span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a><span class="co"># y-axis label</span></span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.yaxis</span>(<span class="at">side =</span> <span class="st">"right"</span>,</span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>             <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">500</span>),</span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>             <span class="at">labels.cex =</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>),</span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>             <span class="at">tick.length =</span> <span class="dv">2</span></span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.text</span>(<span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> <span class="st">"N variants</span><span class="sc">\n</span><span class="st">per bin"</span>,</span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> <span class="st">"chr1"</span>,</span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>            <span class="at">facing =</span> <span class="st">"clockwise"</span>,</span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>            <span class="at">adj =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>            <span class="at">cex =</span> <span class="fl">0.3</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>))</span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+</div>
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-somite-f0-cab" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="plots/circos/trio_homo/hdrr/5000/Cab.png" class="img-fluid figure-img" width="1968"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.2: Proportion of homozygous SNPs within 5 kb bins in the <em>Cab</em> F<sub>0</sub> generation genome (<em>green</em>), and number of SNPs in each bin (<em>yellow</em>). Code set out in <code>rule circos_homozygosity</code> in https://github.com/brettellebi/somites/blob/master/workflow/rules/04_trio_homozygosity.smk.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.2: Proportion of homozygous SNPs within 5 kb bins in the <em>Cab</em> F<sub>0</sub> generation genome (<em>green</em>), and number of SNPs in each bin (<em>yellow</em>). Code set out in <code>rule circos_homozygosity</code> in <a href="https://github.com/brettellebi/somites/blob/master/workflow/rules/04_trio_homozygosity.smk">https://github.com/brettellebi/somites/blob/master/workflow/rules/04_trio_homozygosity.smk</a>.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -361,13 +541,193 @@ div.csl-indent {
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"book/plots/circos/trio_homo/hdrr/5000/Kaga.png"</span>), <span class="at">auto_pdf =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(circlize)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Set variables</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>IN_FILE <span class="ot">=</span> <span class="st">"/hps/nobackup/birney/users/ian/somites/genos/F0_and_F1/hdrr/counts/Kaga/5000.csv"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>CHROM_LENGTHS <span class="ot">=</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"config/hdrr_chrom_lengths.csv"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>REF <span class="ot">=</span> <span class="st">"hdrr"</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>SAMPLE <span class="ot">=</span> <span class="st">"Kaga"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>BIN_LENGTH <span class="ot">=</span> <span class="dv">5000</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>PAL <span class="ot">=</span> <span class="st">"#DE3C4B"</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>OUT_PNG <span class="ot">=</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"book/plots/circos/trio_homo/hdrr/5000/Kaga.png"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Get lighter/darker functions</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://gist.githubusercontent.com/brettellebi/c5015ee666cdf8d9f7e25fa3c8063c99/raw/91e601f82da6c614b4983d8afc4ef399fa58ed4b/karyoploteR_lighter_darker.R"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>genos <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(IN_FILE)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>chroms <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(CHROM_LENGTHS,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>                         <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"CHROM"</span>, <span class="st">"LENGTH"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove MT</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(CHROM <span class="sc">!=</span> <span class="st">"MT"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> CHROM <span class="sc">%&gt;%</span> </span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>                  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"^"</span>, <span class="at">replacement =</span> <span class="st">"chr"</span>),</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>                <span class="at">START =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CHROM, START, <span class="at">END =</span> LENGTH)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Process variables</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (SAMPLE <span class="sc">==</span> <span class="st">"F1"</span>){</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  TARGET_CHROM <span class="ot">=</span> <span class="st">"PROP_HET"</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  TARGET_CHROM <span class="ot">=</span> <span class="st">"PROP_HOM"</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (REF <span class="sc">==</span> <span class="st">"hdrr"</span>){</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>  REF <span class="ot">=</span> <span class="st">"HdrR"</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (REF <span class="sc">==</span> <span class="st">"hni"</span>){</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  REF <span class="ot">=</span> <span class="st">"HNI"</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Process `genos`</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>homozyg <span class="ot">=</span> genos <span class="sc">%&gt;%</span> </span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> CHROM <span class="sc">%&gt;%</span> </span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>                  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"^"</span>, <span class="at">replacement =</span> <span class="st">"chr"</span>),</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_START =</span> (BIN <span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span> BIN_LENGTH <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_END =</span> BIN <span class="sc">*</span> BIN_LENGTH) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CHROM, BIN_START, BIN_END, dplyr<span class="sc">::</span><span class="fu">all_of</span>(TARGET_CHROM))</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>n_vars <span class="ot">=</span> genos <span class="sc">%&gt;%</span> </span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> CHROM <span class="sc">%&gt;%</span> </span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>                  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"^"</span>, <span class="at">replacement =</span> <span class="st">"chr"</span>),</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_START =</span> (BIN <span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span> BIN_LENGTH <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_END =</span> BIN <span class="sc">*</span> BIN_LENGTH) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CHROM, BIN_START, BIN_END, TOT_HITS) </span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="co"># PNG</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Set output</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(OUT_PNG,</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">20</span>,</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">20</span>,</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> <span class="st">"cm"</span>,</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">res =</span> <span class="dv">500</span>)</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Circos plots</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.par</span>(<span class="at">cell.padding =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>           <span class="at">track.margin =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>           <span class="at">gap.degree =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(chroms) <span class="sc">-</span> <span class="dv">1</span>), <span class="dv">8</span>))</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize plot</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initializeWithIdeogram</span>(chroms,</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>                              <span class="at">plotType =</span> <span class="fu">c</span>(<span class="st">"axis"</span>, <span class="st">"labels"</span>),</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>                              <span class="at">major.by =</span> <span class="fl">1e7</span>,</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>                              <span class="at">axis.labels.cex =</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>))</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (SAMPLE <span class="sc">==</span> <span class="st">"F1"</span>){</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>  CENTER_LAB <span class="ot">=</span> <span class="fu">paste</span>(SAMPLE,</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">heterozygosity</span><span class="sc">\n</span><span class="st">and</span><span class="sc">\n</span><span class="st">variant count"</span>,</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">within</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>                     BIN_LENGTH <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"kb bins"</span>,</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>,</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>                     REF,</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>                     <span class="st">" reference"</span>,</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>  CENTER_LAB <span class="ot">=</span> <span class="fu">paste</span>(SAMPLE,</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">homozygosity</span><span class="sc">\n</span><span class="st">and</span><span class="sc">\n</span><span class="st">variant count"</span>,</span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">within</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>                     BIN_LENGTH <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"kb bins"</span>,</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>,</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>                     REF,</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>                     <span class="st">" reference"</span>,</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="co"># Add label to center</span></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">0</span>, <span class="dv">0</span>, CENTER_LAB)</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="co"># Add proportion of homozygosity</span></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.genomicTrack</span>(homozyg,</span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>                    <span class="at">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">circos.genomicLines</span>(region,</span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>                                          value,</span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">type =</span> <span class="st">"h"</span>,</span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">col =</span> PAL,</span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">cex =</span> <span class="fl">0.05</span>)</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>                    },</span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>                    <span class="at">track.height =</span> <span class="fl">0.12</span>,</span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>                    <span class="at">bg.border =</span> <span class="cn">NA</span>,</span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a><span class="co"># y-axis label</span></span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.yaxis</span>(<span class="at">side =</span> <span class="st">"right"</span>,</span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>             <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>             <span class="at">labels.cex =</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>),</span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>             <span class="at">tick.length =</span> <span class="dv">2</span></span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="co"># y-axis title</span></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (SAMPLE <span class="sc">==</span> <span class="st">"F1"</span>){</span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>  AXIS_LAB <span class="ot">=</span> <span class="st">"proportion</span><span class="sc">\n</span><span class="st">heterozygous"</span></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>  AXIS_LAB <span class="ot">=</span> <span class="st">"proportion</span><span class="sc">\n</span><span class="st">homozygous"</span></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.text</span>(<span class="dv">0</span>, <span class="fl">0.25</span>,</span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> AXIS_LAB,</span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> <span class="st">"chr1"</span>,</span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>            <span class="at">facing =</span> <span class="st">"clockwise"</span>,</span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>            <span class="at">adj =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>            <span class="at">cex =</span> <span class="fl">0.3</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>))</span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a><span class="co"># Add number of hits</span></span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a><span class="do">## get max number of variants</span></span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>MAX_VARS <span class="ot">=</span> <span class="fu">max</span>(n_vars<span class="sc">$</span>TOT_HITS, <span class="at">na.rm =</span> T)</span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.genomicTrack</span>(n_vars,</span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a>                    <span class="at">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">circos.genomicLines</span>(region,</span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>                                          value,</span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">type =</span> <span class="st">"h"</span>,</span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">col =</span> <span class="st">"#F3B700"</span>,</span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">cex =</span> <span class="fl">0.05</span>)</span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>                    },</span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a>                    <span class="at">track.height =</span> <span class="fl">0.12</span>,</span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a>                    <span class="at">bg.border =</span> <span class="cn">NA</span>,</span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, MAX_VARS))</span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a><span class="co"># y-axis label</span></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.yaxis</span>(<span class="at">side =</span> <span class="st">"right"</span>,</span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a>             <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">500</span>),</span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>             <span class="at">labels.cex =</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>),</span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>             <span class="at">tick.length =</span> <span class="dv">2</span></span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.text</span>(<span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> <span class="st">"N variants</span><span class="sc">\n</span><span class="st">per bin"</span>,</span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> <span class="st">"chr1"</span>,</span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a>            <span class="at">facing =</span> <span class="st">"clockwise"</span>,</span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a>            <span class="at">adj =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a>            <span class="at">cex =</span> <span class="fl">0.3</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>))</span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+</div>
+<div class="cell">
 <div class="cell-output-display">
 <div id="fig-somite-f0-kaga" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="plots/circos/trio_homo/hdrr/5000/Kaga.png" class="img-fluid figure-img" width="1968"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.3: Proportion of homozygous SNPs within 5 kb bins in the <em>Kaga</em> F<sub>0</sub> generation genome (<em>red</em>), and number of SNPs in each bin (<em>yellow</em>). Code set out in <code>rule circos_homozygosity</code> in https://github.com/brettellebi/somites/blob/master/workflow/rules/04_trio_homozygosity.smk.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.3: Proportion of homozygous SNPs within 5 kb bins in the <em>Kaga</em> F<sub>0</sub> generation genome (<em>red</em>), and number of SNPs in each bin (<em>yellow</em>). Code set out in <code>rule circos_homozygosity</code> in <a href="https://github.com/brettellebi/somites/blob/master/workflow/rules/04_trio_homozygosity.smk">https://github.com/brettellebi/somites/blob/master/workflow/rules/04_trio_homozygosity.smk</a></figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -378,194 +738,191 @@ div.csl-indent {
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(circlize)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set variables</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>IN_FILE <span class="ot">=</span> <span class="st">"/hps/nobackup/birney/users/ian/somites/genos/F0_and_F1/hni/counts/Kaga/5000.csv"</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>CHROM_LENGTHS <span class="ot">=</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"config/hdrr_chrom_lengths.csv"</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>REF <span class="ot">=</span> <span class="st">"hni"</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>SAMPLE <span class="ot">=</span> <span class="st">"Kaga"</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>BIN_LENGTH <span class="ot">=</span> <span class="dv">5000</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>PAL <span class="ot">=</span> <span class="st">"#DE3C4B"</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>OUT_PNG <span class="ot">=</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"book/plots/circos/trio_homo/hni/5000/Kaga.png"</span>)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(circlize)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Set variables</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>IN_FILE <span class="ot">=</span> <span class="st">"/hps/nobackup/birney/users/ian/somites/genos/F0_and_F1/hni/counts/Kaga/5000.csv"</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>CHROM_LENGTHS <span class="ot">=</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"config/hdrr_chrom_lengths.csv"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>REF <span class="ot">=</span> <span class="st">"hni"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>SAMPLE <span class="ot">=</span> <span class="st">"Kaga"</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>BIN_LENGTH <span class="ot">=</span> <span class="dv">5000</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>PAL <span class="ot">=</span> <span class="st">"#DE3C4B"</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>OUT_PNG <span class="ot">=</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"book/plots/circos/trio_homo/hni/5000/Kaga.png"</span>)</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Get lighter/darker functions</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://gist.githubusercontent.com/brettellebi/c5015ee666cdf8d9f7e25fa3c8063c99/raw/91e601f82da6c614b4983d8afc4ef399fa58ed4b/karyoploteR_lighter_darker.R"</span>)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Get lighter/darker functions</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://gist.githubusercontent.com/brettellebi/c5015ee666cdf8d9f7e25fa3c8063c99/raw/91e601f82da6c614b4983d8afc4ef399fa58ed4b/karyoploteR_lighter_darker.R"</span>)</span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>genos <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(IN_FILE)</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>chroms <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(CHROM_LENGTHS,</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>                         <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"CHROM"</span>, <span class="st">"LENGTH"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove MT</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(CHROM <span class="sc">!=</span> <span class="st">"MT"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> CHROM <span class="sc">%&gt;%</span> </span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>                  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"^"</span>, <span class="at">replacement =</span> <span class="st">"chr"</span>),</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>                <span class="at">START =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CHROM, START, <span class="at">END =</span> LENGTH)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Process variables</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (SAMPLE <span class="sc">==</span> <span class="st">"F1"</span>){</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  TARGET_CHROM <span class="ot">=</span> <span class="st">"PROP_HET"</span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  TARGET_CHROM <span class="ot">=</span> <span class="st">"PROP_HOM"</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (REF <span class="sc">==</span> <span class="st">"hdrr"</span>){</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  REF <span class="ot">=</span> <span class="st">"HdrR"</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (REF <span class="sc">==</span> <span class="st">"hni"</span>){</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  REF <span class="ot">=</span> <span class="st">"HNI"</span></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Process `genos`</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>homozyg <span class="ot">=</span> genos <span class="sc">%&gt;%</span> </span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> CHROM <span class="sc">%&gt;%</span> </span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>                  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"^"</span>, <span class="at">replacement =</span> <span class="st">"chr"</span>),</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_START =</span> (BIN <span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span> BIN_LENGTH <span class="sc">+</span> <span class="dv">1</span>,</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_END =</span> BIN <span class="sc">*</span> BIN_LENGTH) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CHROM, BIN_START, BIN_END, dplyr<span class="sc">::</span><span class="fu">all_of</span>(TARGET_CHROM))</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>n_vars <span class="ot">=</span> genos <span class="sc">%&gt;%</span> </span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> CHROM <span class="sc">%&gt;%</span> </span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>                  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"^"</span>, <span class="at">replacement =</span> <span class="st">"chr"</span>),</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_START =</span> (BIN <span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span> BIN_LENGTH <span class="sc">+</span> <span class="dv">1</span>,</span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_END =</span> BIN <span class="sc">*</span> BIN_LENGTH) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CHROM, BIN_START, BIN_END, TOT_HITS) </span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="co"># PNG</span></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Set output</span></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(OUT_PNG,</span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">20</span>,</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">20</span>,</span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> <span class="st">"cm"</span>,</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">res =</span> <span class="dv">500</span>)</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Circos plots</span></span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.par</span>(<span class="at">cell.padding =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>           <span class="at">track.margin =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>           <span class="at">gap.degree =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(chroms) <span class="sc">-</span> <span class="dv">1</span>), <span class="dv">8</span>))</span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize plot</span></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initializeWithIdeogram</span>(chroms,</span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>                              <span class="at">plotType =</span> <span class="fu">c</span>(<span class="st">"axis"</span>, <span class="st">"labels"</span>),</span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>                              <span class="at">major.by =</span> <span class="fl">1e7</span>,</span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>                              <span class="at">axis.labels.cex =</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>))</span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (SAMPLE <span class="sc">==</span> <span class="st">"F1"</span>){</span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>  CENTER_LAB <span class="ot">=</span> <span class="fu">paste</span>(SAMPLE,</span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">heterozygosity</span><span class="sc">\n</span><span class="st">and</span><span class="sc">\n</span><span class="st">variant count"</span>,</span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">within</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>                     BIN_LENGTH <span class="sc">/</span> <span class="dv">1000</span>,</span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"kb bins"</span>,</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>,</span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>                     REF,</span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>                     <span class="st">" reference"</span>,</span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sep =</span> <span class="st">""</span>)</span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>  CENTER_LAB <span class="ot">=</span> <span class="fu">paste</span>(SAMPLE,</span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">homozygosity</span><span class="sc">\n</span><span class="st">and</span><span class="sc">\n</span><span class="st">variant count"</span>,</span>
-<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">within</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>                     BIN_LENGTH <span class="sc">/</span> <span class="dv">1000</span>,</span>
-<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"kb bins"</span>,</span>
-<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>,</span>
-<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>                     REF,</span>
-<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>                     <span class="st">" reference"</span>,</span>
-<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sep =</span> <span class="st">""</span>)</span>
-<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="co"># Add label to center</span></span>
-<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">0</span>, <span class="dv">0</span>, CENTER_LAB)</span>
-<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a><span class="co"># Add proportion of homozygosity</span></span>
-<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.genomicTrack</span>(homozyg,</span>
-<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>                    <span class="at">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">circos.genomicLines</span>(region,</span>
-<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>                                          value,</span>
-<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">type =</span> <span class="st">"h"</span>,</span>
-<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">col =</span> PAL,</span>
-<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">cex =</span> <span class="fl">0.05</span>)</span>
-<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>                    },</span>
-<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>                    <span class="at">track.height =</span> <span class="fl">0.12</span>,</span>
-<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>                    <span class="at">bg.border =</span> <span class="cn">NA</span>,</span>
-<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a><span class="co"># y-axis label</span></span>
-<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.yaxis</span>(<span class="at">side =</span> <span class="st">"right"</span>,</span>
-<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>             <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
-<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>             <span class="at">labels.cex =</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>),</span>
-<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>             <span class="at">tick.length =</span> <span class="dv">2</span></span>
-<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a><span class="co"># y-axis title</span></span>
-<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (SAMPLE <span class="sc">==</span> <span class="st">"F1"</span>){</span>
-<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a>  AXIS_LAB <span class="ot">=</span> <span class="st">"proportion</span><span class="sc">\n</span><span class="st">heterozygous"</span></span>
-<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a>  AXIS_LAB <span class="ot">=</span> <span class="st">"proportion</span><span class="sc">\n</span><span class="st">homozygous"</span></span>
-<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.text</span>(<span class="dv">0</span>, <span class="fl">0.25</span>,</span>
-<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> AXIS_LAB,</span>
-<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> <span class="st">"chr1"</span>,</span>
-<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a>            <span class="at">facing =</span> <span class="st">"clockwise"</span>,</span>
-<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a>            <span class="at">adj =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
-<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a>            <span class="at">cex =</span> <span class="fl">0.3</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>))</span>
-<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a><span class="co"># Add number of hits</span></span>
-<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a><span class="do">## get max number of variants</span></span>
-<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>MAX_VARS <span class="ot">=</span> <span class="fu">max</span>(n_vars<span class="sc">$</span>TOT_HITS, <span class="at">na.rm =</span> T)</span>
-<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.genomicTrack</span>(n_vars,</span>
-<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a>                    <span class="at">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
-<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">circos.genomicLines</span>(region,</span>
-<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>                                          value,</span>
-<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">type =</span> <span class="st">"h"</span>,</span>
-<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">col =</span> <span class="st">"#F3B700"</span>,</span>
-<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">cex =</span> <span class="fl">0.05</span>)</span>
-<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a>                    },</span>
-<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a>                    <span class="at">track.height =</span> <span class="fl">0.12</span>,</span>
-<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a>                    <span class="at">bg.border =</span> <span class="cn">NA</span>,</span>
-<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, MAX_VARS))</span>
-<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a><span class="co"># y-axis label</span></span>
-<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.yaxis</span>(<span class="at">side =</span> <span class="st">"right"</span>,</span>
-<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a>             <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">500</span>),</span>
-<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a>             <span class="at">labels.cex =</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>),</span>
-<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a>             <span class="at">tick.length =</span> <span class="dv">2</span></span>
-<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.text</span>(<span class="dv">0</span>, <span class="dv">0</span>,</span>
-<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> <span class="st">"N variants</span><span class="sc">\n</span><span class="st">per bin"</span>,</span>
-<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> <span class="st">"chr1"</span>,</span>
-<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a>            <span class="at">facing =</span> <span class="st">"clockwise"</span>,</span>
-<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a>            <span class="at">adj =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
-<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a>            <span class="at">cex =</span> <span class="fl">0.3</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>))</span>
-<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>genos <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(IN_FILE)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>chroms <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(CHROM_LENGTHS,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>                         <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"CHROM"</span>, <span class="st">"LENGTH"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove MT</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(CHROM <span class="sc">!=</span> <span class="st">"MT"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> CHROM <span class="sc">%&gt;%</span> </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>                  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"^"</span>, <span class="at">replacement =</span> <span class="st">"chr"</span>),</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>                <span class="at">START =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CHROM, START, <span class="at">END =</span> LENGTH)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Process variables</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (SAMPLE <span class="sc">==</span> <span class="st">"F1"</span>){</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  TARGET_CHROM <span class="ot">=</span> <span class="st">"PROP_HET"</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  TARGET_CHROM <span class="ot">=</span> <span class="st">"PROP_HOM"</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (REF <span class="sc">==</span> <span class="st">"hdrr"</span>){</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  REF <span class="ot">=</span> <span class="st">"HdrR"</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (REF <span class="sc">==</span> <span class="st">"hni"</span>){</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  REF <span class="ot">=</span> <span class="st">"HNI"</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Process `genos`</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>homozyg <span class="ot">=</span> genos <span class="sc">%&gt;%</span> </span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> CHROM <span class="sc">%&gt;%</span> </span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>                  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"^"</span>, <span class="at">replacement =</span> <span class="st">"chr"</span>),</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_START =</span> (BIN <span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span> BIN_LENGTH <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_END =</span> BIN <span class="sc">*</span> BIN_LENGTH) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CHROM, BIN_START, BIN_END, dplyr<span class="sc">::</span><span class="fu">all_of</span>(TARGET_CHROM))</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>n_vars <span class="ot">=</span> genos <span class="sc">%&gt;%</span> </span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> CHROM <span class="sc">%&gt;%</span> </span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>                  stringr<span class="sc">::</span><span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"^"</span>, <span class="at">replacement =</span> <span class="st">"chr"</span>),</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_START =</span> (BIN <span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span> BIN_LENGTH <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_END =</span> BIN <span class="sc">*</span> BIN_LENGTH) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CHROM, BIN_START, BIN_END, TOT_HITS) </span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="co"># PNG</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Set output</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(OUT_PNG,</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">20</span>,</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">20</span>,</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> <span class="st">"cm"</span>,</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">res =</span> <span class="dv">500</span>)</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Circos plots</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.par</span>(<span class="at">cell.padding =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>           <span class="at">track.margin =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>           <span class="at">gap.degree =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(chroms) <span class="sc">-</span> <span class="dv">1</span>), <span class="dv">8</span>))</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize plot</span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.initializeWithIdeogram</span>(chroms,</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>                              <span class="at">plotType =</span> <span class="fu">c</span>(<span class="st">"axis"</span>, <span class="st">"labels"</span>),</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>                              <span class="at">major.by =</span> <span class="fl">1e7</span>,</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>                              <span class="at">axis.labels.cex =</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>))</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (SAMPLE <span class="sc">==</span> <span class="st">"F1"</span>){</span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>  CENTER_LAB <span class="ot">=</span> <span class="fu">paste</span>(SAMPLE,</span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">heterozygosity</span><span class="sc">\n</span><span class="st">and</span><span class="sc">\n</span><span class="st">variant count"</span>,</span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">within</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>                     BIN_LENGTH <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"kb bins"</span>,</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>,</span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>                     REF,</span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>                     <span class="st">" reference"</span>,</span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>  CENTER_LAB <span class="ot">=</span> <span class="fu">paste</span>(SAMPLE,</span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">homozygosity</span><span class="sc">\n</span><span class="st">and</span><span class="sc">\n</span><span class="st">variant count"</span>,</span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n</span><span class="st">within</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>                     BIN_LENGTH <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"kb bins"</span>,</span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>,</span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>                     REF,</span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>                     <span class="st">" reference"</span>,</span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a><span class="co"># Add label to center</span></span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">0</span>, <span class="dv">0</span>, CENTER_LAB)</span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a><span class="co"># Add proportion of homozygosity</span></span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.genomicTrack</span>(homozyg,</span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>                    <span class="at">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">circos.genomicLines</span>(region,</span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>                                          value,</span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">type =</span> <span class="st">"h"</span>,</span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">col =</span> PAL,</span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">cex =</span> <span class="fl">0.05</span>)</span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>                    },</span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>                    <span class="at">track.height =</span> <span class="fl">0.12</span>,</span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>                    <span class="at">bg.border =</span> <span class="cn">NA</span>,</span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a><span class="co"># y-axis label</span></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.yaxis</span>(<span class="at">side =</span> <span class="st">"right"</span>,</span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>             <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>),</span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>             <span class="at">labels.cex =</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>),</span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>             <span class="at">tick.length =</span> <span class="dv">2</span></span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a><span class="co"># y-axis title</span></span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (SAMPLE <span class="sc">==</span> <span class="st">"F1"</span>){</span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a>  AXIS_LAB <span class="ot">=</span> <span class="st">"proportion</span><span class="sc">\n</span><span class="st">heterozygous"</span></span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a>  AXIS_LAB <span class="ot">=</span> <span class="st">"proportion</span><span class="sc">\n</span><span class="st">homozygous"</span></span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.text</span>(<span class="dv">0</span>, <span class="fl">0.25</span>,</span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> AXIS_LAB,</span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> <span class="st">"chr1"</span>,</span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a>            <span class="at">facing =</span> <span class="st">"clockwise"</span>,</span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a>            <span class="at">adj =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a>            <span class="at">cex =</span> <span class="fl">0.3</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>))</span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a><span class="co"># Add number of hits</span></span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a><span class="do">## get max number of variants</span></span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a>MAX_VARS <span class="ot">=</span> <span class="fu">max</span>(n_vars<span class="sc">$</span>TOT_HITS, <span class="at">na.rm =</span> T)</span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.genomicTrack</span>(n_vars,</span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>                    <span class="at">panel.fun =</span> <span class="cf">function</span>(region, value, ...) {</span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">circos.genomicLines</span>(region,</span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>                                          value,</span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">type =</span> <span class="st">"h"</span>,</span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">col =</span> <span class="st">"#F3B700"</span>,</span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">cex =</span> <span class="fl">0.05</span>)</span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a>                    },</span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a>                    <span class="at">track.height =</span> <span class="fl">0.12</span>,</span>
+<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a>                    <span class="at">bg.border =</span> <span class="cn">NA</span>,</span>
+<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, MAX_VARS))</span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a><span class="co"># y-axis label</span></span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.yaxis</span>(<span class="at">side =</span> <span class="st">"right"</span>,</span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a>             <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">500</span>),</span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a>             <span class="at">labels.cex =</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>),</span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a>             <span class="at">tick.length =</span> <span class="dv">2</span></span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a><span class="fu">circos.text</span>(<span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels =</span> <span class="st">"N variants</span><span class="sc">\n</span><span class="st">per bin"</span>,</span>
+<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a>            <span class="at">sector.index =</span> <span class="st">"chr1"</span>,</span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a>            <span class="at">facing =</span> <span class="st">"clockwise"</span>,</span>
+<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a>            <span class="at">adj =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a>            <span class="at">cex =</span> <span class="fl">0.3</span><span class="sc">*</span><span class="fu">par</span>(<span class="st">"cex"</span>))</span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"book/plots/circos/trio_homo/hni/5000/Kaga.png"</span>), <span class="at">auto_pdf =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div id="fig-somite-f0-kaga-hni" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="plots/circos/trio_homo/hni/5000/Kaga.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.4: Proportion of homozygous SNPs within 5 kb bins in the <em>Kaga</em> F<sub>0</sub> generation genome when aligned to the <em>HNI</em> reference (<em>red</em>), and number of SNPs in each bin (<em>yellow</em>). Code set out in <code>rule circos_homozygosity</code> in https://github.com/brettellebi/somites/blob/master/workflow/rules/04_trio_homozygosity.smk.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.4: Proportion of homozygous SNPs within 5 kb bins in the <em>Kaga</em> F<sub>0</sub> generation genome when aligned to the <em>HNI</em> reference (<em>red</em>), and number of SNPs in each bin (<em>yellow</em>). Code adapted from <code>rule circos_homozygosity</code> in <a href="https://github.com/brettellebi/somites/blob/master/workflow/rules/04_trio_homozygosity.smk">https://github.com/brettellebi/somites/blob/master/workflow/rules/04_trio_homozygosity.smk</a>.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -574,33 +931,47 @@ div.csl-indent {
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-danecekTwelveYearsSAMtools2021" class="csl-entry" role="doc-biblioentry">
-Danecek, Petr, James K Bonfield, Jennifer Liddle, John Marshall, Valeriu Ohan, Martin O Pollard, Andrew Whitwham, et al. 2021. <span>“Twelve Years of <span>SAMtools</span> and <span>BCFtools</span>.”</span> <em>GigaScience</em> 10 (2): giab008. <a href="https://doi.org/10.1093/gigascience/giab008">https://doi.org/10.1093/gigascience/giab008</a>.
+Danecek, Petr, James K Bonfield, Jennifer Liddle, John Marshall, Valeriu Ohan, Martin O Pollard, Andrew Whitwham, et al. <span>“Twelve Years of <span>SAMtools</span> and <span>BCFtools</span>.”</span> <em>GigaScience</em> 10, no. 2 (February 1, 2021): giab008. <a href="https://doi.org/10.1093/gigascience/giab008">https://doi.org/10.1093/gigascience/giab008</a>.
 </div>
 <div id="ref-depristoFrameworkVariationDiscovery2011" class="csl-entry" role="doc-biblioentry">
-DePristo, Mark A., Eric Banks, Ryan Poplin, Kiran V. Garimella, Jared R. Maguire, Christopher Hartl, Anthony A. Philippakis, et al. 2011. <span>“A Framework for Variation Discovery and Genotyping Using Next-Generation <span>DNA</span> Sequencing Data.”</span> <em>Nature Genetics</em> 43 (5, 5): 491–98. <a href="https://doi.org/10.1038/ng.806">https://doi.org/10.1038/ng.806</a>.
+DePristo, Mark A., Eric Banks, Ryan Poplin, Kiran V. Garimella, Jared R. Maguire, Christopher Hartl, Anthony A. Philippakis, et al. <span>“A Framework for Variation Discovery and Genotyping Using Next-Generation <span>DNA</span> Sequencing Data.”</span> <em>Nature Genetics</em> 43, no. 5, 5 (May 2011): 491–98. <a href="https://doi.org/10.1038/ng.806">https://doi.org/10.1038/ng.806</a>.
 </div>
 <div id="ref-guCirclizeImplementsEnhances2014" class="csl-entry" role="doc-biblioentry">
-Gu, Zuguang, Lei Gu, Roland Eils, Matthias Schlesner, and Benedikt Brors. 2014. <span>“Circlize Implements and Enhances Circular Visualization in <span>R</span>.”</span> <em>Bioinformatics</em> 30 (19): 2811–12. <a href="https://doi.org/10.1093/bioinformatics/btu393">https://doi.org/10.1093/bioinformatics/btu393</a>.
+Gu, Zuguang, Lei Gu, Roland Eils, Matthias Schlesner, and Benedikt Brors. <span>“Circlize Implements and Enhances Circular Visualization in <span>R</span>.”</span> <em>Bioinformatics</em> 30, no. 19 (October 1, 2014): 2811–12. <a href="https://doi.org/10.1093/bioinformatics/btu393">https://doi.org/10.1093/bioinformatics/btu393</a>.
 </div>
 <div id="ref-liSequenceAlignmentMap2009" class="csl-entry" role="doc-biblioentry">
-Li, Heng, Bob Handsaker, Alec Wysoker, Tim Fennell, Jue Ruan, Nils Homer, Gabor Marth, Goncalo Abecasis, Richard Durbin, and 1000 Genome Project Data Processing Subgroup. 2009. <span>“The <span>Sequence</span> Alignment/Map (<span>SAM</span>) Format and <span>SAMtools</span>.”</span> <em>Bioinformatics</em> 25 (16): 2078–79.
+Li, Heng, Bob Handsaker, Alec Wysoker, Tim Fennell, Jue Ruan, Nils Homer, Gabor Marth, Goncalo Abecasis, Richard Durbin, and 1000 Genome Project Data Processing Subgroup. <span>“The <span>Sequence</span> Alignment/Map (<span>SAM</span>) Format and <span>SAMtools</span>.”</span> <em>Bioinformatics</em> 25, no. 16 (2009): 2078–79.
 </div>
 <div id="ref-mckennaGenomeAnalysisToolkit2010" class="csl-entry" role="doc-biblioentry">
-McKenna, Aaron, Matthew Hanna, Eric Banks, Andrey Sivachenko, Kristian Cibulskis, Andrew Kernytsky, Kiran Garimella, et al. 2010. <span>“The <span>Genome Analysis Toolkit</span>: <span>A MapReduce</span> Framework for Analyzing Next-Generation <span>DNA</span> Sequencing Data.”</span> <em>Genome Research</em> 20 (9): 1297–1303. <a href="https://doi.org/10.1101/gr.107524.110">https://doi.org/10.1101/gr.107524.110</a>.
+McKenna, Aaron, Matthew Hanna, Eric Banks, Andrey Sivachenko, Kristian Cibulskis, Andrew Kernytsky, Kiran Garimella, et al. <span>“The <span>Genome Analysis Toolkit</span>: <span>A MapReduce</span> Framework for Analyzing Next-Generation <span>DNA</span> Sequencing Data.”</span> <em>Genome Research</em> 20, no. 9 (January 9, 2010): 1297–1303. <a href="https://doi.org/10.1101/gr.107524.110">https://doi.org/10.1101/gr.107524.110</a>.
 </div>
 <div id="ref-Picard2019toolkit" class="csl-entry" role="doc-biblioentry">
-<span>“Picard Toolkit.”</span> 2019. <em>Broad Institute, GitHub Repository</em>. <a href="https://broadinstitute.github.io/picard/" class="uri">https://broadinstitute.github.io/picard/</a>; Broad Institute.
+<span>“Picard Toolkit.”</span> <em>Broad Institute, GitHub Repository</em>. <a href="https://broadinstitute.github.io/picard/" class="uri">https://broadinstitute.github.io/picard/</a>; Broad Institute, 2019.
 </div>
 <div id="ref-poplinScalingAccurateGenetic2018" class="csl-entry" role="doc-biblioentry">
-Poplin, Ryan, Valentin Ruano-Rubio, Mark A. DePristo, Tim J. Fennell, Mauricio O. Carneiro, Geraldine A. Van der Auwera, David E. Kling, et al. 2018. <span>“Scaling Accurate Genetic Variant Discovery to Tens of Thousands of Samples.”</span> <span>bioRxiv</span>. <a href="https://doi.org/10.1101/201178">https://doi.org/10.1101/201178</a>.
+Poplin, Ryan, Valentin Ruano-Rubio, Mark A. DePristo, Tim J. Fennell, Mauricio O. Carneiro, Geraldine A. Van der Auwera, David E. Kling, et al. <span>“Scaling Accurate Genetic Variant Discovery to Tens of Thousands of Samples.”</span> <span>bioRxiv</span>, July 24, 2018. <a href="https://doi.org/10.1101/201178">https://doi.org/10.1101/201178</a>.
 </div>
 <div id="ref-vanderauweraGenomicsCloudUsing2020" class="csl-entry" role="doc-biblioentry">
-Van der Auwera, Geraldine A., and Brian D. O’Connor. 2020. <em>Genomics in the Cloud: Using <span>Docker</span>, <span>GATK</span>, and <span>WDL</span> in <span>Terra</span></em>. <span>O’Reilly Media</span>.
+Van der Auwera, Geraldine A., and Brian D. O’Connor. <em>Genomics in the Cloud: Using <span>Docker</span>, <span>GATK</span>, and <span>WDL</span> in <span>Terra</span></em>. <span>O’Reilly Media</span>, 2020.
 </div>
 <div id="ref-vasimuddinEfficientArchitectureawareAcceleration2019" class="csl-entry" role="doc-biblioentry">
-Vasimuddin, Md, Sanchit Misra, Heng Li, and Srinivas Aluru. 2019. <span>“Efficient Architecture-Aware Acceleration of <span>BWA-MEM</span> for Multicore Systems.”</span> In <em>2019 <span>IEEE International Parallel</span> and <span>Distributed Processing Symposium</span> (<span>IPDPS</span>)</em>, 314–24. <span>IEEE</span>.
+Vasimuddin, Md, Sanchit Misra, Heng Li, and Srinivas Aluru. <span>“Efficient Architecture-Aware Acceleration of <span>BWA-MEM</span> for Multicore Systems.”</span> In <em>2019 <span>IEEE International Parallel</span> and <span>Distributed Processing Symposium</span> (<span>IPDPS</span>)</em>, 314–24. <span>IEEE</span>, 2019.
 </div>
 </div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><a href="#ref-danecekTwelveYearsSAMtools2021" role="doc-biblioref">Petr Danecek et al., <span>“Twelve Years of <span>SAMtools</span> and <span>BCFtools</span>,”</span> <em>GigaScience</em> 10, no. 2 (February 1, 2021): giab008, </a><a href="https://doi.org/10.1093/gigascience/giab008" role="doc-biblioref">https://doi.org/10.1093/gigascience/giab008</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="#ref-vasimuddinEfficientArchitectureawareAcceleration2019" role="doc-biblioref">Md Vasimuddin et al., <span>“Efficient Architecture-Aware Acceleration of <span>BWA-MEM</span> for Multicore Systems,”</span> in <em>2019 <span>IEEE International Parallel</span> and <span>Distributed Processing Symposium</span> (<span>IPDPS</span>)</em> (<span>IEEE</span>, 2019), 314–24</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="#ref-Picard2019toolkit" role="doc-biblioref"><span>“Picard Toolkit,”</span> <em>Broad Institute, GitHub Repository</em> (</a><a href="https://broadinstitute.github.io/picard/" class="uri" role="doc-biblioref">https://broadinstitute.github.io/picard/</a>; Broad Institute, 2019).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="#ref-liSequenceAlignmentMap2009" role="doc-biblioref">Heng Li et al., <span>“The <span>Sequence</span> Alignment/Map (<span>SAM</span>) Format and <span>SAMtools</span>,”</span> <em>Bioinformatics</em> 25, no. 16 (2009): 2078–79</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><a href="#ref-mckennaGenomeAnalysisToolkit2010" role="doc-biblioref">Aaron McKenna et al., <span>“The <span>Genome Analysis Toolkit</span>: <span>A MapReduce</span> Framework for Analyzing Next-Generation <span>DNA</span> Sequencing Data,”</span> <em>Genome Research</em> 20, no. 9 (January 9, 2010): 1297–1303, </a><a href="https://doi.org/10.1101/gr.107524.110" role="doc-biblioref">https://doi.org/10.1101/gr.107524.110</a>; <a href="#ref-depristoFrameworkVariationDiscovery2011" role="doc-biblioref">Mark A. DePristo et al., <span>“A Framework for Variation Discovery and Genotyping Using Next-Generation <span>DNA</span> Sequencing Data,”</span> <em>Nature Genetics</em> 43, no. 5, 5 (May 2011): 491–98, </a><a href="https://doi.org/10.1038/ng.806" role="doc-biblioref">https://doi.org/10.1038/ng.806</a>; <a href="#ref-vanderauweraGenomicsCloudUsing2020" role="doc-biblioref">Geraldine A. Van der Auwera and Brian D. O’Connor, <em>Genomics in the Cloud: Using <span>Docker</span>, <span>GATK</span>, and <span>WDL</span> in <span>Terra</span></em> (<span>O’Reilly Media</span>, 2020)</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><a href="#ref-poplinScalingAccurateGenetic2018" role="doc-biblioref">Ryan Poplin et al., <span>“Scaling Accurate Genetic Variant Discovery to Tens of Thousands of Samples”</span> (<span>bioRxiv</span>, July 24, 2018), </a><a href="https://doi.org/10.1101/201178" role="doc-biblioref">https://doi.org/10.1101/201178</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><a href="#ref-Picard2019toolkit" role="doc-biblioref"><span>“Picard Toolkit”</span></a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p><a href="#ref-danecekTwelveYearsSAMtools2021" role="doc-biblioref">Danecek et al., <span>“Twelve Years of <span>SAMtools</span> and <span>BCFtools</span>”</span></a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p><a href="#ref-guCirclizeImplementsEnhances2014" role="doc-biblioref">Zuguang Gu et al., <span>“Circlize Implements and Enhances Circular Visualization in <span>R</span>,”</span> <em>Bioinformatics</em> 30, no. 19 (October 1, 2014): 2811–12, </a><a href="https://doi.org/10.1093/bioinformatics/btu393" role="doc-biblioref">https://doi.org/10.1093/bioinformatics/btu393</a>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
