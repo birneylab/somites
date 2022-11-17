@@ -93,15 +93,11 @@ Before proceeding to map the F~2~ sequences to the genotypes of the F~0~ generat
 
 To call variants, I followed the GATK best practices (to the extent they were applicable) [@mckennaGenomeAnalysisToolkit2010; @depristoFrameworkVariationDiscovery2011; @vanderauweraGenomicsCloudUsing2020] with GATK's HaplotypeCaller and GenotypeGVCFs tools [@poplinScalingAccurateGenetic2018], then merged all calls into a single .vcf file with picard [@Picard2019toolkit]. Finally, I extracted the biallelic calls for *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* and *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* with bcftools [@danecekTwelveYearsSAMtools2021], counted the number of SNPs within non-overlapping, 5-kb bins, and calculated the proportion of SNPs within each bin that were homozgyous. 
 
-**fig-somite-f0-cab** is a circos plot generated with circlize [@guCirclizeImplementsEnhances2014] for the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* F~0~ strain used in this experiment, featuring the proportion of homozygous SNPs per 5-kb bin (green), and the total number of SNPs in each bin (yellow). As expected for a strain that has been inbred for over 10 generations, the mean homozygosity for this strain is high, with a mean proportion of homozygosity across all bins of 83%.
+**@fig-somite-f0-cab** is a circos plot generated with circlize [@guCirclizeImplementsEnhances2014] for the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* F~0~ strain used in this experiment, featuring the proportion of homozygous SNPs per 5-kb bin (green), and the total number of SNPs in each bin (yellow). As expected for a strain that has been inbred for over 10 generations, the mean homozygosity for this strain is high, with a mean proportion of homozygosity across all bins of 83%.
 
 ```{r}
 #| label: fig-somite-f0-cab
-#| message: false
-#| warning: false
-#| fig-width: 10
-#| fig-height: 7
-#| fig.cap: 'Proportion of homozygous SNPs within 5 kb bins in the *Cab* F~0~ generation genome (*green*), and number of SNPs in each bin (*yellow*).'
+#| fig.cap: 'Proportion of homozygous SNPs within 5 kb bins in the *Cab* F~0~ generation genome (*green*), and number of SNPs in each bin (*yellow*). Code set out in `rule circos_homozygosity` in https://github.com/brettellebi/somites/blob/master/workflow/rules/04_trio_homozygosity.smk.'
 knitr::include_graphics(here::here("book/plots/circos/trio_homo/hdrr/5000/Cab.png"), auto_pdf = T)
 ```
 
@@ -109,17 +105,200 @@ However, the levels of homozygosity in the *`r kableExtra::text_spec("Kaga", col
 
 ```{r}
 #| label: fig-somite-f0-kaga
-#| echo: false
-#| fig.cap: 'Proportion of homozygous SNPs within 5 kb bins in the *Kaga* F~0~ generation genome (*red*), and number of SNPs in each bin (*yellow*).'
+#| fig.cap: 'Proportion of homozygous SNPs within 5 kb bins in the *Kaga* F~0~ generation genome (*red*), and number of SNPs in each bin (*yellow*). Code set out in `rule circos_homozygosity` in https://github.com/brettellebi/somites/blob/master/workflow/rules/04_trio_homozygosity.smk.'
 knitr::include_graphics(here::here("book/plots/circos/trio_homo/hdrr/5000/Kaga.png"), auto_pdf = T)
 ```
 
 To determine whether the low levels of observed homozygosity in *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* was affected by its alignments to the southern Japanese *HdrR* reference, we also aligned the F~0~ samples to the northern Japanese *HNI* reference (**@fig-somite-f0-kaga-hni**). This did not make differences to the levels of observed homozygosity in either sample, which gave us confidence that the low homozygosity observed in *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* was not driven by reference bias. I understand from our collaborators that the low homozygosity of this *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* individual must have resulted from the strain having been contaminated at some stage by breeding with a different inbred strain prior to when they received the individuals. 
 
 ```{r}
+#| eval: false
+
+# Load libraries
+
+library(circlize)
+
+# Set variables
+
+IN_FILE = "/hps/nobackup/birney/users/ian/somites/genos/F0_and_F1/hni/counts/Kaga/5000.csv"
+CHROM_LENGTHS = here::here("config/hdrr_chrom_lengths.csv")
+REF = "hni"
+SAMPLE = "Kaga"
+BIN_LENGTH = 5000
+PAL = "#DE3C4B"
+OUT_PNG = here::here("book/plots/circos/trio_homo/hni/5000/Kaga.png")
+
+
+# Get lighter/darker functions
+
+source("https://gist.githubusercontent.com/brettellebi/c5015ee666cdf8d9f7e25fa3c8063c99/raw/91e601f82da6c614b4983d8afc4ef399fa58ed4b/karyoploteR_lighter_darker.R")
+
+
+# Read in data
+
+genos = readr::read_csv(IN_FILE)
+
+chroms = readr::read_csv(CHROM_LENGTHS,
+                         col_names = c("CHROM", "LENGTH")) %>% 
+  # remove MT
+  dplyr::filter(CHROM != "MT") %>% 
+  dplyr::mutate(CHROM = CHROM %>% 
+                  stringr::str_replace(pattern = "^", replacement = "chr"),
+                START = 1) %>% 
+  dplyr::select(CHROM, START, END = LENGTH)
+
+# Process variables
+
+if (SAMPLE == "F1"){
+  TARGET_CHROM = "PROP_HET"
+} else {
+  TARGET_CHROM = "PROP_HOM"
+}
+
+if (REF == "hdrr"){
+  REF = "HdrR"
+} else if (REF == "hni"){
+  REF = "HNI"
+}
+
+# Process `genos`
+
+homozyg = genos %>% 
+  dplyr::mutate(CHROM = CHROM %>% 
+                  stringr::str_replace(pattern = "^", replacement = "chr"),
+                BIN_START = (BIN -1) * BIN_LENGTH + 1,
+                BIN_END = BIN * BIN_LENGTH) %>% 
+  dplyr::select(CHROM, BIN_START, BIN_END, dplyr::all_of(TARGET_CHROM))
+
+n_vars = genos %>% 
+  dplyr::mutate(CHROM = CHROM %>% 
+                  stringr::str_replace(pattern = "^", replacement = "chr"),
+                BIN_START = (BIN -1) * BIN_LENGTH + 1,
+                BIN_END = BIN * BIN_LENGTH) %>% 
+  dplyr::select(CHROM, BIN_START, BIN_END, TOT_HITS) 
+
+########################
+# PNG
+########################
+
+# Set output
+
+png(OUT_PNG,
+    width = 20,
+    height = 20,
+    units = "cm",
+    res = 500)
+
+# Create Circos plots
+
+circos.par(cell.padding = c(0, 0, 0, 0),
+           track.margin = c(0, 0),
+           gap.degree = c(rep(1, nrow(chroms) - 1), 8))
+
+# Initialize plot
+
+circos.initializeWithIdeogram(chroms,
+                              plotType = c("axis", "labels"),
+                              major.by = 1e7,
+                              axis.labels.cex = 0.25*par("cex"))
+
+if (SAMPLE == "F1"){
+  CENTER_LAB = paste(SAMPLE,
+                     "\nheterozygosity\nand\nvariant count",
+                     "\nwithin\n",
+                     BIN_LENGTH / 1000,
+                     "kb bins",
+                     "\n\n",
+                     REF,
+                     " reference",
+                     sep = "")
+} else {
+  CENTER_LAB = paste(SAMPLE,
+                     "\nhomozygosity\nand\nvariant count",
+                     "\nwithin\n",
+                     BIN_LENGTH / 1000,
+                     "kb bins",
+                     "\n\n",
+                     REF,
+                     " reference",
+                     sep = "")
+}
+# Add label to center
+text(0, 0, CENTER_LAB)
+
+# Add proportion of homozygosity
+
+circos.genomicTrack(homozyg,
+                    panel.fun = function(region, value, ...) {
+                      circos.genomicLines(region,
+                                          value,
+                                          type = "h",
+                                          col = PAL,
+                                          cex = 0.05)
+                    },
+                    track.height = 0.12,
+                    bg.border = NA,
+                    ylim = c(0, 1))
+# y-axis label
+circos.yaxis(side = "right",
+             at = c(0, 0.5, 1),
+             labels.cex = 0.25*par("cex"),
+             tick.length = 2
+)
+# y-axis title
+
+if (SAMPLE == "F1"){
+  AXIS_LAB = "proportion\nheterozygous"
+} else {
+  AXIS_LAB = "proportion\nhomozygous"
+}
+
+circos.text(0, 0.25,
+            labels = AXIS_LAB,
+            sector.index = "chr1",
+            facing = "clockwise",
+            adj = c(0, -0.5),
+            cex = 0.3*par("cex"))
+
+# Add number of hits
+
+## get max number of variants
+
+MAX_VARS = max(n_vars$TOT_HITS, na.rm = T)
+
+circos.genomicTrack(n_vars,
+                    panel.fun = function(region, value, ...) {
+                      circos.genomicLines(region,
+                                          value,
+                                          type = "h",
+                                          col = "#F3B700",
+                                          cex = 0.05)
+                    },
+                    track.height = 0.12,
+                    bg.border = NA,
+                    ylim = c(0, MAX_VARS))
+# y-axis label
+circos.yaxis(side = "right",
+             at = c(0, 500),
+             labels.cex = 0.25*par("cex"),
+             tick.length = 2
+)
+
+circos.text(0, 0,
+            labels = "N variants\nper bin",
+            sector.index = "chr1",
+            facing = "clockwise",
+            adj = c(0, -0.5),
+            cex = 0.3*par("cex"))
+
+dev.off()
+
+```
+
+
+```{r}
 #| label: fig-somite-f0-kaga-hni
-#| echo: false
-#| fig.cap: 'Proportion of homozygous SNPs within 5 kb bins in the *Kaga* F~0~ generation genome when aligned to the *HNI* reference (*red*), and number of SNPs in each bin (*yellow*).'
+#| fig.cap: 'Proportion of homozygous SNPs within 5 kb bins in the *Kaga* F~0~ generation genome when aligned to the *HNI* reference (*red*), and number of SNPs in each bin (*yellow*). Code set out in `rule circos_homozygosity` in https://github.com/brettellebi/somites/blob/master/workflow/rules/04_trio_homozygosity.smk.'
 #| out.width: '100%'
 knitr::include_graphics(here::here("book/plots/circos/trio_homo/hni/5000/Kaga.png"), auto_pdf = T)
 ```
