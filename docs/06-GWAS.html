@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
@@ -79,6 +142,16 @@ div.csl-indent {
     "search-submit-button-title": "Submit"
   }
 }</script>
+
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="site_libs/datatables-binding-0.26/datatables.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="site_libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="site_libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="site_libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -165,8 +238,9 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#period-intercept" id="toc-period-intercept" class="nav-link active" data-scroll-target="#period-intercept"><span class="toc-section-number">6.1</span>  Period intercept</a></li>
-  <li><a href="#psm-area" id="toc-psm-area" class="nav-link" data-scroll-target="#psm-area"><span class="toc-section-number">6.2</span>  PSM area</a></li>
+  <li><a href="#genetic-relationshiop-matrix" id="toc-genetic-relationshiop-matrix" class="nav-link active" data-scroll-target="#genetic-relationshiop-matrix"><span class="toc-section-number">6.1</span>  Genetic Relationshiop Matrix</a></li>
+  <li><a href="#period-intercept" id="toc-period-intercept" class="nav-link" data-scroll-target="#period-intercept"><span class="toc-section-number">6.2</span>  Period intercept</a></li>
+  <li><a href="#psm-area" id="toc-psm-area" class="nav-link" data-scroll-target="#psm-area"><span class="toc-section-number">6.3</span>  PSM area</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/brettellebi/somites/edit/master/book/06-GWAS.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -190,28 +264,276 @@ div.csl-indent {
 
 </header>
 
-<p>Finally, I used the called recombination blocks as pseudo-SNPs in a genetic linkage analysis. To detect associations between the pseudo-SNPs and the three phenotypes of interest, I used a linear mixed model (<strong>LMM</strong>) as implemented in GCTA,<span class="citation" data-cites="yangGCTAToolGenomewide2011"><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></span> which follows the form set out in the Introduction in section @ref(GWAS), equations @ref(eq:gwaslmm) to @ref(eq:gwaslmme). For the genetic relationship matrix (<strong>GRM</strong>), I additionally used the leave-one-chromosome-out implementation of GCTA’s LMM, with excludes the chromosome on which the candidate SNP is located when calculating the GRM. A GRM constructed from the entire genome is presented in <strong><a href="#fig-somite-grm">Figure&nbsp;<span>6.1</span></a></strong>. The square in the top right-hand corner is created by samples ~550-648, which, based on Figure @ref(fig:karyo-no-missing) above, clearly have distinct genotypes to the rest of the samples due to their having been bred from different F<sub>1</sub> parents.</p>
+<section id="genetic-relationshiop-matrix" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="genetic-relationshiop-matrix"><span class="header-section-number">6.1</span> Genetic Relationshiop Matrix</h2>
+<p>Finally, I used the called recombination blocks as pseudo-SNPs in a genetic linkage analysis. To detect associations between the pseudo-SNPs and the three phenotypes of interest, I used a linear mixed model (<strong>LMM</strong>) as implemented in GCTA <span class="citation" data-cites="yangGCTAToolGenomewide2011">(<a href="07-references.html#ref-yangGCTAToolGenomewide2011" role="doc-biblioref">Yang et al. 2011</a>)</span>. For the genetic relationship matrix (<strong>GRM</strong>), I additionally used the leave-one-chromosome-out implementation of GCTA’s LMM, with excludes the chromosome on which the candidate SNP is located when calculating the GRM. A GRM constructed from the entire genome is presented in <strong><a href="#fig-somite-grm">Figure&nbsp;<span>6.1</span></a></strong>. The square in the top right-hand corner is created by samples ~550-648, which, based on <a href="05-F2-genotyping.html#fig-karyo-no-missing">Figure&nbsp;<span>5.4</span></a> above, clearly have distinct genotypes to the rest of the samples due to their having been bred from different F<sub>1</sub> parents.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(genio)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Set variables</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>IN_PREF <span class="ot">=</span> <span class="st">"/hps/nobackup/birney/users/ian/somites/beds/F2/hdrr/None/5000/0.8"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>LOW_COV <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">89</span>, <span class="dv">166</span>, <span class="dv">178</span>, <span class="dv">189</span>, <span class="dv">227</span>, <span class="dv">239</span>, <span class="dv">470</span>, <span class="dv">472</span>, <span class="dv">473</span>, <span class="dv">490</span>, <span class="dv">501</span>, <span class="dv">502</span>, <span class="dv">503</span>, <span class="dv">504</span>, <span class="dv">505</span>, <span class="dv">506</span>, <span class="dv">507</span>, <span class="dv">508</span>, <span class="dv">509</span>, <span class="dv">510</span>, <span class="dv">511</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in files</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Read bed</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>fam <span class="ot">=</span> genio<span class="sc">::</span><span class="fu">read_fam</span>(IN_PREF)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>bim <span class="ot">=</span> genio<span class="sc">::</span><span class="fu">read_bim</span>(IN_PREF)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>df_genos <span class="ot">=</span> genio<span class="sc">::</span><span class="fu">read_bed</span>(IN_PREF,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                           <span class="at">names_loci =</span> bim<span class="sc">$</span>id,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                           <span class="at">names_ind =</span> fam<span class="sc">$</span>id) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Get indexes of all non-low coverage samples</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>ind_keep <span class="ot">=</span> <span class="fu">which</span>(<span class="sc">!</span><span class="fu">as.character</span>(fam<span class="sc">$</span>id) <span class="sc">%in%</span> LOW_COV)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out low-cov samples from `fam` and `df_genos`</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>df_genos <span class="ot">=</span> df_genos[, ind_keep]</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>fam <span class="ot">=</span> fam <span class="sc">%&gt;%</span> </span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span>id <span class="sc">%in%</span> LOW_COV)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert genos to matrix</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> df_genos <span class="sc">%&gt;%</span> </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># transpose</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>(.) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert back to data frame</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(.)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute GRM "manually"</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Following guidance here: https://zjuwhw.github.io/2021/08/20/GRM.html</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">dim</span>(x)[<span class="dv">1</span>]</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">dim</span>(x)[<span class="dv">2</span>]</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># For each SNP, sum the ALT alleles and divide by 2n to get the ALT allele frequency</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>p_hat <span class="ot">=</span> <span class="fu">apply</span>(x, <span class="dv">2</span>, sum)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>n)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardise matrix by allele frequency</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>w <span class="ot">=</span> <span class="fu">apply</span>(<span class="fu">rbind</span>(x,p_hat), <span class="dv">2</span>, <span class="cf">function</span>(x) (x<span class="dv">-2</span><span class="sc">*</span>x[<span class="fu">length</span>(x)])<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">*</span>x[<span class="fu">length</span>(x)]<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>x[<span class="fu">length</span>(x)])))[<span class="dv">1</span><span class="sc">:</span>n,]</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Cacluate the GRM</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>A <span class="ot">=</span> w <span class="sc">%*%</span> <span class="fu">t</span>(w) <span class="sc">/</span> m</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="do">#########################</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot GRM</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="do">#########################</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Order</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>ord <span class="ot">=</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(A, <span class="at">method =</span> <span class="st">"euclidean"</span>), <span class="at">method =</span> <span class="st">"ward.D"</span>)<span class="sc">$</span>order</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co">#labs = rownames(A)[ord]</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="do">## Get labs with cross</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co">#labs_x = tibble(SAMPLE = labs) %&gt;% </span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co">#  dplyr::left_join(f2 %&gt;% </span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co">#                     dplyr::select(SAMPLE, PAT_MAT),</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co">#                   by = "SAMPLE") %&gt;% </span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co">#  # combine</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co">#  dplyr::mutate(S_X = paste(SAMPLE, PAT_MAT, sep = "_"))</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Order matrix</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>A_ord <span class="ot">=</span> A[ord, ord]</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to DF</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>df_fig <span class="ot">=</span> A_ord <span class="sc">%&gt;%</span> </span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"SAMPLE_1"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="sc">-</span><span class="fu">c</span>(SAMPLE_1), <span class="at">names_to =</span> <span class="st">"SAMPLE_2"</span>, <span class="at">values_to =</span> <span class="st">"VALUE"</span>)</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">=</span> df_fig <span class="sc">%&gt;%</span> </span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">x =</span> SAMPLE_1, <span class="at">y =</span> SAMPLE_2, <span class="at">fill =</span> VALUE)) <span class="sc">+</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"plasma"</span>) <span class="sc">+</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">aspect.ratio =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>),</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"sample A"</span>) <span class="sc">+</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"sample B"</span>)</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div id="fig-somite-grm" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="plots/grm_man/hdrr/None/5000/grm_man_0.8.png" class="img-fluid figure-img" width="6000"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;6.1: GRM generated for 600 F<sub>2</sub> samples using Equations @ref(eq:grmstd) and @ref(eq:grm).</figcaption><p></p>
+<p><img src="06-GWAS_files/figure-html/fig-somite-grm-1.png" class="img-fluid figure-img" width="2880"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.1: GRM generated for 600 F<sub>2</sub> samples using Equations @ref(eq:grmstd) and @ref(eq:grm). Code adapted from <code>rule make_grm_man</code> in <a href="https://github.com/brettellebi/somites/blob/master/workflow/rules/08_relationship_metrics.smk">https://github.com/brettellebi/somites/blob/master/workflow/rules/08_relationship_metrics.smk</a>.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>As described above in <strong><a href="02-phenotypes.html"><span>Chapter&nbsp;2</span></a></strong>, the microscope used to image the embryos (either AU or DB) differed by several degrees in heat, which likely caused differences in the measurements observed. I accordingly experimented with including microscope as a covariate, either alone or together with the genotype for the reporter locus (either homozygous or heterozygous), or excluding it altogether. In an attempt to avoid complications resulting from its inclusion, I also tried inverse-normalising the period phenotype within each microscope group, transforming the phenotype to fit a normal distribution across both microscopes. I onlyshow the results from this transformed phenotype in the following section.</p>
+<p>As described above in <a href="02-phenotypes.html"><span>Chapter&nbsp;2</span></a>, the microscope used to image the embryos (either AU or DB) differed by several degrees in heat, which likely caused differences in the measurements observed. I accordingly experimented with including microscope as a covariate, either alone or together with the genotype for the reporter locus (either homozygous or heterozygous), or excluding it altogether. In an attempt to avoid complications resulting from its inclusion, I also tried inverse-normalising the period phenotype within each microscope group, transforming the phenotype to fit a normal distribution across both microscopes. I onlyshow the results from this transformed phenotype in the following section.</p>
 <p>To set the significance threshold, I permuted the phenotype across samples using 10 different random seeds, together with all covariates when included, and ran a separate linkage model for each permutation. I then set the lowest <span class="math inline">\(p\)</span>-value from all 10 permutation as the significance threshold for the non-permuted model. I additionally applied a Bonferroni correction to our <span class="math inline">\(p\)</span>-values by dividing <span class="math inline">\(\alpha\)</span> (0.05) by the number of pseudo-SNPs in the model, and set this as a secondary threshold.</p>
-<section id="period-intercept" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="period-intercept"><span class="header-section-number">6.1</span> Period intercept</h2>
+</section>
+<section id="period-intercept" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="period-intercept"><span class="header-section-number">6.2</span> Period intercept</h2>
 <p><strong><a href="#fig-somite-manhattan">Figure&nbsp;<span>6.2</span></a></strong> is a Manhattan plot of the genetic linkage results for the period intercept phenotype, inverse-normalised across microscopes. The regions found to be significant based on the permutations’ minimum <span class="math inline">\(p\)</span>-value are set out in <strong><a href="#tbl-somite-sig-int">Table&nbsp;<span>6.1</span></a></strong>.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set variables</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>IN <span class="ot">=</span> <span class="st">"/hps/nobackup/birney/users/ian/somites/gcta/mlma_loco_invnorm/true/hdrr/None/5000/0.8/intercept.loco.mlma"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>MIN_P <span class="ot">=</span> <span class="st">"/hps/nobackup/birney/users/ian/somites/gcta/mlma_loco_invnorm/min_p/hdrr/None/5000/0.8/intercept.csv"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>BIN_LENGTH <span class="ot">=</span> <span class="dv">5000</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>COV <span class="ot">=</span> <span class="fl">0.8</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>PHENO <span class="ot">=</span> <span class="st">"intercept"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting parameters</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>gwas_pal <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"#2B2D42"</span>, <span class="st">"#F7B267"</span>, <span class="st">"#F25C54"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gwas_pal) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"target"</span>, <span class="st">"even chr"</span>, <span class="st">"odd chr"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>intercept_pal <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"#EF476F"</span>, <span class="st">"#8D99AE"</span>, <span class="st">"#2b2d42"</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(intercept_pal) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"target"</span>, <span class="st">"even chr"</span>, <span class="st">"odd chr"</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># PSM</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>unsegmented_psm_area_pal <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"#E59500"</span>, <span class="st">"#9C6FC3"</span>, <span class="st">"#401F3E"</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(unsegmented_psm_area_pal) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"target"</span>, <span class="st">"even chr"</span>, <span class="st">"odd chr"</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># HdrR chromosome data</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Get chromosome lengths</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>med_chr_lens <span class="ot">=</span> <span class="fu">read.table</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">"Oryzias_latipes.ASM223467v1.dna.toplevel.fa_chr_counts.txt"</span>),</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"chr"</span>, <span class="st">"end"</span>))</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Add start</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>med_chr_lens<span class="sc">$</span>start <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorder</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>med_chr_lens <span class="ot">=</span> med_chr_lens <span class="sc">%&gt;%</span> </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(chr, start, end) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove MT</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(chr <span class="sc">!=</span> <span class="st">"MT"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to integer</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">chr =</span> <span class="fu">as.integer</span>(chr)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add cumulative bases</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CUMSUM =</span> <span class="fu">cumsum</span>(end),</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>                <span class="at">TOT =</span> CUMSUM <span class="sc">-</span> end) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add midpoint for each chr</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">MID_TOT =</span> TOT <span class="sc">+</span> (end <span class="sc">/</span> <span class="dv">2</span>))</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in files</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in and process data</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(IN) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add POS</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">BIN_START =</span> (bp <span class="sc">*</span> BIN_LENGTH) <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_END =</span> (bp <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">*</span> BIN_LENGTH) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>  <span class="co"># join chromosome lengths</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(med_chr_lens, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Chr"</span> <span class="ot">=</span> <span class="st">"chr"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add x-coord</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">X_COORD =</span> BIN_START <span class="sc">+</span> TOT) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="co"># change column names</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">CHROM =</span> Chr)</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Get significance levels</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="do">## Permutations</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>PERM_SIG <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(MIN_P) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(MIN_P) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">min</span>(.)</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="do">## Bonferroni</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>BONF_SIG <span class="ot">=</span> <span class="fl">0.05</span> <span class="sc">/</span> <span class="fu">nrow</span>(df)</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Set title</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>TITLE <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">"Phenotype: "</span>,</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>              PHENO,</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>              <span class="st">"</span><span class="sc">\n</span><span class="st">Split inverse-normalised"</span>)</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>SUBTITLE <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">"Emission covariances: "</span>,</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>                 COV,</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"</span><span class="sc">\n</span><span class="st">Bin length: "</span>,</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>                 BIN_LENGTH)</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="co"># Set palette</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">=</span> <span class="fu">eval</span>(<span class="fu">as.name</span>(<span class="fu">paste</span>(PHENO, <span class="st">"_pal"</span>, <span class="at">sep =</span> <span class="st">""</span>)))</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="co"># Manhattan plot function</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>plot_man <span class="ot">=</span> <span class="cf">function</span>(df, <span class="at">title =</span> <span class="cn">NULL</span>, <span class="at">subtitle =</span> <span class="cn">NULL</span>, gwas_pal, <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, med_chr_lens, <span class="at">perm_sig =</span> <span class="cn">NULL</span>, <span class="at">bonf_sig =</span> <span class="cn">NULL</span>){</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create palette</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>  pal <span class="ot">=</span> <span class="fu">rep_len</span>(gwas_pal, <span class="at">length.out =</span> <span class="fu">nrow</span>(med_chr_lens))</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(pal) <span class="ot">=</span> med_chr_lens<span class="sc">$</span>chr</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create `COLOUR` vector</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">COLOUR =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(<span class="sc">!</span><span class="fu">is.null</span>(perm_sig) <span class="sc">&amp;</span> p <span class="sc">&lt;</span> perm_sig <span class="sc">~</span> gwas_pal[<span class="dv">1</span>],</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>                                            gtools<span class="sc">::</span><span class="fu">even</span>(CHROM) <span class="sc">~</span> gwas_pal[<span class="dv">2</span>],</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>                                            gtools<span class="sc">::</span><span class="fu">odd</span>(CHROM) <span class="sc">~</span> gwas_pal[<span class="dv">3</span>])) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CHROM =</span> <span class="fu">factor</span>(CHROM, <span class="at">levels =</span> med_chr_lens<span class="sc">$</span>chr)) </span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>  out_plot <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> X_COORD,</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(p),</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>               <span class="at">label =</span> BIN_START,</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>               <span class="at">label2 =</span> BIN_END)) <span class="sc">+</span> </span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">colour =</span> df<span class="sc">$</span>COLOUR,</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> size,</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> alpha) <span class="sc">+</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>    <span class="co">#scale_color_manual(values = gwas_pal) +</span></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> med_chr_lens<span class="sc">$</span>MID_TOT, </span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> med_chr_lens<span class="sc">$</span>chr) <span class="sc">+</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> title,</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> subtitle) <span class="sc">+</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Chromosome"</span>) <span class="sc">+</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"-log10(p-value)"</span>) <span class="sc">+</span> </span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>    <span class="co"># permutations significance level</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fu">log10</span>(perm_sig), <span class="at">colour =</span> <span class="st">"#60D394"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(MID_TOT[<span class="dv">1</span>], <span class="sc">-</span><span class="fu">log10</span>(perm_sig), <span class="at">label =</span> <span class="st">"permutations"</span>, <span class="at">vjust =</span> <span class="dv">1</span>), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="st">"#60D394"</span>) <span class="sc">+</span> </span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>    <span class="co"># bonferroni significance level</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="fu">log10</span>(bonf_sig), <span class="at">colour =</span> <span class="st">"#F06449"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(MID_TOT[<span class="dv">1</span>], <span class="sc">-</span><span class="fu">log10</span>(bonf_sig), <span class="at">label =</span> <span class="st">"bonferroni"</span>, <span class="at">vjust =</span> <span class="dv">1</span>), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="st">"#F06449"</span>)</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out_plot)</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot and save</span></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a><span class="do">########################</span></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>out_plot <span class="ot">=</span> <span class="fu">plot_man</span>(df,</span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>                    <span class="at">title =</span> TITLE,</span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>                    <span class="at">subtitle =</span> SUBTITLE,</span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>                    <span class="at">gwas_pal =</span> pal,</span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>                    <span class="at">med_chr_lens =</span> med_chr_lens,</span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>                    <span class="at">perm_sig =</span> PERM_SIG,</span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>                    <span class="at">bonf_sig =</span> BONF_SIG)</span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>out_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div id="fig-somite-manhattan" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="plots/gcta_invnorm/hdrr/None/5000/0.8/intercept.png" class="img-fluid figure-img" width="1920"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;6.2: Manhattan plot of the genetic linkage results for the period intercept phenotype, inverse-normalised across microscopes. Pseudo-SNPs with <span class="math inline">\(p\)</span>-values lower than the permutation significance threshold are highlighted in red.</figcaption><p></p>
+<p><img src="06-GWAS_files/figure-html/fig-somite-manhattan-1.png" class="img-fluid figure-img" width="921"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.2: Manhattan plot of the genetic linkage results for the period intercept phenotype, inverse-normalised across microscopes. Pseudo-SNPs with <span class="math inline">\(p\)</span>-values lower than the permutation significance threshold are highlighted in red. Code adapted from <code>rule get_manhattan_gcta_invnorm</code> in <a href="https://github.com/brettellebi/somites/blob/master/workflow/rules/06_2_GWAS_GCTA_split_invnorm.smk">https://github.com/brettellebi/somites/blob/master/workflow/rules/06_2_GWAS_GCTA_split_invnorm.smk</a>.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -253,7 +575,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>These regions contained a total of 46,872 SNPs imputed from the genotype of the F<sub>0</sub> parental strains. We ran Ensembl’s Variant Effect Predictor<span class="citation" data-cites="mclarenEnsemblVariantEffect2016"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span> over these SNPs to identify those that would be most likely to have functional consequences. The full counts of SNPs falling into each category of ‘consequence’ are set out in <strong><a href="#tbl-int-consequence">Table&nbsp;<span>6.2</span></a></strong>. From this process I identified 38 genes that included a missense variant, 1 that included a missense variant and a start lost (ENSORLG00000014616), and 1 that included a missense variant and a stop lost (ENSORLG00000015149).</p>
+<p>These regions contained a total of 46,872 SNPs imputed from the genotype of the F<sub>0</sub> parental strains. We ran Ensembl’s Variant Effect Predictor <span class="citation" data-cites="mclarenEnsemblVariantEffect2016">(<a href="07-references.html#ref-mclarenEnsemblVariantEffect2016" role="doc-biblioref">McLaren et al. 2016</a>)</span> over these SNPs to identify those that would be most likely to have functional consequences. The full counts of SNPs falling into each category of ‘consequence’ are set out in <strong><a href="#tbl-int-consequence">Table&nbsp;<span>6.2</span></a></strong>. From this process I identified 38 genes that included a missense variant, 1 that included a missense variant and a start lost (ENSORLG00000014616), and 1 that included a missense variant and a stop lost (ENSORLG00000015149).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-int-consequence" class="anchored">
@@ -335,216 +657,40 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>My collaborators then combined these results with bulk RNA-seq that they had performed on F<sub>0</sub> <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> individuals, to determine which of these genes are expressed in the tail during embryogenesis. This allowed them to reduce to the list to 29 genes, and a gene ontology analysis of this found that the list of genes was enriched for body axis, somitogenesis, and segmentation (<strong><a href="#tbl-psm-final-genes">Table&nbsp;<span>6.3</span></a></strong>). For this list of genes, our collaborators are now in the process of knocking out the protein-altering <em><span style="     color: #43AA8B !important;">Cab</span></em> allele into <em><span style="     color: #DE3C4B !important;">Kaga</span></em> embryos, and <em>vice versa</em>, to functionally validate these variants.</p>
+<p>We then combined these results with bulk RNA-seq that they had performed on F<sub>0</sub> <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> individuals, to determine which of these genes are expressed in the tail during embryogenesis. This allowed us to reduce to the list to 29 genes, and a gene ontology analysis of this found that the list of genes was enriched for body axis, somitogenesis, and segmentation (see table below). For this list of genes, our collaborators are now in the process of knocking out the protein-altering <em><span style="     color: #43AA8B !important;">Cab</span></em> allele into <em><span style="     color: #DE3C4B !important;">Kaga</span></em> embryos, and <em>vice versa</em>, to functionally validate these variants.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"results/final_gene_list.csv"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove the 'Source:...' in square brackets</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">description =</span> stringr<span class="sc">::</span><span class="fu">str_remove_all</span>(description, <span class="st">"</span><span class="sc">\\</span><span class="st">[.*</span><span class="sc">\\</span><span class="st">]"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename columns</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Chromosome =</span> <span class="st">"chromosome_name"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">`</span><span class="at">Ensembl gene ID</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"ensembl_gene_id"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">Description  =</span> description) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">datatable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<div id="tbl-psm-final-genes" class="anchored">
 
-<table><caption>Table&nbsp;6.3:  Target genes for functional validation expressed in the unsegmented PSM and containing protein alterations. Table generated by Ali Seleit. </caption>
- <thead>
-  <tr>
-   <th style="text-align:right;"> Chromosome </th>
-   <th style="text-align:left;"> Ensembl gene ID </th>
-   <th style="text-align:left;"> Description </th>
-   <th style="text-align:left;"> Role </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000014656 </td>
-   <td style="text-align:left;"> mesoderm posterior protein 2-like </td>
-   <td style="text-align:left;"> Somitogenesis </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000014659 </td>
-   <td style="text-align:left;"> mesp </td>
-   <td style="text-align:left;"> Somitogenesis </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000020474 </td>
-   <td style="text-align:left;"> protocadherin 10b </td>
-   <td style="text-align:left;"> Somitogenesis </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000014616 </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> Possible role in Somitogenesis (MAP-kinase) </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000020551 </td>
-   <td style="text-align:left;"> FAT atypical cadherin 4 </td>
-   <td style="text-align:left;"> Possible role in Somitogenesis (PCP, Yap1 regulator) </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000020531 </td>
-   <td style="text-align:left;"> neurogenin 1 </td>
-   <td style="text-align:left;"> Possible role in Somitogenesis (BHLH-TF regulation of Wnt) </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000015149 </td>
-   <td style="text-align:left;"> ADAM metallopeptidase with thrombospondin type 1 motif 18 </td>
-   <td style="text-align:left;"> Extracellular matrix </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000015418 </td>
-   <td style="text-align:left;"> matrix metallopeptidase 15 </td>
-   <td style="text-align:left;"> Extracellular matrix </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000020488 </td>
-   <td style="text-align:left;"> transforming growth factor beta induced </td>
-   <td style="text-align:left;"> Extracellular matrix </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000028055 </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> &nbsp;Signal trasduction (Rho) </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000020481 </td>
-   <td style="text-align:left;"> ArfGAP with RhoGAP domain, ankyrin repeat and PH domain 3 </td>
-   <td style="text-align:left;"> &nbsp;Signal transduction (GTPase activator RhoGap) </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000020525 </td>
-   <td style="text-align:left;"> TBC1 domain family member 2A-like </td>
-   <td style="text-align:left;"> Signal transduction Gtpase activator, cadherin recycling </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000015260 </td>
-   <td style="text-align:left;"> synapse associated protein 1 </td>
-   <td style="text-align:left;"> TOR acitivity </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000028553 </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000015460 </td>
-   <td style="text-align:left;"> dpy-19 like C-mannosyltransferase 3 </td>
-   <td style="text-align:left;"> glycosylation </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000022010 </td>
-   <td style="text-align:left;"> beta-1,4-galactosyltransferase 1 </td>
-   <td style="text-align:left;"> glycosylation </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000020498 </td>
-   <td style="text-align:left;"> protein NipSnap homolog 3A </td>
-   <td style="text-align:left;"> Mitochondria </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000020494 </td>
-   <td style="text-align:left;"> nitric oxide associated 1 </td>
-   <td style="text-align:left;"> Mitochondria </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000020504 </td>
-   <td style="text-align:left;"> ATP-binding cassette sub-family A member 1 </td>
-   <td style="text-align:left;"> Metabolism (cholestrol efflux) </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000015118 </td>
-   <td style="text-align:left;"> phosphorylase kinase regulatory subunit beta </td>
-   <td style="text-align:left;"> Metabolism </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000020493 </td>
-   <td style="text-align:left;"> RE1 silencing transcription factor </td>
-   <td style="text-align:left;"> RNA pol II (transcritpion regulation </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000015365 </td>
-   <td style="text-align:left;"> solute carrier family 7 member 6 opposite strand </td>
-   <td style="text-align:left;"> RNA pol II (nuclear export) </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000029052 </td>
-   <td style="text-align:left;"> exosome component 3 </td>
-   <td style="text-align:left;"> rRNA + RNA binding </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000015278 </td>
-   <td style="text-align:left;"> adhesion G protein-coupled receptor G3 </td>
-   <td style="text-align:left;"> G-protein coupled receptor </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000015287 </td>
-   <td style="text-align:left;"> adhesion G-protein coupled receptor G5 </td>
-   <td style="text-align:left;"> G-protein coupled receptor </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000025674 </td>
-   <td style="text-align:left;"> matrin-3 </td>
-   <td style="text-align:left;"> inner nuclear protein (chromatin architecture </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000023325 </td>
-   <td style="text-align:left;"> matrin-3 </td>
-   <td style="text-align:left;"> inner nuclear protein (chromatin architecture </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ENSORLG00000022388 </td>
-   <td style="text-align:left;"> poly(A) binding protein interacting protein 2 </td>
-   <td style="text-align:left;"> Translation repressor </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> ENSORLG00000015096 </td>
-   <td style="text-align:left;"> integrin alpha FG-GAP repeat containing 1 </td>
-   <td style="text-align:left;"> NA possibly T cell activation </td>
-  </tr>
-</tbody>
-</table>
-
+<div id="htmlwidget-b476c6a1f8c81fa6e9ea" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b476c6a1f8c81fa6e9ea">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29"],[3,3,10,3,10,10,3,3,10,3,10,10,3,10,3,10,10,10,10,3,10,3,10,3,3,10,10,10,3],["ENSORLG00000014656","ENSORLG00000014659","ENSORLG00000020474","ENSORLG00000014616","ENSORLG00000020551","ENSORLG00000020531","ENSORLG00000015149","ENSORLG00000015418","ENSORLG00000020488","ENSORLG00000028055","ENSORLG00000020481","ENSORLG00000020525","ENSORLG00000015260","ENSORLG00000028553","ENSORLG00000015460","ENSORLG00000022010","ENSORLG00000020498","ENSORLG00000020494","ENSORLG00000020504","ENSORLG00000015118","ENSORLG00000020493","ENSORLG00000015365","ENSORLG00000029052","ENSORLG00000015278","ENSORLG00000015287","ENSORLG00000025674","ENSORLG00000023325","ENSORLG00000022388","ENSORLG00000015096"],["mesoderm posterior protein 2-like ","mesp ","protocadherin 10b ",null,"FAT atypical cadherin 4 ","neurogenin 1 ","ADAM metallopeptidase with thrombospondin type 1 motif 18 ","matrix metallopeptidase 15 ","transforming growth factor beta induced ",null,"ArfGAP with RhoGAP domain, ankyrin repeat and PH domain 3 ","TBC1 domain family member 2A-like ","synapse associated protein 1 ",null,"dpy-19 like C-mannosyltransferase 3 ","beta-1,4-galactosyltransferase 1 ","protein NipSnap homolog 3A ","nitric oxide associated 1 ","ATP-binding cassette sub-family A member 1 ","phosphorylase kinase regulatory subunit beta ","RE1 silencing transcription factor ","solute carrier family 7 member 6 opposite strand ","exosome component 3 ","adhesion G protein-coupled receptor G3 ","adhesion G-protein coupled receptor G5 ","matrin-3 ","matrin-3 ","poly(A) binding protein interacting protein 2 ","integrin alpha FG-GAP repeat containing 1 "],["Somitogenesis","Somitogenesis","Somitogenesis","Possible role in Somitogenesis (MAP-kinase)","Possible role in Somitogenesis (PCP, Yap1 regulator)","Possible role in Somitogenesis (BHLH-TF regulation of Wnt)","Extracellular matrix","Extracellular matrix","Extracellular matrix"," Signal trasduction (Rho)"," Signal transduction (GTPase activator RhoGap)","Signal transduction Gtpase activator, cadherin recycling","TOR acitivity",null,"glycosylation","glycosylation","Mitochondria","Mitochondria","Metabolism (cholestrol efflux)","Metabolism","RNA pol II (transcritpion regulation","RNA pol II (nuclear export)","rRNA + RNA binding","G-protein coupled receptor","G-protein coupled receptor","inner nuclear protein (chromatin architecture","inner nuclear protein (chromatin architecture","Translation repressor","NA possibly T cell activation"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Chromosome<\/th>\n      <th>Ensembl gene ID<\/th>\n      <th>Description<\/th>\n      <th>Role<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</div>
-<p>My collaborators have begun the process of using the CRISPR-Cas9 system<span class="citation" data-cites="campenhoutGuidelinesOptimizedGene2019"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></span> to knock out some of these candidate genes to determine their effect on the period phenotype. The <em>mespb</em> (ENSORLG00000014656) and <em>pcdh10b</em> (ENSORLG00000020474) genes have both been found to be involved in segmental boundary formation and somite patterning,<span class="citation" data-cites="hitachiPhysicalInteractionTbx62008 rangarajanPCNSNovelProtocadherin2006"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></span> and are highly conserved in vertebrates.<span class="citation" data-cites="gulEvolutionDiversityCadherins2017 satouAscidianMespGene2004"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span> Preliminary results have shown that knocking out either of these genes from the <em><span style="     color: #43AA8B !important;">Cab</span></em> strain significantly speeds up somite period development by 2-3 minutes (<strong><a href="#fig-ko-period">Figure&nbsp;<span>6.3</span></a>)</strong>), providing promising evidence that these genes are involved in the establishment of the segmentation clock.</p>
+<p>We have since begun the process of using the CRISPR-Cas9 system <span class="citation" data-cites="campenhoutGuidelinesOptimizedGene2019">(<a href="07-references.html#ref-campenhoutGuidelinesOptimizedGene2019" role="doc-biblioref">Campenhout et al. 2019</a>)</span> to knock out some of these candidate genes to determine their effect on the period phenotype. The <em>mespb</em> (ENSORLG00000014656) and <em>pcdh10b</em> (ENSORLG00000020474) genes have both been found to be involved in segmental boundary formation and somite patterning <span class="citation" data-cites="hitachiPhysicalInteractionTbx62008 rangarajanPCNSNovelProtocadherin2006">(<a href="07-references.html#ref-hitachiPhysicalInteractionTbx62008" role="doc-biblioref">Hitachi et al. 2008</a>; <a href="07-references.html#ref-rangarajanPCNSNovelProtocadherin2006" role="doc-biblioref">Rangarajan, Luo, and Sargent 2006</a>)</span>, and are highly conserved in vertebrates <span class="citation" data-cites="gulEvolutionDiversityCadherins2017 satouAscidianMespGene2004">(<a href="07-references.html#ref-gulEvolutionDiversityCadherins2017" role="doc-biblioref">Gul et al. 2017</a>; <a href="07-references.html#ref-satouAscidianMespGene2004" role="doc-biblioref">Satou, Imai, and Satoh 2004</a>)</span>. Preliminary results have shown that knocking out either of these genes from the <em><span style="     color: #43AA8B !important;">Cab</span></em> strain significantly speeds up somite period development by 2-3 minutes (<strong><a href="#fig-ko-period">Figure&nbsp;<span>6.3</span></a>)</strong>), providing promising evidence that these genes are involved in the establishment of the segmentation clock.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-ko-period" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="plots/ali/ko_results.png" class="img-fluid figure-img" width="2000"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;6.3: Period intercept for <em>Cab</em> embryos with CRISPR-Cas9 knock-outs<span class="citation" data-cites="campenhoutGuidelinesOptimizedGene2019"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span> of <em>mespb</em> and <em>pcdh10b</em> compared to controls. Figure generated by Ali Seleit.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.3: Period intercept for <em>Cab</em> embryos with CRISPR-Cas9 knock-outs <span class="citation" data-cites="campenhoutGuidelinesOptimizedGene2019">(<a href="07-references.html#ref-campenhoutGuidelinesOptimizedGene2019" role="doc-biblioref">Campenhout et al. 2019</a>)</span> of <em>mespb</em> and <em>pcdh10b</em> compared to controls. Figure generated by Ali Seleit.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="psm-area" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="psm-area"><span class="header-section-number">6.2</span> PSM area</h2>
-<p><strong><a href="#fig-psm-manhattan">Figure&nbsp;<span>6.4</span></a></strong> is a Manhattan plot of the genetic linkage results for the PSM area phenotype. The regions found to be significant based on the permutations’ minimum <span class="math inline">\(p\)</span>-value are set out in <strong><a href="#tbl-somite-sig-psm">Table&nbsp;<span>6.4</span></a></strong>, although they exceed the Bonferroni correction threshold as well. I note that this ~6 Mb significant region on chromosome 3 does not overlap at all with the significant region discovered for the period intercept phenotype.</p>
+<section id="psm-area" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="psm-area"><span class="header-section-number">6.3</span> PSM area</h2>
+<p><strong><a href="#fig-psm-manhattan">Figure&nbsp;<span>6.4</span></a></strong> is a Manhattan plot of the genetic linkage results for the PSM area phenotype. The regions found to be significant based on the permutations’ minimum <span class="math inline">\(p\)</span>-value are set out in the table below, although they exceed the Bonferroni correction threshold as well. I note that this ~6 Mb significant region on chromosome 3 does not overlap at all with the significant region discovered for the period intercept phenotype.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-psm-manhattan" class="quarto-figure quarto-figure-center anchored">
@@ -557,151 +703,61 @@ div.csl-indent {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="tbl-somite-sig-psm" class="anchored">
 
-<table><caption>Table&nbsp;6.4:  Significant 5-kb bin range for PSM area below the minimum p-value from 10 permutations. </caption>
- <thead>
-  <tr>
-   <th style="text-align:right;"> Chromosome </th>
-   <th style="text-align:right;"> Bin start </th>
-   <th style="text-align:right;"> Bin end </th>
-   <th style="text-align:right;"> Length (kb) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 20375001 </td>
-   <td style="text-align:right;"> 26285000 </td>
-   <td style="text-align:right;"> 5910 </td>
-  </tr>
-</tbody>
-</table>
-
+<div id="htmlwidget-5810f9e1d17e04ae5451" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5810f9e1d17e04ae5451">{"x":{"filter":"none","vertical":false,"data":[["1"],[3],[20375001],[26285000],[5910]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Chromosome<\/th>\n      <th>Bin start<\/th>\n      <th>Bin end<\/th>\n      <th>Length (kb)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</div>
-<p>This region contained a total of 29,096 SNPs imputed from the genotype of the F<sub>0</sub> parental strains. I ran Ensembl’s Variant Effect Predictor<span class="citation" data-cites="mclarenEnsemblVariantEffect2016"><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></span> over these SNPs to identify those that would be most likely to have functional consequences. The full counts of SNPs falling into each category of ‘consequence’ are set out in <strong><a href="#tbl-psm-consequence">Table&nbsp;<span>6.5</span></a></strong>. From this process I identified 114 genes that included a missense variant, and 1 that included a both a missense variant and a start lost (ENSORLG00000010863, a centriole, cilia and spindle-associated protein).</p>
+<p>This region contained a total of 29,096 SNPs imputed from the genotype of the F<sub>0</sub> parental strains. I ran Ensembl’s Variant Effect Predictor <span class="citation" data-cites="mclarenEnsemblVariantEffect2016">(<a href="07-references.html#ref-mclarenEnsemblVariantEffect2016" role="doc-biblioref">McLaren et al. 2016</a>)</span> over these SNPs to identify those that would be most likely to have functional consequences. The full counts of SNPs falling into each category of ‘consequence’ are set out in <strong><span class="quarto-unresolved-ref">?tbl-psm-consequence</span></strong>. From this process I identified 114 genes that included a missense variant, and 5 that included a both a missense variant and a splice region variant (see table further below).</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="tbl-psm-consequence" class="anchored">
 
-<table><caption>Table&nbsp;6.5:  Variant Effect Predictor results for SNPs in the bins. </caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Consequence </th>
-   <th style="text-align:right;"> Count </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> intron variant </td>
-   <td style="text-align:right;"> 47211 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> intergenic variant </td>
-   <td style="text-align:right;"> 20045 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> upstream gene variant </td>
-   <td style="text-align:right;"> 7304 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> downstream gene variant </td>
-   <td style="text-align:right;"> 5229 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 3 prime UTR variant </td>
-   <td style="text-align:right;"> 1082 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> synonymous variant </td>
-   <td style="text-align:right;"> 694 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> missense variant </td>
-   <td style="text-align:right;"> 383 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 5 prime UTR variant </td>
-   <td style="text-align:right;"> 201 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> splice region variant,intron variant </td>
-   <td style="text-align:right;"> 126 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> missense variant,splice region variant </td>
-   <td style="text-align:right;"> 19 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> splice region variant,synonymous variant </td>
-   <td style="text-align:right;"> 17 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> stop gained </td>
-   <td style="text-align:right;"> 3 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> splice donor variant </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> start lost </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> stop lost </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> stop lost,splice region variant </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-</tbody>
-</table>
+<div id="htmlwidget-300bbe9b67659d6d3cb4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-300bbe9b67659d6d3cb4">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14"],["intron variant","intergenic variant","downstream gene variant","upstream gene variant","3 prime UTR variant","synonymous variant","missense variant","5 prime UTR variant","splice region variant,intron variant","splice region variant,synonymous variant","missense variant,splice region variant","stop gained","splice donor variant","start lost"],[23189,9171,8894,8491,2104,1141,716,433,184,18,7,2,1,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Consequence<\/th>\n      <th>Count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"results/annotations_psm/hdrr/None/5000/0.8/unsegmented_psm_area/None/vep_out.txt"</span>),</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">comment =</span> <span class="st">"##"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="st">"Uploaded_variation"</span> <span class="ot">=</span> <span class="st">"#Uploaded_variation"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"missense"</span>, Consequence)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">distinct</span>(Gene, Consequence, <span class="at">.keep_all =</span> T) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">datatable</span>(  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 
+<div id="htmlwidget-ddd67161f196278bdb15" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ddd67161f196278bdb15">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119"],["3_20383497_A/G","3_20414961_T/G","3_20434457_C/A","3_20440889_C/G","3_20448609_A/G","3_20690315_A/T","3_21021674_T/G","3_21047792_A/G","3_21066831_G/T","3_21103443_A/G","3_21132277_T/C","3_21140110_G/C","3_21153533_A/G","3_21201032_C/G","3_21216425_T/G","3_21243090_A/G","3_21257549_G/T","3_21279639_A/T","3_21301538_C/T","3_21380253_A/G","3_21385305_G/A","3_21431261_G/A","3_21513631_A/G","3_21529278_G/A","3_21529319_G/C","3_21533373_T/C","3_21534986_A/T","3_21549679_G/C","3_21604117_A/G","3_21621899_A/C","3_21662431_G/C","3_21687420_T/C","3_21700395_G/C","3_21733722_C/T","3_21739680_T/A","3_21771584_G/A","3_21821709_A/C","3_21839853_G/A","3_21918127_A/G","3_21958622_T/C","3_21982305_C/T","3_21998114_T/G","3_22014106_C/A","3_22079930_T/A","3_22100001_T/C","3_22136701_T/A","3_22147223_T/C","3_22306322_C/A","3_22321763_C/T","3_22521041_C/G","3_22554461_T/G","3_22598877_T/C","3_23028379_C/A","3_23204491_A/G","3_23246944_T/C","3_23257354_T/A","3_23303862_A/G","3_23399797_T/C","3_23430758_T/G","3_23508332_C/T","3_23529935_G/T","3_23599350_C/T","3_24108594_T/G","3_24155972_T/A","3_24175800_G/A","3_24181581_A/T","3_24228094_G/T","3_24319186_G/C","3_24340602_C/G","3_24352338_T/C","3_24394010_G/C","3_24418951_A/C","3_24447767_A/G","3_24475075_C/T","3_24484181_A/T","3_24505086_C/A","3_24522977_G/A","3_24525794_C/A","3_24534691_G/A","3_24563570_A/T","3_24598675_A/G","3_24605771_G/A","3_24616921_T/C","3_24629463_T/A","3_24636901_A/T","3_24649115_T/A","3_24662874_C/A","3_24670407_C/A","3_24703987_T/C","3_24724329_C/T","3_24743762_G/A","3_24750647_A/G","3_24823295_G/C","3_24835672_A/T","3_24928580_C/T","3_24940070_T/C","3_24957932_G/C","3_24983592_C/T","3_25000192_T/C","3_25012202_G/A","3_25085042_T/G","3_25157090_C/G","3_25478738_T/G","3_25576535_A/C","3_25588023_G/A","3_25612993_A/G","3_25619961_C/T","3_25627540_T/A","3_25648378_G/C","3_25662710_G/A","3_25672541_T/C","3_25672571_A/T","3_25676394_G/A","3_25712890_C/G","3_25743003_G/C","3_25761232_A/G","3_25783287_C/T","3_26263064_C/T","3_26269265_A/G"],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],["G","G","A","G","G","T","G","G","T","G","C","C","G","G","G","G","T","T","T","G","A","A","G","A","C","C","T","C","G","C","C","C","C","T","A","A","C","A","G","C","T","G","A","A","C","A","C","A","T","G","G","C","A","G","C","A","G","C","G","T","T","T","G","A","A","T","T","C","G","C","C","C","G","T","T","A","A","A","A","T","G","A","C","A","T","A","A","A","C","T","A","G","C","T","T","C","C","T","C","A","G","G","G","C","A","G","T","A","C","A","C","T","A","G","C","G","T","T","G"],["ENSORLG00000007572","ENSORLG00000007600","ENSORLG00000007627","ENSORLG00000028865","ENSORLG00000007654","ENSORLG00000007874","ENSORLG00000007887","ENSORLG00000007919","ENSORLG00000007937","ENSORLG00000007983","ENSORLG00000023237","ENSORLG00000028821","ENSORLG00000008018","ENSORLG00000008091","ENSORLG00000008128","ENSORLG00000008161","ENSORLG00000008169","ENSORLG00000008215","ENSORLG00000008243","ENSORLG00000008354","ENSORLG00000022154","ENSORLG00000008414","ENSORLG00000008529","ENSORLG00000008553","ENSORLG00000008553","ENSORLG00000008566","ENSORLG00000024583","ENSORLG00000008583","ENSORLG00000008619","ENSORLG00000008634","ENSORLG00000008746","ENSORLG00000008771","ENSORLG00000008816","ENSORLG00000008886","ENSORLG00000008899","ENSORLG00000008928","ENSORLG00000009011","ENSORLG00000027801","ENSORLG00000009133","ENSORLG00000009256","ENSORLG00000009302","ENSORLG00000009318","ENSORLG00000028024","ENSORLG00000009326","ENSORLG00000009390","ENSORLG00000009448","ENSORLG00000009456","ENSORLG00000009505","ENSORLG00000009542","ENSORLG00000009553","ENSORLG00000009635","ENSORLG00000023512","ENSORLG00000026461","ENSORLG00000009737","ENSORLG00000009791","ENSORLG00000009814","ENSORLG00000009859","ENSORLG00000009918","ENSORLG00000009928","ENSORLG00000029310","ENSORLG00000010005","ENSORLG00000010058","ENSORLG00000010140","ENSORLG00000010186","ENSORLG00000010208","ENSORLG00000010240","ENSORLG00000010439","ENSORLG00000010460","ENSORLG00000010499","ENSORLG00000010550","ENSORLG00000010574","ENSORLG00000010606","ENSORLG00000010662","ENSORLG00000010717","ENSORLG00000010757","ENSORLG00000010863","ENSORLG00000010893","ENSORLG00000010915","ENSORLG00000010915","ENSORLG00000010960","ENSORLG00000010987","ENSORLG00000010987","ENSORLG00000011020","ENSORLG00000011047","ENSORLG00000011055","ENSORLG00000011067","ENSORLG00000011080","ENSORLG00000011092","ENSORLG00000030304","ENSORLG00000011210","ENSORLG00000011263","ENSORLG00000025042","ENSORLG00000011272","ENSORLG00000011299","ENSORLG00000011318","ENSORLG00000011334","ENSORLG00000011355","ENSORLG00000011367","ENSORLG00000011429","ENSORLG00000011484","ENSORLG00000024160","ENSORLG00000011493","ENSORLG00000011543","ENSORLG00000011615","ENSORLG00000011615","ENSORLG00000011681","ENSORLG00000026429","ENSORLG00000023930","ENSORLG00000028486","ENSORLG00000011703","ENSORLG00000029352","ENSORLG00000029352","ENSORLG00000011716","ENSORLG00000011741","ENSORLG00000011778","ENSORLG00000011802","ENSORLG00000011836","ENSORLG00000011914","ENSORLG00000011925"],["ENSORLT00000009493","ENSORLT00000009528","ENSORLT00000009557","ENSORLT00000037540","ENSORLT00000009591","ENSORLT00000009866","ENSORLT00000009892","ENSORLT00000009935","ENSORLT00000009954","ENSORLT00000010020","ENSORLT00000031728","ENSORLT00000040311","ENSORLT00000010060","ENSORLT00000010163","ENSORLT00000010206","ENSORLT00000010250","ENSORLT00000010258","ENSORLT00000010321","ENSORLT00000010349","ENSORLT00000010498","ENSORLT00000010497","ENSORLT00000010570","ENSORLT00000010711","ENSORLT00000010740","ENSORLT00000010740","ENSORLT00000010754","ENSORLT00000033448","ENSORLT00000034560","ENSORLT00000010815","ENSORLT00000010831","ENSORLT00000033175","ENSORLT00000011018","ENSORLT00000011069","ENSORLT00000011148","ENSORLT00000011164","ENSORLT00000011198","ENSORLT00000011298","ENSORLT00000032278","ENSORLT00000011462","ENSORLT00000011613","ENSORLT00000011670","ENSORLT00000011685","ENSORLT00000034368","ENSORLT00000011692","ENSORLT00000011774","ENSORLT00000011842","ENSORLT00000011850","ENSORLT00000011918","ENSORLT00000011968","ENSORLT00000011975","ENSORLT00000012082","ENSORLT00000034908","ENSORLT00000029593","ENSORLT00000043008","ENSORLT00000012284","ENSORLT00000012317","ENSORLT00000012371","ENSORLT00000012441","ENSORLT00000012457","ENSORLT00000035738","ENSORLT00000012555","ENSORLT00000012618","ENSORLT00000012717","ENSORLT00000012772","ENSORLT00000012806","ENSORLT00000012841","ENSORLT00000013081","ENSORLT00000013110","ENSORLT00000013162","ENSORLT00000013230","ENSORLT00000013260","ENSORLT00000013302","ENSORLT00000013370","ENSORLT00000013435","ENSORLT00000013490","ENSORLT00000013623","ENSORLT00000013666","ENSORLT00000013690","ENSORLT00000013690","ENSORLT00000013746","ENSORLT00000013782","ENSORLT00000013782","ENSORLT00000013824","ENSORLT00000013860","ENSORLT00000013866","ENSORLT00000013881","ENSORLT00000013900","ENSORLT00000013916","ENSORLT00000038422","ENSORLT00000014060","ENSORLT00000014119","ENSORLT00000028239","ENSORLT00000014126","ENSORLT00000014157","ENSORLT00000014164","ENSORLT00000014199","ENSORLT00000014223","ENSORLT00000014236","ENSORLT00000014317","ENSORLT00000014384","ENSORLT00000029620","ENSORLT00000014397","ENSORLT00000034436","ENSORLT00000037176","ENSORLT00000014565","ENSORLT00000014650","ENSORLT00000033605","ENSORLT00000029450","ENSORLT00000041108","ENSORLT00000014671","ENSORLT00000042828","ENSORLT00000042828","ENSORLT00000014686","ENSORLT00000014715","ENSORLT00000014756","ENSORLT00000014786","ENSORLT00000014828","ENSORLT00000014928","ENSORLT00000014940"],["Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript","Transcript"],["missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant,splice_region_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant,splice_region_variant","missense_variant","missense_variant","missense_variant,splice_region_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant,splice_region_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant,splice_region_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant","missense_variant"],["1501","638","1759","869","502","10768","2448","344","3613","1883","1285","2459","1311","2712","1274","537","1587","487","1658","885","2466","1107","1046","677","718","301","204","432","547","521","451","65","434","789","1817","2361","1400","2023","2015","1082","3803","952","150","511","241","90","8","101","3039","668","1155","520","2049","3919","1244","4530","151","1047","632","1637","2686","9611","329","59","185","176","1633","986","753","1905","1830","1643","1252","246","184","1690","95","288","4554","994","2981","7787","1171","1448","940","1809","114","2697","646","312","1027","477","1102","5905","974","1106","2777","646","190","2153","3770","3307","90","437","2849","1894","1934","1886","274","898","196","166","401","1397","1336","1508","940","466","32"],["1501","365","1759","560","502","10732","1591","344","3613","1883","904","2136","611","2712","1036","464","1587","71","1280","608","1909","697","151","677","718","301","204","18","547","9","338","19","49","595","1193","2311","1240","1061","1903","1012","3803","952","150","127","241","7","8","101","3039","668","599","520","1299","3919","1244","4530","151","772","479","691","2333","9611","277","59","31","53","1186","328","674","1415","1586","1643","1252","47","184","861","95","259","4525","116","2795","7601","1171","1448","29","1094","94","2147","646","110","1027","221","1102","5905","158","688","2144","646","38","2125","3770","3307","59","437","2732","1669","1310","1344","274","898","196","166","401","1293","1054","1348","271","466","32"],["501","122","587","187","168","3578","531","115","1205","628","302","712","204","904","346","155","529","24","427","203","637","233","51","226","240","101","68","6","183","3","113","7","17","199","398","771","414","354","635","338","1268","318","50","43","81","3","3","34","1013","223","200","174","433","1307","415","1510","51","258","160","231","778","3204","93","20","11","18","396","110","225","472","529","548","418","16","62","287","32","87","1509","39","932","2534","391","483","10","365","32","716","216","37","343","74","368","1969","53","230","715","216","13","709","1257","1103","20","146","911","557","437","448","92","300","66","56","134","431","352","450","91","156","11"],["I/V","V/G","L/M","A/G","I/V","S/T","I/L","F/S","Q/K","L/P","S/P","I/M","V/A","H/Q","I/L","E/G","D/E","N/I","S/N","L/S","P/S","P/S","S/G","G/E","D/H","K/E","F/L","M/I","I/V","E/D","G/A","T/A","E/Q","V/I","K/I","H/Y","M/L","R/K","M/V","Y/H","S/N","N/H","D/E","S/T","Y/H","S/T","L/P","T/N","M/I","G/A","H/P","C/R","E/D","S/P","K/R","K/N","S/G","N/D","L/W","D/N","S/I","C/Y","S/R","L/Q","V/I","K/I","L/I","V/L","A/G","K/R","A/G","N/T","S/G","P/L","F/I","K/N","P/L","L/I","A/T","E/V","K/R","G/E","N/D","N/I","Q/L","D/V","A/S","S/I","S/G","S/L","G/S","N/S","A/P","C/S","P/L","S/P","A/G","G/R","E/G","A/T","K/T","A/P","I/S","D/A","R/K","S/G","R/Q","R/S","V/L","V/I","K/E","W/R","R/K","K/N","P/A","S/G","P/S","V/I","E/G"],["Atc/Gtc","gTt/gGt","Ctg/Atg","gCc/gGc","Atc/Gtc","Tct/Act","Atc/Ctc","tTt/tCt","Caa/Aaa","cTa/cCa","Tct/Cct","atC/atG","gTt/gCt","caC/caG","Att/Ctt","gAg/gGg","gaC/gaA","aAc/aTc","aGc/aAc","tTa/tCa","Cct/Tct","Cct/Tct","Agt/Ggt","gGa/gAa","Gac/Cac","Aag/Gag","ttT/ttA","atG/atC","Atc/Gtc","gaA/gaC","gGc/gCc","Act/Gct","Gag/Cag","Gtc/Atc","aAa/aTa","Cac/Tac","Atg/Ctg","aGg/aAg","Atg/Gtg","Tac/Cac","aGc/aAc","Aat/Cat","gaC/gaA","Tca/Aca","Tat/Cat","Tct/Act","cTg/cCg","aCc/aAc","atG/atA","gGc/gCc","cAt/cCt","Tgt/Cgt","gaG/gaT","Tcc/Ccc","aAg/aGg","aaA/aaT","Agc/Ggc","Aac/Gac","tTg/tGg","Gac/Aac","aGt/aTt","tGc/tAc","Agc/Cgc","cTa/cAa","Gtt/Att","aAa/aTa","Cta/Ata","Gtc/Ctc","gCc/gGc","aAg/aGg","gCg/gGg","aAc/aCc","Agt/Ggt","cCg/cTg","Ttt/Att","aaG/aaT","cCg/cTg","Cta/Ata","Gca/Aca","gAa/gTa","aAg/aGg","gGa/gAa","Aac/Gac","aAc/aTc","cAa/cTa","gAc/gTc","Gct/Tct","aGc/aTc","Agc/Ggc","tCa/tTa","Ggc/Agc","aAc/aGc","Gct/Cct","Tgt/Agt","cCt/cTt","Tcc/Ccc","gCc/gGc","Gga/Aga","gAg/gGg","Gcc/Acc","aAg/aCg","Gca/Cca","aTt/aGt","gAt/gCt","aGg/aAg","Agc/Ggc","cGa/cAa","agA/agT","Gtt/Ctt","Gtc/Atc","Aag/Gag","Tgg/Agg","aGa/aAa","aaG/aaC","Cct/Gct","Agt/Ggt","Cca/Tca","Gtt/Att","gAg/gGg"],["-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"],["IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=1","IMPACT=MODERATE;STRAND=-1","IMPACT=MODERATE;STRAND=1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Uploaded_variation<\/th>\n      <th>Location<\/th>\n      <th>Allele<\/th>\n      <th>Gene<\/th>\n      <th>Feature<\/th>\n      <th>Feature_type<\/th>\n      <th>Consequence<\/th>\n      <th>cDNA_position<\/th>\n      <th>CDS_position<\/th>\n      <th>Protein_position<\/th>\n      <th>Amino_acids<\/th>\n      <th>Codons<\/th>\n      <th>Existing_variation<\/th>\n      <th>Extra<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</div>
-<p>Our collaborators then combined these results with bulk RNA-seq that they had performed on F<sub>0</sub> <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> individuals, to determine which of these genes are expressed in the unsegmented tail during embryogenesis. This allowed them to reduce to the list to 96 genes, although they were not apparently associated with a specific gene ontology as perhaps expected, given this is a single locus that is potentially driven by just one gene. As with the period intercept phenotype, our collaborators are now in the process of knocking in the <em><span style="     color: #43AA8B !important;">Cab</span></em> allele into <em><span style="     color: #DE3C4B !important;">Kaga</span></em> embryos, and <em>vice versa</em>, to functionally validate these variants.</p>
+<p>We then combined these results with bulk RNA-seq that they had performed on F<sub>0</sub> <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em> individuals, to determine which of these genes are expressed in the unsegmented tail during embryogenesis. This allowed us to reduce to the list to 96 genes, although they were not apparently associated with a specific gene ontology as perhaps expected, given this is a single locus that is potentially driven by just one gene. As with the period intercept phenotype, we are now in the process of knocking in the <em><span style="     color: #43AA8B !important;">Cab</span></em> allele into <em><span style="     color: #DE3C4B !important;">Kaga</span></em> embryos, and <em>vice versa</em>, to functionally validate these variants.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-campenhoutGuidelinesOptimizedGene2019" class="csl-entry" role="doc-biblioentry">
-Campenhout, Claude Van, Pauline Cabochette, Anne-Clémence Veillard, Miklos Laczik, Agnieszka Zelisko-Schmidt, Céline Sabatel, Maxime Dhainaut, Benoit Vanhollebeke, Cyril Gueydan, and Véronique Kruys. <span>“Guidelines for Optimized Gene Knockout Using <span>CRISPR</span>/<span>Cas9</span>.”</span> <em>BioTechniques</em> 66, no. 6 (June 2019): 295–302. <a href="https://doi.org/10.2144/btn-2018-0187">https://doi.org/10.2144/btn-2018-0187</a>.
+Campenhout, Claude Van, Pauline Cabochette, Anne-Clémence Veillard, Miklos Laczik, Agnieszka Zelisko-Schmidt, Céline Sabatel, Maxime Dhainaut, Benoit Vanhollebeke, Cyril Gueydan, and Véronique Kruys. 2019. <span>“Guidelines for Optimized Gene Knockout Using <span>CRISPR</span>/<span>Cas9</span>.”</span> <em>BioTechniques</em> 66 (6): 295–302. <a href="https://doi.org/10.2144/btn-2018-0187">https://doi.org/10.2144/btn-2018-0187</a>.
 </div>
 <div id="ref-gulEvolutionDiversityCadherins2017" class="csl-entry" role="doc-biblioentry">
-Gul, Ismail Sahin, Paco Hulpiau, Yvan Saeys, and Frans van Roy. <span>“Evolution and Diversity of Cadherins and Catenins.”</span> <em>Experimental Cell Research</em>, Cell <span>Sensing</span> and <span>Signaling</span> via <span>Cell-Cell Adhesion</span>, 358, no. 1 (September 1, 2017): 3–9. <a href="https://doi.org/10.1016/j.yexcr.2017.03.001">https://doi.org/10.1016/j.yexcr.2017.03.001</a>.
+Gul, Ismail Sahin, Paco Hulpiau, Yvan Saeys, and Frans van Roy. 2017. <span>“Evolution and Diversity of Cadherins and Catenins.”</span> <em>Experimental Cell Research</em>, Cell <span>Sensing</span> and <span>Signaling</span> via <span>Cell-Cell Adhesion</span>, 358 (1): 3–9. <a href="https://doi.org/10.1016/j.yexcr.2017.03.001">https://doi.org/10.1016/j.yexcr.2017.03.001</a>.
 </div>
 <div id="ref-hitachiPhysicalInteractionTbx62008" class="csl-entry" role="doc-biblioentry">
-Hitachi, Keisuke, Hiroki Danno, Akiko Kondow, Kiyoshi Ohnuma, Hideho Uchiyama, Shoichi Ishiura, Akira Kurisaki, and Makoto Asashima. <span>“Physical Interaction Between <span>Tbx6</span> and Mespb Is Indispensable for the Activation of Bowline Expression During <span>Xenopus</span> Somitogenesis.”</span> <em>Biochemical and Biophysical Research Communications</em> 372, no. 4 (August 8, 2008): 607–12. <a href="https://doi.org/10.1016/j.bbrc.2008.05.083">https://doi.org/10.1016/j.bbrc.2008.05.083</a>.
+Hitachi, Keisuke, Hiroki Danno, Akiko Kondow, Kiyoshi Ohnuma, Hideho Uchiyama, Shoichi Ishiura, Akira Kurisaki, and Makoto Asashima. 2008. <span>“Physical Interaction Between <span>Tbx6</span> and Mespb Is Indispensable for the Activation of Bowline Expression During <span>Xenopus</span> Somitogenesis.”</span> <em>Biochemical and Biophysical Research Communications</em> 372 (4): 607–12. <a href="https://doi.org/10.1016/j.bbrc.2008.05.083">https://doi.org/10.1016/j.bbrc.2008.05.083</a>.
 </div>
 <div id="ref-mclarenEnsemblVariantEffect2016" class="csl-entry" role="doc-biblioentry">
-McLaren, William, Laurent Gil, Sarah E. Hunt, Harpreet Singh Riat, Graham R. S. Ritchie, Anja Thormann, Paul Flicek, and Fiona Cunningham. <span>“The <span>Ensembl Variant Effect Predictor</span>.”</span> <em>Genome Biology</em> 17, no. 1 (June 6, 2016): 122. <a href="https://doi.org/10.1186/s13059-016-0974-4">https://doi.org/10.1186/s13059-016-0974-4</a>.
+McLaren, William, Laurent Gil, Sarah E. Hunt, Harpreet Singh Riat, Graham R. S. Ritchie, Anja Thormann, Paul Flicek, and Fiona Cunningham. 2016. <span>“The <span>Ensembl Variant Effect Predictor</span>.”</span> <em>Genome Biology</em> 17 (1): 122. <a href="https://doi.org/10.1186/s13059-016-0974-4">https://doi.org/10.1186/s13059-016-0974-4</a>.
 </div>
 <div id="ref-rangarajanPCNSNovelProtocadherin2006" class="csl-entry" role="doc-biblioentry">
-Rangarajan, Janaki, Ting Luo, and Thomas D. Sargent. <span>“<span>PCNS</span>: <span>A</span> Novel Protocadherin Required for Cranial Neural Crest Migration and Somite Morphogenesis in <span>Xenopus</span>.”</span> <em>Developmental Biology</em> 295, no. 1 (July 1, 2006): 206–18. <a href="https://doi.org/10.1016/j.ydbio.2006.03.025">https://doi.org/10.1016/j.ydbio.2006.03.025</a>.
+Rangarajan, Janaki, Ting Luo, and Thomas D. Sargent. 2006. <span>“<span>PCNS</span>: <span>A</span> Novel Protocadherin Required for Cranial Neural Crest Migration and Somite Morphogenesis in <span>Xenopus</span>.”</span> <em>Developmental Biology</em> 295 (1): 206–18. <a href="https://doi.org/10.1016/j.ydbio.2006.03.025">https://doi.org/10.1016/j.ydbio.2006.03.025</a>.
 </div>
 <div id="ref-satouAscidianMespGene2004" class="csl-entry" role="doc-biblioentry">
-Satou, Yutaka, Kaoru S. Imai, and Nori Satoh. <span>“The Ascidian <span>Mesp</span> Gene Specifies Heart Precursor Cells.”</span> <em>Development</em> 131, no. 11 (June 1, 2004): 2533–41. <a href="https://doi.org/10.1242/dev.01145">https://doi.org/10.1242/dev.01145</a>.
+Satou, Yutaka, Kaoru S. Imai, and Nori Satoh. 2004. <span>“The Ascidian <span>Mesp</span> Gene Specifies Heart Precursor Cells.”</span> <em>Development</em> 131 (11): 2533–41. <a href="https://doi.org/10.1242/dev.01145">https://doi.org/10.1242/dev.01145</a>.
 </div>
 <div id="ref-yangGCTAToolGenomewide2011" class="csl-entry" role="doc-biblioentry">
-Yang, Jian, S. Hong Lee, Michael E. Goddard, and Peter M. Visscher. <span>“<span>GCTA</span>: <span>A Tool</span> for <span class="nocase">Genome-wide Complex Trait Analysis</span>.”</span> <em>The American Journal of Human Genetics</em> 88, no. 1 (January 7, 2011): 76–82. <a href="https://doi.org/10.1016/j.ajhg.2010.11.011">https://doi.org/10.1016/j.ajhg.2010.11.011</a>.
+Yang, Jian, S. Hong Lee, Michael E. Goddard, and Peter M. Visscher. 2011. <span>“<span>GCTA</span>: <span>A Tool</span> for <span class="nocase">Genome-wide Complex Trait Analysis</span>.”</span> <em>The American Journal of Human Genetics</em> 88 (1): 76–82. <a href="https://doi.org/10.1016/j.ajhg.2010.11.011">https://doi.org/10.1016/j.ajhg.2010.11.011</a>.
 </div>
 </div>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p><a href="#ref-yangGCTAToolGenomewide2011" role="doc-biblioref">Jian Yang et al., <span>“<span>GCTA</span>: <span>A Tool</span> for <span class="nocase">Genome-wide Complex Trait Analysis</span>,”</span> <em>The American Journal of Human Genetics</em> 88, no. 1 (January 7, 2011): 76–82, </a><a href="https://doi.org/10.1016/j.ajhg.2010.11.011" role="doc-biblioref">https://doi.org/10.1016/j.ajhg.2010.11.011</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><a href="#ref-mclarenEnsemblVariantEffect2016" role="doc-biblioref">William McLaren et al., <span>“The <span>Ensembl Variant Effect Predictor</span>,”</span> <em>Genome Biology</em> 17, no. 1 (June 6, 2016): 122, </a><a href="https://doi.org/10.1186/s13059-016-0974-4" role="doc-biblioref">https://doi.org/10.1186/s13059-016-0974-4</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><a href="#ref-campenhoutGuidelinesOptimizedGene2019" role="doc-biblioref">Claude Van Campenhout et al., <span>“Guidelines for Optimized Gene Knockout Using <span>CRISPR</span>/<span>Cas9</span>,”</span> <em>BioTechniques</em> 66, no. 6 (June 2019): 295–302, </a><a href="https://doi.org/10.2144/btn-2018-0187" role="doc-biblioref">https://doi.org/10.2144/btn-2018-0187</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p><a href="#ref-hitachiPhysicalInteractionTbx62008" role="doc-biblioref">Keisuke Hitachi et al., <span>“Physical Interaction Between <span>Tbx6</span> and Mespb Is Indispensable for the Activation of Bowline Expression During <span>Xenopus</span> Somitogenesis,”</span> <em>Biochemical and Biophysical Research Communications</em> 372, no. 4 (August 8, 2008): 607–12, </a><a href="https://doi.org/10.1016/j.bbrc.2008.05.083" role="doc-biblioref">https://doi.org/10.1016/j.bbrc.2008.05.083</a>; <a href="#ref-rangarajanPCNSNovelProtocadherin2006" role="doc-biblioref">Janaki Rangarajan, Ting Luo, and Thomas D. Sargent, <span>“<span>PCNS</span>: <span>A</span> Novel Protocadherin Required for Cranial Neural Crest Migration and Somite Morphogenesis in <span>Xenopus</span>,”</span> <em>Developmental Biology</em> 295, no. 1 (July 1, 2006): 206–18, </a><a href="https://doi.org/10.1016/j.ydbio.2006.03.025" role="doc-biblioref">https://doi.org/10.1016/j.ydbio.2006.03.025</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p><a href="#ref-gulEvolutionDiversityCadherins2017" role="doc-biblioref">Ismail Sahin Gul et al., <span>“Evolution and Diversity of Cadherins and Catenins,”</span> <em>Experimental Cell Research</em>, Cell <span>Sensing</span> and <span>Signaling</span> via <span>Cell-Cell Adhesion</span>, 358, no. 1 (September 1, 2017): 3–9, </a><a href="https://doi.org/10.1016/j.yexcr.2017.03.001" role="doc-biblioref">https://doi.org/10.1016/j.yexcr.2017.03.001</a>; <a href="#ref-satouAscidianMespGene2004" role="doc-biblioref">Yutaka Satou, Kaoru S. Imai, and Nori Satoh, <span>“The Ascidian <span>Mesp</span> Gene Specifies Heart Precursor Cells,”</span> <em>Development</em> 131, no. 11 (June 1, 2004): 2533–41, </a><a href="https://doi.org/10.1242/dev.01145" role="doc-biblioref">https://doi.org/10.1242/dev.01145</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p><a href="#ref-campenhoutGuidelinesOptimizedGene2019" role="doc-biblioref">Campenhout et al., <span>“Guidelines for Optimized Gene Knockout Using <span>CRISPR</span>/<span>Cas9</span>”</span></a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p><a href="#ref-mclarenEnsemblVariantEffect2016" role="doc-biblioref">McLaren et al., <span>“The <span>Ensembl Variant Effect Predictor</span>”</span></a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->

@@ -9,7 +9,6 @@ book:
   author: "Ian Brettell"
   date: today
   date-format: "D MMMM YYYY"
-  #csl: chicago-fullnote-bibliography.csl
   #number-sections: true
   search: true
   repo-url: https://github.com/brettellebi/somites
@@ -35,5 +34,5 @@ format:
     bibliography: book.bib
     linkcolor: "#3C1642"
     code-fold: true
-    csl: chicago-fullnote-bibliography.csl
+    #csl: chicago-fullnote-bibliography.csl
     #backgroundcolor: "#3C1642"

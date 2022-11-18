@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
@@ -79,6 +142,16 @@ div.csl-indent {
     "search-submit-button-title": "Submit"
   }
 }</script>
+
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="site_libs/datatables-binding-0.26/datatables.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="site_libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="site_libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="site_libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -161,7 +234,15 @@ div.csl-indent {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#alignment-and-estimation-of-crossover-events-per-chromosome" id="toc-alignment-and-estimation-of-crossover-events-per-chromosome" class="nav-link active" data-scroll-target="#alignment-and-estimation-of-crossover-events-per-chromosome"><span class="toc-section-number">5.1</span>  Alignment and estimation of crossover events per chromosome</a></li>
+  <li><a href="#hmm-for-calling-recombination-blocks" id="toc-hmm-for-calling-recombination-blocks" class="nav-link" data-scroll-target="#hmm-for-calling-recombination-blocks"><span class="toc-section-number">5.2</span>  HMM for calling recombination blocks</a></li>
+  <li><a href="#recombination-blocks" id="toc-recombination-blocks" class="nav-link" data-scroll-target="#recombination-blocks"><span class="toc-section-number">5.3</span>  Recombination blocks</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/brettellebi/somites/edit/master/book/05-F2-genotyping.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -183,83 +264,254 @@ div.csl-indent {
 
 </header>
 
-<p>To maximise the efficiency of our sequencing runs, our collaborators “shallow-sequenced” the F<sub>2</sub> generation with the short-read Illumina platform at a depth of ~1x. I then aligned these sequences to the <em>HdrR</em> reference with <em>BWA-MEM2</em>,<span class="citation" data-cites="vasimuddinEfficientArchitectureawareAcceleration2019"><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></span> sorted the reads and marked duplicates with <em>Picard</em>,<span class="citation" data-cites="Picard2019toolkit"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span> then indexed the resulting BAM files with <em>SAMtools</em>.<span class="citation" data-cites="danecekTwelveYearsSAMtools2021"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></span> Genotyping these shallow sequences with the same method as used for the high-coverage sequences for the F<sub>0</sub> and F<sub>1</sub> generation would be inappropriate. We therefore used a different method whereby we used <em>bam-readcount</em><span class="citation" data-cites="khannaBamreadcountRapidGeneration2022"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></span> to count the reads that supported either the <em><span style="     color: #43AA8B !important;">Cab</span></em> or the <em><span style="     color: #DE3C4B !important;">Kaga</span></em> allele for all SNPs that met the criteria described above in section @f1-heterozygosity above, summed the read counts within 5 kb blocks, and calculated the frequency of reads within each bin that supported the <em><span style="     color: #DE3C4B !important;">Kaga</span></em> allele. This generated a value for each bin between 0 and 1, where 0 signified that all reads within that bin supported the <em><span style="     color: #43AA8B !important;">Cab</span></em> allele, and 1 signified that all reads within that bin supported the <em><span style="     color: #DE3C4B !important;">Kaga</span></em> allele. Bins containing no reads were imputed with a value of 0.5.</p>
-<p>I then used these values for all F<sub>2</sub> individuals as the input to a Hidden Markov Model (HMM) with the software package <em>hmmlearn</em>,<span class="citation" data-cites="HmmlearnHmmlearn2022"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span> which I applied to classify each bin as one of three states, with state 0 corresponding to homozygous-<em><span style="     color: #43AA8B !important;">Cab</span></em>, 1 corresponding to heterozygous, and 2 corresponding to homozygous-<em><span style="     color: #DE3C4B !important;">Kaga</span></em>. Across each chromosome of every sample, the output of the HMM was expected to produce a sequence of states. Based on previous biological knowledge that crossover events occur on average less than once per chromosome<span class="citation" data-cites="haenelMetaanalysisChromosomescaleCrossover2018"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span> (see <strong><a href="#fig-zebrafish-co-per-chrom">Figure&nbsp;<span>5.1</span></a></strong> for the average crossover rates per chromosome in zebrafish), I expected to observe the same state persisting for long stretches of the chromosome, only changing to another state between 0 and 3 times, and rarely more. To achieve this, I adjusted the HMM’s transition probabilities to be extremely low, and the Gaussian emission probabilities for each state to have a variance of 0.8, which resulted in long “blocks” of the same genotype call across the chromosome with only a small number of average transitions (i.e.&nbsp;crossover events) per chromosome.</p>
+<section id="alignment-and-estimation-of-crossover-events-per-chromosome" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="alignment-and-estimation-of-crossover-events-per-chromosome"><span class="header-section-number">5.1</span> Alignment and estimation of crossover events per chromosome</h2>
+<p>To maximise the efficiency of our sequencing runs, we “shallow-sequenced” the F<sub>2</sub> generation with the short-read Illumina platform at a depth of ~1x. We then aligned these sequences to the <em>HdrR</em> reference with <em>BWA-MEM2</em> <span class="citation" data-cites="vasimuddinEfficientArchitectureawareAcceleration2019">(<a href="07-references.html#ref-vasimuddinEfficientArchitectureawareAcceleration2019" role="doc-biblioref">Vasimuddin et al. 2019</a>)</span>, sorted the reads and marked duplicates with <em>Picard</em> <span class="citation" data-cites="Picard2019toolkit">(<a href="07-references.html#ref-Picard2019toolkit" role="doc-biblioref"><span>“Picard Toolkit”</span> 2019</a>)</span>, then indexed the resulting BAM files with <em>SAMtools</em> <span class="citation" data-cites="danecekTwelveYearsSAMtools2021">(<a href="07-references.html#ref-danecekTwelveYearsSAMtools2021" role="doc-biblioref">Danecek et al. 2021</a>)</span>. The Snakemake module used to map the sequences to the reference is set out <a href="https://github.com/brettellebi/somites/blob/master/workflow/rules/05_1_F2_mapping.smk">here</a>.</p>
+<p>Genotyping these shallow sequences with the same method as used for the high-coverage sequences for the F<sub>0</sub> and F<sub>1</sub> generation would be inappropriate. We therefore used a different method whereby we used <em>bam-readcount</em> <span class="citation" data-cites="khannaBamreadcountRapidGeneration2022">(<a href="07-references.html#ref-khannaBamreadcountRapidGeneration2022" role="doc-biblioref">Khanna et al. 2022</a>)</span> to count the reads that supported either the <em><span style="     color: #43AA8B !important;">Cab</span></em> or the <em><span style="     color: #DE3C4B !important;">Kaga</span></em> allele for all SNPs that met the criteria described above in <a href="04-F1-heterozygosity.html"><span>Chapter&nbsp;4</span></a>, summed the read counts within 5 kb blocks, and calculated the frequency of reads within each bin that supported the <em><span style="     color: #DE3C4B !important;">Kaga</span></em> allele. This generated a value for each bin between 0 and 1, where 0 signified that all reads within that bin supported the <em><span style="     color: #43AA8B !important;">Cab</span></em> allele, and 1 signified that all reads within that bin supported the <em><span style="     color: #DE3C4B !important;">Kaga</span></em> allele. Bins containing no reads were imputed with a value of 0.5.</p>
+</section>
+<section id="hmm-for-calling-recombination-blocks" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="hmm-for-calling-recombination-blocks"><span class="header-section-number">5.2</span> HMM for calling recombination blocks</h2>
+<p>We then used these values for all F<sub>2</sub> individuals as the input to a Hidden Markov Model (HMM) with the software package <em>hmmlearn</em> <span class="citation" data-cites="HmmlearnHmmlearn2022">(<a href="07-references.html#ref-HmmlearnHmmlearn2022" role="doc-biblioref"><em>Hmmlearn/Hmmlearn</em> [2014] 2022</a>)</span>, which we applied to classify each bin as one of three states, with state 0 corresponding to homozygous-<em><span style="     color: #43AA8B !important;">Cab</span></em>, 1 corresponding to heterozygous, and 2 corresponding to homozygous-<em><span style="     color: #DE3C4B !important;">Kaga</span></em>. Across each chromosome of every sample, the output of the HMM was expected to produce a sequence of states. Based on previous biological knowledge that crossover events occur on average less than once per chromosome <span class="citation" data-cites="haenelMetaanalysisChromosomescaleCrossover2018">(<a href="07-references.html#ref-haenelMetaanalysisChromosomescaleCrossover2018" role="doc-biblioref">Haenel et al. 2018</a>)</span> (see <strong><a href="#fig-zebrafish-co-per-chrom">Figure&nbsp;<span>5.1</span></a></strong> for the average crossover rates per chromosome in zebrafish), we expected to observe the same state persisting for long stretches of the chromosome, only changing to another state between 0 and 3 times, and rarely more. To achieve this, we adjusted the HMM’s transition probabilities to be extremely low, and the Gaussian emission probabilities for each state to have a variance of 0.8, which resulted in long “blocks” of the same genotype call across the chromosome with only a small number of average transitions (i.e.&nbsp;crossover events) per chromosome. The Snakemake module used to call recombination blocks in the F<sub>2</sub> generation is set out <a href="https://github.com/brettellebi/somites/blob/master/workflow/rules/05_2_F2_calling.smk">here</a>.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which species have a genome length of nearly 800 Mb?</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#readr::read_tsv(here::here("results/haenel_2018_S4.txt"),</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                       comment = "#") %&gt;% </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  dplyr::group_by(Species) %&gt;% </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  dplyr::summarise(TOT_LEN = sum(Physical.map.length.Mb)) %&gt;% </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  dplyr::arrange(desc(TOT_LEN))</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Cyprinus carpio (common carp) has a total genome length of 847.66 Mb (similar to 800 Mb in medaka)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"results/haenel_2018_S4.txt"</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">comment =</span> <span class="st">"#"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Danio.renio"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Species =</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(Species,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Cyprinus.carpio"</span> <span class="ot">=</span> <span class="st">"common carp"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Homo.sapiens"</span> <span class="ot">=</span> <span class="st">"human"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Danio.renio"</span> <span class="ot">=</span> <span class="st">"zebrafish"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Chromosome =</span> Chromosome <span class="sc">%&gt;%</span> stringr<span class="sc">::</span><span class="fu">str_remove</span>(<span class="st">"Chr"</span>),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">Chromosome =</span> Chromosome <span class="sc">%&gt;%</span> </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.numeric</span>(.) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">factor</span>(., <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="st">"crossovers per chromosome"</span> <span class="ot">=</span> Crossover.rate <span class="sc">*</span> Physical.map.length.Mb <span class="sc">/</span> <span class="dv">100</span>) </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Get mean crossovers per chromosome</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>mean_crossovers <span class="ot">=</span> <span class="fu">mean</span>(df<span class="sc">$</span><span class="st">`</span><span class="at">crossovers per chromosome</span><span class="st">`</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(Chromosome, <span class="st">`</span><span class="at">crossovers per chromosome</span><span class="st">`</span>, <span class="at">fill =</span> Chromosome)) <span class="sc">+</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  cowplot<span class="sc">::</span><span class="fu">theme_cowplot</span>() <span class="sc">+</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"chromosome"</span>) <span class="sc">+</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zebrafish"</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"mean: "</span>, mean_crossovers, <span class="at">sep =</span> <span class="st">""</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div id="fig-zebrafish-co-per-chrom" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="05-F2-genotyping_files/figure-html/fig-zebrafish-co-per-chrom-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.1: Crossovers per chromosome based on data provided in <span class="citation" data-cites="haenelMetaanalysisChromosomescaleCrossover2018">Haenel et al.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></span>, where “crossovers per chromosome” for each chromosome <span class="math inline">\(c\)</span> was calculated by <span class="math inline">\(\frac{crossover~rate_{c}(cM / Mb) \times length_{c}(Mb)} {100}\)</span>. The medaka genome is shorter in length than the zebrafish genome (~800 Mb compared to ~1,300 Mb), which according to the authors would suggest that medaka likely has a higher average crossover rate than what is presented in this figure.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.1: Crossovers per chromosome based on data provided in file S4 of <span class="citation" data-cites="haenelMetaanalysisChromosomescaleCrossover2018">Haenel et al. (<a href="07-references.html#ref-haenelMetaanalysisChromosomescaleCrossover2018" role="doc-biblioref">2018</a>)</span>, where “crossovers per chromosome” for each chromosome <span class="math inline">\(c\)</span> was calculated by <span class="math inline">\(\frac{crossover~rate_{c}(cM / Mb) \times length_{c}(Mb)} {100}\)</span>. The medaka genome is shorter in length than the zebrafish genome (~800 Mb compared to ~1,300 Mb), which according to the authors would suggest that medaka likely has a higher average crossover rate than what is presented in this figure.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong><a href="#fig-hmm-scat">Figure&nbsp;<span>5.2</span></a></strong> shows how adjusting the HMM parameters changed the called genotypes for 10 F<sub>2</sub> samples on chromosome 18, by way of an example. Allowing the HMM to train itself for the transition probabilities and emission variances, the HMM produced an apparently noisy output (A). Fixing the transition probabilities to make it very likely for a state to transition back to itself rather than to another state did not appear to change the output (B). However, increasing the Gaussian emission variances created the “blocks” that I expected, and the higher the emission variances, the “tighter” the blocks (C-F).</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set variables</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>IN <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/A.csv"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/B.csv"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/D.csv"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/C.csv"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/F.csv"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn/None/5000/G.csv"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">###################</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Extra variables</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="do">###################</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot only chr 18 as an example</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>TARGET_CHROM <span class="ot">=</span> <span class="dv">18</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>BIN_LENGTH <span class="ot">=</span> <span class="dv">5000</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>states <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>pal_hom_het_2 <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"#43AA8B"</span>, <span class="st">"#000022"</span>, <span class="st">"#DE3C4B"</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pal_hom_het_2) <span class="ot">=</span> states</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Set recode vector</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>recode_vec <span class="ot">=</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">0</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Homozygous Cab"</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Heterozygous"</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Homozygous Kaga"</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="do">######################</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Function for titles</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="do">######################</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>get_titles <span class="ot">=</span> <span class="cf">function</span>(MOD){</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (MOD <span class="sc">==</span> <span class="st">"A"</span>){</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    mod <span class="ot">=</span> <span class="st">"Standard HMM"</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (MOD <span class="sc">==</span> <span class="st">"B"</span>){</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    mod <span class="ot">=</span> <span class="st">"Fixed transition probabilities"</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (MOD <span class="sc">==</span> <span class="st">"C"</span>){</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    mod <span class="ot">=</span> <span class="st">"Fixed transition probabilities</span><span class="sc">\n</span><span class="st">Emission variances of 0.33"</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (MOD <span class="sc">==</span> <span class="st">"D"</span>){</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    mod <span class="ot">=</span> <span class="st">"Fixed transition probabilities</span><span class="sc">\n</span><span class="st">Emission variances of 0.01"</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (MOD <span class="sc">==</span> <span class="st">"E"</span>){</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    mod <span class="ot">=</span> <span class="st">"Error states (0.15 prob of entering error state)</span><span class="sc">\n</span><span class="st">Variances: 0.2 for true state, 1 for error state"</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (MOD <span class="sc">==</span> <span class="st">"F"</span>){</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    mod <span class="ot">=</span> <span class="st">"Fixed transition probabilities</span><span class="sc">\n</span><span class="st">Emission variances of 0.8"</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (MOD <span class="sc">==</span> <span class="st">"G"</span>){</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    mod <span class="ot">=</span> <span class="st">"Fixed transition probabilities</span><span class="sc">\n</span><span class="st">Emission variances of 1"</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(mod)</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="do">###################</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="do">###################</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>dat_list <span class="ot">=</span> purrr<span class="sc">::</span><span class="fu">map</span>(IN, <span class="cf">function</span>(DF){</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  DF <span class="sc">%&gt;%</span> </span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    readr<span class="sc">::</span><span class="fu">read_csv</span>(., <span class="at">col_types =</span> <span class="st">"iiiiiidi"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add key variables</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">BIN_START =</span> (BIN <span class="sc">*</span> BIN_LENGTH) <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>                  <span class="at">BIN_END =</span> ((BIN <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">*</span> BIN_LENGTH)) </span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Set names</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dat_list) <span class="ot">=</span> <span class="fu">unlist</span>(IN) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">basename</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_remove</span>(<span class="st">".csv"</span>)</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in total medaka genome count</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="do">## Get chromosome lengths</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>med_chr_lens <span class="ot">=</span> <span class="fu">read.table</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/Oryzias_latipes.ASM223467v1.dna.toplevel.fa_chr_counts.txt"</span>),</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"chr"</span>, <span class="st">"end"</span>))</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="do">## Add start</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>med_chr_lens<span class="sc">$</span>start <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="do">## Reorder</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>med_chr_lens <span class="ot">=</span> med_chr_lens <span class="sc">%&gt;%</span> </span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(chr, start, end) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove MT</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(chr <span class="sc">!=</span> <span class="st">"MT"</span>)</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="do">## Total HdrR sequence length</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>total_hdrr_bases <span class="ot">=</span> <span class="fu">sum</span>(med_chr_lens<span class="sc">$</span>end)</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="do">###################</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="do">###################</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Make list of plots</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>counter <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>fig_list <span class="ot">=</span> purrr<span class="sc">::</span><span class="fu">map</span>(dat_list, <span class="cf">function</span>(DF){</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>  counter <span class="ot">&lt;&lt;-</span> counter <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get title</span></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>  mod <span class="ot">=</span> <span class="fu">get_titles</span>(<span class="fu">names</span>(dat_list)[counter])</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>  scatter <span class="ot">=</span> DF <span class="sc">%&gt;%</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get Mb</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">BIN_MB =</span> BIN_START<span class="sc">/</span><span class="fl">1e6</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(CHROM <span class="sc">==</span> TARGET_CHROM) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">STATE =</span> <span class="fu">factor</span>(STATE, <span class="at">levels =</span> states)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(BIN_MB, PROP_KAGA, <span class="at">colour =</span> STATE),</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal_hom_het_2) <span class="sc">+</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(SAMPLE)) <span class="sc">+</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>    cowplot<span class="sc">::</span><span class="fu">theme_cowplot</span>(<span class="at">rel_large =</span> <span class="dv">13</span><span class="sc">/</span><span class="dv">14</span>,</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>                           <span class="at">rel_small =</span> <span class="dv">11</span><span class="sc">/</span><span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(mod) <span class="sc">+</span></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"bin start (Mb)"</span>) <span class="sc">+</span> </span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"frequency of SNPs within bin</span><span class="sc">\n</span><span class="st">that align with the Kaga allele"</span>)</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="co"># Compile</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>legend <span class="ot">=</span> cowplot<span class="sc">::</span><span class="fu">get_legend</span>(fig_list[[<span class="dv">1</span>]] <span class="sc">+</span> </span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"HMM state"</span>)))</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>out <span class="ot">=</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fig_list[[<span class="dv">1</span>]] <span class="sc">+</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">'none'</span>,</span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()),</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>                          fig_list[[<span class="dv">2</span>]] <span class="sc">+</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">'none'</span>) <span class="sc">+</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()),</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>                          fig_list[[<span class="dv">3</span>]]  <span class="sc">+</span></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">'none'</span>),</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>                          fig_list[[<span class="dv">4</span>]]  <span class="sc">+</span></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">'none'</span>) <span class="sc">+</span></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()),</span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>                          fig_list[[<span class="dv">5</span>]]  <span class="sc">+</span></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">'none'</span>,</span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()),</span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>                          fig_list[[<span class="dv">6</span>]]  <span class="sc">+</span></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">'none'</span>) <span class="sc">+</span></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()),</span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>                          <span class="at">align =</span> <span class="st">"hv"</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">axis =</span> <span class="st">"tblr"</span>,</span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>, <span class="st">"F"</span>),</span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label_size =</span> <span class="dv">16</span>)</span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a><span class="co"># Add legend</span></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>out <span class="ot">=</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(out,</span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>                         cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(<span class="cn">NULL</span>, legend, <span class="cn">NULL</span>, <span class="at">ncol =</span> <span class="dv">1</span>),</span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>                         <span class="at">rel_widths=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.2</span>))</span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div id="fig-hmm-scat" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="plots/thesis/scatter_collage.png" class="img-fluid figure-img" width="2400"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.2: HMM states called for each bin across chr18 for 10 F<sub>2</sub> samples, to illustrate the effect of changing the HMM’s transition probabilities and emission variances. States 0, 1, and 2 correspond to homozygous <em>Cab</em>, heterozygous, and homozygous <em>Kaga</em>. Each point represents a 5-kb bin. Y-axis is the proportion of reads within each bin that align to the <em>Kaga</em> allele. X-axis is the bp location of the start of each bin. <strong>A</strong>: Standard HMM with all model parameters trained on the data. <strong>B</strong>. HMM with fixed transition probabilities of 0 <span class="math inline">\(\rightarrow\)</span> 0 or 1 <span class="math inline">\(\rightarrow\)</span> 1 or 2 <span class="math inline">\(\rightarrow\)</span> 2 = 0.999; 0 <span class="math inline">\(\rightarrow\)</span> 1 or 2 <span class="math inline">\(\rightarrow\)</span> 1 = 0.00066; 0 <span class="math inline">\(\rightarrow\)</span> 2 or 2 <span class="math inline">\(\rightarrow\)</span> 0 = 0.000333; 1 <span class="math inline">\(\rightarrow\)</span> 0 or 1 <span class="math inline">\(\rightarrow\)</span> 2 = 0.0005. <strong>C</strong>-<strong>F</strong> retain those transition probabilities but with different fixed emission variances of 0.01 (<strong>C</strong>), 0.33 (<strong>D</strong>), 0.8 (<strong>E</strong>), and 1 (<strong>F</strong>).</figcaption><p></p>
+<p><img src="05-F2-genotyping_files/figure-html/fig-hmm-scat-1.png" class="img-fluid figure-img" width="1152"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.2: HMM states called for each bin across chr18 for 10 F<sub>2</sub> samples, to illustrate the effect of changing the HMM’s transition probabilities and emission variances. States 0, 1, and 2 correspond to homozygous <em>Cab</em>, heterozygous, and homozygous <em>Kaga</em>. Each point represents a 5-kb bin. Y-axis is the proportion of reads within each bin that align to the <em>Kaga</em> allele. X-axis is the bp location of the start of each bin. <strong>A</strong>: Standard HMM with all model parameters trained on the data. <strong>B</strong>. HMM with fixed transition probabilities of 0 <span class="math inline">\(\rightarrow\)</span> 0 or 1 <span class="math inline">\(\rightarrow\)</span> 1 or 2 <span class="math inline">\(\rightarrow\)</span> 2 = 0.999; 0 <span class="math inline">\(\rightarrow\)</span> 1 or 2 <span class="math inline">\(\rightarrow\)</span> 1 = 0.00066; 0 <span class="math inline">\(\rightarrow\)</span> 2 or 2 <span class="math inline">\(\rightarrow\)</span> 0 = 0.000333; 1 <span class="math inline">\(\rightarrow\)</span> 0 or 1 <span class="math inline">\(\rightarrow\)</span> 2 = 0.0005. <strong>C</strong>-<strong>F</strong> retain those transition probabilities but with different fixed emission variances of 0.01 (<strong>C</strong>), 0.33 (<strong>D</strong>), 0.8 (<strong>E</strong>), and 1 (<strong>F</strong>). Code adapted from <code>rule compile_scatters_thesis</code> in <a href="https://github.com/brettellebi/somites/blob/master/workflow/rules/08_extra.smk">https://github.com/brettellebi/somites/blob/master/workflow/rules/08_extra.smk</a>.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>I used these genotype-block calls to generate the recombination karyoplot shown in <strong><a href="#fig-karyo-wi-missing">Figure&nbsp;<span>5.3</span></a></strong>, with homozygous-<em><span style="     color: #43AA8B !important;">Cab</span></em> blocks in green, heterozoygous blocks in navy blue, and homozygous <em><span style="     color: #DE3C4B !important;">Kaga</span></em> blocks in red. Missing calls are blank, where the vertical blank lines indicate that the region could not be called for any F<sub>2</sub> individuals, likely due to an insufficient number of informative SNPs residing in those 5-kb blocks; and horizontal blank lines indicate that the sample could not be called, likely due to low sequencing coverage for that sample.</p>
+</section>
+<section id="recombination-blocks" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="recombination-blocks"><span class="header-section-number">5.3</span> Recombination blocks</h2>
+<p>We used these genotype-block calls to generate the recombination karyoplot shown in <strong><a href="#fig-karyo-wi-missing">Figure&nbsp;<span>5.3</span></a></strong>, with homozygous-<em><span style="     color: #43AA8B !important;">Cab</span></em> blocks in green, heterozoygous blocks in navy blue, and homozygous <em><span style="     color: #DE3C4B !important;">Kaga</span></em> blocks in red. Missing calls are blank, where the vertical blank lines indicate that the region could not be called for any F<sub>2</sub> individuals, likely due to an insufficient number of informative SNPs residing in those 5-kb blocks; and horizontal blank lines indicate that the sample could not be called, likely due to low sequencing coverage for that sample.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-karyo-wi-missing" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="plots/karyoplots_cropped/karyoplot_wi_missing_cropped.png" class="img-fluid figure-img" width="3622"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.3: Recombination blocks in 622 F<sub>2</sub> samples based on the ratio of reads mapping to either the <em>Cab</em> or <em>Kaga</em> allele within 5-kb bins, with homozygous-<em>Cab</em> blocks in green, heterozoygous blocks in navy blue, and homozygous <em>Kaga</em> blocks in red. Most blocks show 0-2 crossover events, as expected, with some regions showing higher numbers of crossovers interpreted as noise. Unfilled regions are those with no state called by the HMM due to a lack of reads mapping to SNPs within those 5-kb bins.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.3: Recombination blocks in 622 F<sub>2</sub> samples based on the ratio of reads mapping to either the <em>Cab</em> or <em>Kaga</em> allele within 5-kb bins, with homozygous-<em>Cab</em> blocks in green, heterozoygous blocks in navy blue, and homozygous <em>Kaga</em> blocks in red. Most blocks show 0-2 crossover events, as expected, with some regions showing higher numbers of crossovers interpreted as noise. Unfilled regions are those with no state called by the HMM due to a lack of reads mapping to SNPs within those 5-kb bins. Code set out in <code>rule plot_true_hmmlearn</code> in <a href="https://github.com/brettellebi/somites/blob/master/workflow/rules/05_2_F2_calling.smk">https://github.com/brettellebi/somites/blob/master/workflow/rules/05_2_F2_calling.smk</a>.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>In the downstream analysis, I excluded the 22 samples that showed poor coverage across the genome. For the remaining samples, I “filled” the bins with missing genotypes based on the call of the previous called bin, or if unavailable (e.g.&nbsp;the missing bin was at the start of the chromosome), then the next called bin (<strong><a href="#fig-karyo-no-missing">Figure&nbsp;<span>5.4</span></a></strong>); note that this figure retains the low-coverage samples (horizontal blank lines) that were excluded from further analysis to allow for a direct comparison with <strong><a href="#fig-karyo-wi-missing">Figure&nbsp;<span>5.3</span></a></strong>. I used these filled genotype calls for the association tests described below in section <strong><span class="citation" data-cites="somite-assoc-tests"><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></span></strong>. As a rough way to estimate the accuracy of this genotyping method, we checked the genotypes called by the HMM for the reporter region on chr16 ~28.7Mb against our collaborators’ manual recording of reporter gene counts based on the intensity of the <em>Her7</em>-Venus reporter’s fluorescence. The confusion matrix is set out in <strong><a href="#tbl-reporter-conc">Table&nbsp;<span>5.1</span></a></strong>, showing that 83% of genotypes called by the HMM were consistent with the reporter genotypes as inferred from fluorescence brightness.</p>
+<p>In the downstream analysis, we excluded the 22 samples that showed poor coverage across the genome. For the remaining samples, I “filled” the bins with missing genotypes based on the call of the previous called bin, or if unavailable (e.g.&nbsp;the missing bin was at the start of the chromosome), then the next called bin (<strong><a href="#fig-karyo-no-missing">Figure&nbsp;<span>5.4</span></a></strong>); note that this figure retains the low-coverage samples (horizontal blank lines) that were excluded from further analysis to allow for a direct comparison with <strong><a href="#fig-karyo-wi-missing">Figure&nbsp;<span>5.3</span></a></strong>. I used these filled genotype calls for the association tests described below in <a href="06-GWAS.html"><span>Chapter&nbsp;6</span></a>. As a rough way to estimate the accuracy of this genotyping method, we checked the genotypes called by the HMM for the reporter region on chr16 ~28.7Mb against our collaborators’ manual recording of reporter gene counts based on the intensity of the <em>Her7</em>-Venus reporter’s fluorescence. The confusion matrix below shows that 83% of genotypes called by the HMM were consistent with the reporter genotypes as inferred from fluorescence brightness.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="tbl-reporter-conc" class="anchored">
 
-<table><caption>Table&nbsp;5.1:  Confusion matrix for reporter genotype as called by the HMM, and as inferred from the fluorescence brightness. </caption>
- <thead>
-  <tr>
-   <th style="text-align:right;"> HMM state </th>
-   <th style="text-align:right;"> Reporter phenotype </th>
-   <th style="text-align:right;"> Count </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 252 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 91 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 9 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 245 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
+<div id="htmlwidget-a20c66122e82b18d7d3f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a20c66122e82b18d7d3f">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5"],[0,0,1,1,2],[0,1,0,1,1],[252,91,9,245,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>HMM state<\/th>\n      <th>Reporter phenotype<\/th>\n      <th>Count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>These karyoplots show interesting recombination patterns for several chromosomes. Given the F<sub>2</sub> individuals were selected for the reporter gene on chr16, as expected, there appears to be a strong strong skew towards those genotypes across the whole chromosome. On chr3, most samples are homozygous-<em><span style="     color: #43AA8B !important;">Cab</span></em> for the second half of the chromosome, with a consistent breakpoint around ~22 Mb. However, the final fifth of samples which show a different recombination pattern. The samples are sorted based on the order that they were phenotyped and sequenced, so this difference could have been caused by their being generated from different F<sub>1</sub> individuals with distinct haplotypes.</p>
@@ -268,18 +520,148 @@ div.csl-indent {
 <div id="fig-karyo-no-missing" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="plots/karyoplots_cropped/karyoplot_no_missing_cropped.png" class="img-fluid figure-img" width="3618"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.4: Recombination blocks in 622 F<sub>2</sub> samples based on the ratio of reads mapping to either the <em>Cab</em> or <em>Kaga</em> allele within 5-kb bins, with homozygous-<em>Cab</em> blocks in green, heterozoygous blocks in navy blue, and homozygous <em>Kaga</em> blocks in red. Most blocks show 0-2 crossover events, as expected, with some regions showing higher numbers of crossovers interpreted as noise. Bins with missing genotypes were “filled” based on the call of the previous called bin, or if unavailable (e.g.&nbsp;the missing bin was at the start of the chromosome), then the next called bin.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.4: Recombination blocks in 622 F<sub>2</sub> samples based on the ratio of reads mapping to either the <em>Cab</em> or <em>Kaga</em> allele within 5-kb bins, with homozygous-<em>Cab</em> blocks in green, heterozoygous blocks in navy blue, and homozygous <em>Kaga</em> blocks in red. Most blocks show 0-2 crossover events, as expected, with some regions showing higher numbers of crossovers interpreted as noise. Bins with missing genotypes were “filled” based on the call of the previous called bin, or if unavailable (e.g.&nbsp;the missing bin was at the start of the chromosome), then the next called bin. Code set out in <code>rule plot_true_hmmlearn</code> in <a href="https://github.com/brettellebi/somites/blob/master/workflow/rules/05_2_F2_calling.smk">https://github.com/brettellebi/somites/blob/master/workflow/rules/05_2_F2_calling.smk</a>.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong><a href="#fig-prop-sites-total">Figure&nbsp;<span>5.5</span></a></strong> shows the proportion of 5-kb bins called as either homozygous-<em><span style="     color: #43AA8B !important;">Cab</span></em>, heterozygous, or homozygous-<em><span style="     color: #DE3C4B !important;">Kaga</span></em> within each F<sub>2</sub> sample (points). The ordinary expectation for the ratios would be 0.25, 0.5, and 0.25 respectively. However, we observe a skew towards homozygous-<em><span style="     color: #43AA8B !important;">Cab</span></em> and away from homozygous <em><span style="     color: #DE3C4B !important;">Kaga</span></em>. This was likely caused by the hybrid incompatibility between <em><span style="     color: #43AA8B !important;">Cab</span></em> and <em><span style="     color: #DE3C4B !important;">Kaga</span></em>, given the two strains were derived from populations that are thought to be at the point of speciation.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(karyoploteR)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Get variables</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Debug</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>BIN_LENGTH <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">"5000"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>IN_FILE <span class="ot">=</span> <span class="st">"/hps/nobackup/birney/users/ian/somites/hmm_out/F2/hdrr/hmmlearn_true/None/5000/0.8.csv"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>LOW_COV_SAMPLES <span class="ot">=</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"config/low_cov_samples.list"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>COV <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">"0.8"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>MAX_READS <span class="ot">=</span> <span class="st">"None"</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">######################</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of states</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="do">######################</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>N_STATES <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="do">######################</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Palette and plotting params</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="do">######################</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>pal_hom_het_2 <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"#43AA8B"</span>, <span class="st">"#000022"</span>, <span class="st">"#DE3C4B"</span>, <span class="st">"#FBF5F3"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pal_hom_het_2) <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="st">"UNCLASSIFIED"</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>pal_hom_het_2_lines <span class="ot">=</span> <span class="fu">c</span>(karyoploteR<span class="sc">::</span><span class="fu">darker</span>(pal_hom_het_2[<span class="dv">1</span>], <span class="dv">100</span>),</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>                        karyoploteR<span class="sc">::</span><span class="fu">lighter</span>(pal_hom_het_2[<span class="dv">2</span>], <span class="dv">100</span>),</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>                        karyoploteR<span class="sc">::</span><span class="fu">darker</span>(pal_hom_het_2[<span class="dv">3</span>], <span class="dv">100</span>),</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>                        karyoploteR<span class="sc">::</span><span class="fu">darker</span>(pal_hom_het_2[<span class="dv">4</span>]))</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pal_hom_het_2_lines) <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="st">"UNCLASSIFIED"</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode vector</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>recode_vec <span class="ot">=</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">0</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Homozygous Cab"</span>,</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Heterozygous"</span>,</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Homozygous Kaga"</span>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Set states to loop over</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>states <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span>(N_STATES <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="do">######################</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="do">######################</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(IN_FILE,</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>                     <span class="at">col_types =</span> <span class="st">"iiiiiidi"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add key variables</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">BIN_START =</span> (BIN <span class="sc">*</span> BIN_LENGTH) <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>                <span class="at">BIN_END =</span> ((BIN <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">*</span> BIN_LENGTH)) </span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Get low-coverage samples</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>low_cov_samples <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(LOW_COV_SAMPLES, <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"FID"</span>, <span class="st">"SAMPLE"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(SAMPLE)</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in total medaka genome count</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="do">## Get chromosome lengths</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>med_chr_lens <span class="ot">=</span> <span class="fu">read.table</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/Oryzias_latipes.ASM223467v1.dna.toplevel.fa_chr_counts.txt"</span>),</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"chr"</span>, <span class="st">"end"</span>))</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="do">## Add start</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>med_chr_lens<span class="sc">$</span>start <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="do">## Reorder</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>med_chr_lens <span class="ot">=</span> med_chr_lens <span class="sc">%&gt;%</span> </span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(chr, start, end) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove MT</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(chr <span class="sc">!=</span> <span class="st">"MT"</span>)</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="do">## Total HdrR sequence length</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>total_hdrr_bases <span class="ot">=</span> <span class="fu">sum</span>(med_chr_lens<span class="sc">$</span>end)</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Get number of samples (for setting the height of the Karyoplots)</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>N_SAMPLES <span class="ot">=</span> <span class="fu">unique</span>(df<span class="sc">$</span>SAMPLE) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>()</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="do">#######################</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="co"># Total sites covered by each state</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="do">#######################</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="co"># All sites</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>prop_sites_tot <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get counts of sites per LANE and state</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(SAMPLE, STATE) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>    <span class="co"># spread to one row per LANE</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> SAMPLE, <span class="at">names_from =</span> STATE, <span class="at">values_from =</span> n) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate frequencies of states per LANE</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">TOTAL =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">0</span><span class="st">`</span>, <span class="st">`</span><span class="at">1</span><span class="st">`</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span>),</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>                  <span class="at">FREQ_0 =</span> <span class="st">`</span><span class="at">0</span><span class="st">`</span> <span class="sc">/</span> TOTAL,</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>                  <span class="at">FREQ_1 =</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="sc">/</span> TOTAL,</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>                  <span class="at">FREQ_2 =</span> <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="sc">/</span> TOTAL) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>    <span class="co"># gather</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"FREQ_"</span>),</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_to =</span> <span class="st">"STATE"</span>,</span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_prefix =</span> <span class="st">"FREQ_"</span>,</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>                        <span class="at">values_to =</span> <span class="st">"FREQ"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>    <span class="co"># order STATE and recode with meaning</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">STATE =</span> <span class="fu">factor</span>(STATE, <span class="at">levels =</span> states),</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>                  <span class="at">STATE_RECODE =</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(STATE, <span class="sc">!!!</span>recode_vec)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot</span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(STATE_RECODE, FREQ, <span class="at">colour =</span> STATE, <span class="at">fill =</span> STATE)) <span class="sc">+</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>    ggbeeswarm<span class="sc">::</span><span class="fu">geom_quasirandom</span>(<span class="at">color=</span><span class="st">"#7D8491"</span>, <span class="at">size=</span><span class="fl">0.4</span>, <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal_hom_het_2_lines) <span class="sc">+</span></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> pal_hom_het_2) <span class="sc">+</span></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>, <span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Genotype"</span>) <span class="sc">+</span></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">"Emission (co)variances: "</span>, </span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>                  COV,</span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"</span><span class="sc">\n</span><span class="st">Max reads per bin: "</span>,</span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>                  MAX_READS,</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"</span><span class="sc">\n</span><span class="st">Bin length: "</span>,</span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>                  BIN_LENGTH,</span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep =</span> <span class="st">""</span>))</span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>prop_sites_tot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div id="fig-prop-sites-total" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="plots/hdrr/F1_het_min_DP/hmmlearn_true/None/5000/0.8/prop_sites_total.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.5: Proportions of 5-kb blocks called as either homozygous-<em>Cab</em>, heterozygous, or homozygous-<em>Kaga</em>.</figcaption><p></p>
+<p><img src="05-F2-genotyping_files/figure-html/fig-prop-sites-total-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.5: Proportions of 5-kb blocks called as either homozygous-<em>Cab</em>, heterozygous, or homozygous-<em>Kaga</em>. Code adapted from <code>rule plot_true_hmmlearn</code> in <a href="https://github.com/brettellebi/somites/blob/master/workflow/rules/05_2_F2_calling.smk">https://github.com/brettellebi/somites/blob/master/workflow/rules/05_2_F2_calling.smk</a>.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -288,36 +670,24 @@ div.csl-indent {
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-danecekTwelveYearsSAMtools2021" class="csl-entry" role="doc-biblioentry">
-Danecek, Petr, James K Bonfield, Jennifer Liddle, John Marshall, Valeriu Ohan, Martin O Pollard, Andrew Whitwham, et al. <span>“Twelve Years of <span>SAMtools</span> and <span>BCFtools</span>.”</span> <em>GigaScience</em> 10, no. 2 (February 1, 2021): giab008. <a href="https://doi.org/10.1093/gigascience/giab008">https://doi.org/10.1093/gigascience/giab008</a>.
+Danecek, Petr, James K Bonfield, Jennifer Liddle, John Marshall, Valeriu Ohan, Martin O Pollard, Andrew Whitwham, et al. 2021. <span>“Twelve Years of <span>SAMtools</span> and <span>BCFtools</span>.”</span> <em>GigaScience</em> 10 (2): giab008. <a href="https://doi.org/10.1093/gigascience/giab008">https://doi.org/10.1093/gigascience/giab008</a>.
 </div>
 <div id="ref-haenelMetaanalysisChromosomescaleCrossover2018" class="csl-entry" role="doc-biblioentry">
-Haenel, Quiterie, Telma G. Laurentino, Marius Roesti, and Daniel Berner. <span>“Meta-Analysis of Chromosome-Scale Crossover Rate Variation in Eukaryotes and Its Significance to Evolutionary Genomics.”</span> <em>Molecular Ecology</em> 27, no. 11 (2018): 2477–97. <a href="https://doi.org/10.1111/mec.14699">https://doi.org/10.1111/mec.14699</a>.
+Haenel, Quiterie, Telma G. Laurentino, Marius Roesti, and Daniel Berner. 2018. <span>“Meta-Analysis of Chromosome-Scale Crossover Rate Variation in Eukaryotes and Its Significance to Evolutionary Genomics.”</span> <em>Molecular Ecology</em> 27 (11): 2477–97. <a href="https://doi.org/10.1111/mec.14699">https://doi.org/10.1111/mec.14699</a>.
 </div>
 <div id="ref-HmmlearnHmmlearn2022" class="csl-entry" role="doc-biblioentry">
-<em>Hmmlearn/Hmmlearn</em>. 2014. Reprint, <span>hmmlearn</span>, 2022. <a href="https://github.com/hmmlearn/hmmlearn">https://github.com/hmmlearn/hmmlearn</a>.
+<em>Hmmlearn/Hmmlearn</em>. (2014) 2022. <span>hmmlearn</span>. <a href="https://github.com/hmmlearn/hmmlearn">https://github.com/hmmlearn/hmmlearn</a>.
 </div>
 <div id="ref-khannaBamreadcountRapidGeneration2022" class="csl-entry" role="doc-biblioentry">
-Khanna, Ajay, David E. Larson, Sridhar Nonavinkere Srivatsan, Matthew Mosior, Travis E. Abbott, Susanna Kiwala, Timothy J. Ley, et al. <span>“Bam-Readcount - Rapid Generation of Basepair-Resolution Sequence Metrics.”</span> <em>Journal of Open Source Software</em> 7, no. 69 (January 29, 2022): 3722. <a href="https://doi.org/10.21105/joss.03722">https://doi.org/10.21105/joss.03722</a>.
+Khanna, Ajay, David E. Larson, Sridhar Nonavinkere Srivatsan, Matthew Mosior, Travis E. Abbott, Susanna Kiwala, Timothy J. Ley, et al. 2022. <span>“Bam-Readcount - Rapid Generation of Basepair-Resolution Sequence Metrics.”</span> <em>Journal of Open Source Software</em> 7 (69): 3722. <a href="https://doi.org/10.21105/joss.03722">https://doi.org/10.21105/joss.03722</a>.
 </div>
 <div id="ref-Picard2019toolkit" class="csl-entry" role="doc-biblioentry">
-<span>“Picard Toolkit.”</span> <em>Broad Institute, GitHub Repository</em>. <a href="https://broadinstitute.github.io/picard/" class="uri">https://broadinstitute.github.io/picard/</a>; Broad Institute, 2019.
+<span>“Picard Toolkit.”</span> 2019. <em>Broad Institute, GitHub Repository</em>. <a href="https://broadinstitute.github.io/picard/" class="uri">https://broadinstitute.github.io/picard/</a>; Broad Institute.
 </div>
 <div id="ref-vasimuddinEfficientArchitectureawareAcceleration2019" class="csl-entry" role="doc-biblioentry">
-Vasimuddin, Md, Sanchit Misra, Heng Li, and Srinivas Aluru. <span>“Efficient Architecture-Aware Acceleration of <span>BWA-MEM</span> for Multicore Systems.”</span> In <em>2019 <span>IEEE International Parallel</span> and <span>Distributed Processing Symposium</span> (<span>IPDPS</span>)</em>, 314–24. <span>IEEE</span>, 2019.
+Vasimuddin, Md, Sanchit Misra, Heng Li, and Srinivas Aluru. 2019. <span>“Efficient Architecture-Aware Acceleration of <span>BWA-MEM</span> for Multicore Systems.”</span> In <em>2019 <span>IEEE International Parallel</span> and <span>Distributed Processing Symposium</span> (<span>IPDPS</span>)</em>, 314–24. <span>IEEE</span>.
 </div>
 </div>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p><a href="#ref-vasimuddinEfficientArchitectureawareAcceleration2019" role="doc-biblioref">Md Vasimuddin et al., <span>“Efficient Architecture-Aware Acceleration of <span>BWA-MEM</span> for Multicore Systems,”</span> in <em>2019 <span>IEEE International Parallel</span> and <span>Distributed Processing Symposium</span> (<span>IPDPS</span>)</em> (<span>IEEE</span>, 2019), 314–24</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><a href="#ref-Picard2019toolkit" role="doc-biblioref"><span>“Picard Toolkit,”</span> <em>Broad Institute, GitHub Repository</em> (</a><a href="https://broadinstitute.github.io/picard/" class="uri" role="doc-biblioref">https://broadinstitute.github.io/picard/</a>; Broad Institute, 2019).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><a href="#ref-danecekTwelveYearsSAMtools2021" role="doc-biblioref">Petr Danecek et al., <span>“Twelve Years of <span>SAMtools</span> and <span>BCFtools</span>,”</span> <em>GigaScience</em> 10, no. 2 (February 1, 2021): giab008, </a><a href="https://doi.org/10.1093/gigascience/giab008" role="doc-biblioref">https://doi.org/10.1093/gigascience/giab008</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p><a href="#ref-khannaBamreadcountRapidGeneration2022" role="doc-biblioref">Ajay Khanna et al., <span>“Bam-Readcount - Rapid Generation of Basepair-Resolution Sequence Metrics,”</span> <em>Journal of Open Source Software</em> 7, no. 69 (January 29, 2022): 3722, </a><a href="https://doi.org/10.21105/joss.03722" role="doc-biblioref">https://doi.org/10.21105/joss.03722</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p><a href="#ref-HmmlearnHmmlearn2022" role="doc-biblioref"><em>Hmmlearn/Hmmlearn</em> (2014; repr., <span>hmmlearn</span>, 2022), </a><a href="https://github.com/hmmlearn/hmmlearn" role="doc-biblioref">https://github.com/hmmlearn/hmmlearn</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p><a href="#ref-haenelMetaanalysisChromosomescaleCrossover2018" role="doc-biblioref">Quiterie Haenel et al., <span>“Meta-Analysis of Chromosome-Scale Crossover Rate Variation in Eukaryotes and Its Significance to Evolutionary Genomics,”</span> <em>Molecular Ecology</em> 27, no. 11 (2018): 2477–97, </a><a href="https://doi.org/10.1111/mec.14699" role="doc-biblioref">https://doi.org/10.1111/mec.14699</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p><a href="#ref-haenelMetaanalysisChromosomescaleCrossover2018" role="doc-biblioref"><span>“Meta-Analysis of Chromosome-Scale Crossover Rate Variation in Eukaryotes and Its Significance to Evolutionary Genomics”</span></a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p><a href="#ref-somite-assoc-tests" role="doc-biblioref"><strong>Somite-assoc-tests?</strong></a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
