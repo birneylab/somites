@@ -1,0 +1,9 @@
+# Ali per chromosome plot
+
+```{r}
+library(BSgenome.Hsapiens.UCSC.hg19)
+library(ggbio)
+llibrary(GenomicRanges)
+library(IRanges)
+```
+
