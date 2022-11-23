@@ -1,0 +1,6 @@
+Bootstrap: docker
+From: rocker/tidyverse:3.6
+
+%post
+    # Install packages required for R packages
+    apt update

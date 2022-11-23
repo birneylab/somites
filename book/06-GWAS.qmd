@@ -5,9 +5,9 @@
 library(tidyverse)
 ```
 
-## Genetic Relationshiop Matrix
+## Genetic Relationship Matrix
 
-Finally, we used the called recombination blocks as pseudo-SNPs in a genetic linkage analysis. To detect associations between the pseudo-SNPs and the three phenotypes of interest, we used a linear mixed model (**LMM**) as implemented in GCTA [@yangGCTAToolGenomewide2011]. For the genetic relationship matrix (**GRM**), we additionally used the leave-one-chromosome-out implementation of GCTA's LMM, with excludes the chromosome on which the candidate SNP is located when calculating the GRM. A GRM constructed from the entire genome is presented in **@fig-somite-grm**. The square in the top right-hand corner is created by samples ~550-648, which, based on @fig-karyo-no-missing above, clearly have distinct genotypes to the rest of the samples due to their having been bred from different F~1~ parents. 
+Finally, we used the called recombination blocks as pseudo-SNPs in a genetic linkage analysis. To detect associations between the pseudo-SNPs and the three phenotypes of interest, we used a linear mixed model (**LMM**) as implemented in GCTA [@yangGCTAToolGenomewide2011]. For the genetic relationship matrix (**GRM**), we additionally used the leave-one-chromosome-out implementation of GCTA's LMM, with excludes the chromosome on which the candidate SNP is located when calculating the GRM. A GRM constructed from the entire genome is presented as a heatmap in **@fig-somite-grm**, with each sample represented on each axis, and lighter colours representing a higher degree of relatedness between a pair of samples. The square in the top right-hand corner is created by samples ~550-648, which, based on @fig-karyo-no-missing above, clearly have distinct genotypes to the rest of the samples due to their having been bred from different F~1~ parents. 
 
 ```{r}
 #| label: fig-somite-grm
@@ -104,7 +104,7 @@ fig
 
 ```
 
-As described above in @sec-somite-phenotype, the microscope used to image the embryos (either AU or DB) differed by several degrees in heat, which likely caused differences in the measurements observed. We accordingly experimented with including microscope as a covariate, either alone or together with the genotype for the reporter locus (either homozygous or heterozygous), or excluding it altogether. In an attempt to avoid complications resulting from its inclusion, we also tried inverse-normalising the period phenotype within each microscope group, transforming the phenotype to fit a normal distribution across both microscopes. We only show the results from this transformed phenotype in the following section. 
+As described above in @sec-somite-phenotype, the microscope used to image the embryos (either AU or DB) differed in heat by 0.7-0.8°C, which likely caused differences in the measurements observed. In an attempt to avoid complications resulting from its inclusion, we inverse-normalised the period phenotype within each microscope group, transforming the phenotype to fit a normal distribution across both microscopes (displayed in @fig-invnorm-intercept\B). We only show the results from this transformed phenotype in the following section. 
 
 To set the significance threshold, we permuted the phenotype across samples using 10 different random seeds, together with all covariates when included, and ran a separate linkage model for each permutation. We then set the lowest $p$-value from all 10 permutation as the significance threshold for the non-permuted model. We additionally applied a Bonferroni correction to our $p$-values by dividing $\alpha$ (0.05) by the number of pseudo-SNPs in the model, and set this as a secondary threshold. 
 
@@ -297,7 +297,7 @@ We ran Ensembl's Variant Effect Predictor [@mclarenEnsemblVariantEffect2016] ove
 knitr::kable(readr::read_csv(here::here("results/vep_consequence_counts.csv")))
 ```
 
-We then combined these results with bulk RNA-seq that they had performed on F~0~ *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* and *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* individuals, to determine which of these genes are expressed in the tail during embryogenesis. This allowed us to reduce to the list to 29 genes, and a gene ontology analysis of this found that the list of genes was enriched for body axis, somitogenesis, and segmentation (see table below). Using this list of genes, we are now in the process of knocking out the protein-altering *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* allele into *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* embryos, and *vice versa*, to functionally validate these variants.
+We then combined these results with bulk RNA-seq that they had performed on F~0~ *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* and *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* individuals, to determine which of these genes are expressed in the tail during embryogenesis. This allowed us to reduce to the list to 29 genes, and a gene ontology analysis of this found that the list of genes was enriched for body axis, somitogenesis, and segmentation (see table below). Using this list of genes, we are now in the process of knocking out the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* allele in the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* her7venus background to functionally validate whether any of these genes plays a role in setting the tempo of the segmentation clock.
 
 ```{r}
 #| label: tbl-psm-final-genes
@@ -314,12 +314,21 @@ readr::read_csv(here::here("results/final_gene_list.csv")) %>%
   DT::datatable()
 ```
 
-We have since begun the process of using the CRISPR-Cas9 system [@campenhoutGuidelinesOptimizedGene2019] to knock out some of these candidate genes to determine their effect on the period phenotype. The *mespb* (ENSORLG00000014656) and *pcdh10b* (ENSORLG00000020474) genes have both been found to be involved in segmental boundary formation and somite patterning [@hitachiPhysicalInteractionTbx62008; @rangarajanPCNSNovelProtocadherin2006], and are highly conserved in vertebrates [@gulEvolutionDiversityCadherins2017; @satouAscidianMespGene2004]. Preliminary results have shown that knocking out either of these genes from the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* strain significantly speeds up somite period development by 2-3 minutes (**@fig-ko-period)**), providing promising evidence that these genes are involved in the establishment of the segmentation clock. 
+We have since begun the process of using the CRISPR-Cas9 system [@campenhoutGuidelinesOptimizedGene2019] to knock out some of these candidate genes to determine their effect on the period phenotype. The *mespb* (ENSORLG00000014656) and *pcdh10b* (ENSORLG00000020474) genes have both been found to be involved in segmental boundary formation and somite patterning [@hitachiPhysicalInteractionTbx62008; @rangarajanPCNSNovelProtocadherin2006], and are highly conserved in vertebrates [@gulEvolutionDiversityCadherins2017; @satouAscidianMespGene2004]. Preliminary results have shown that knocking out either of these genes from the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* strain significantly speeds up somite period development by 2-3 minutes (**@fig-ko-period_box** and **@fig-ko-period)**), providing promising evidence that these genes are involved in the establishment of the segmentation clock. 
+
+book/plots/ali/20221123_email_attachments/Graph3.png
+
+```{r}
+#| label: fig-ko-period_box
+#| echo: false
+#| fig.cap: 'Period intercept for *Cab* embryos with CRISPR-Cas9 knock-outs [@campenhoutGuidelinesOptimizedGene2019] of *mespb* and *pcdh10b* compared to controls. Figure generated by Ali Seleit.'
+knitr::include_graphics(here::here("book/plots/ali/20221123_email_attachments/Graph3.png"), auto_pdf = T)
+```
 
 ```{r}
 #| label: fig-ko-period
 #| echo: false
-#| fig.cap: 'Period intercept for *Cab* embryos with CRISPR-Cas9 knock-outs [@campenhoutGuidelinesOptimizedGene2019] of *mespb* and *pcdh10b* compared to controls. Figure generated by Ali Seleit.'
+#| fig.cap: 'Mean period for *Cab* embryos with CRISPR-Cas9 knock-outs [@campenhoutGuidelinesOptimizedGene2019] of *mespb* and *pcdh10b* compared to controls. Figure generated by Ali Seleit.'
 knitr::include_graphics(here::here("book/plots/ali/ko_results.png"), auto_pdf = T)
 ```
 
@@ -372,4 +381,20 @@ readr::read_tsv(here::here("results/annotations_psm/hdrr/None/5000/0.8/unsegment
   DT::datatable(  )
 ```
 
-We then combined these results with bulk RNA-seq that they had performed on F~0~ *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* and *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* individuals, to determine which of these genes are expressed in the unsegmented tail during embryogenesis. This allowed us to reduce to the list to 96 genes, although they were not apparently associated with a specific gene ontology as perhaps expected, given this is a single locus that is potentially driven by just one gene. As with the period intercept phenotype, we are now in the process of knocking in the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* allele into *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* embryos, and *vice versa*, to functionally validate these variants.
+We then combined these results with bulk RNA-seq that they had performed on F~0~ *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* and *`r kableExtra::text_spec("Kaga", color = "#DE3C4B")`* individuals, to determine which of these genes are expressed in the unsegmented tail during embryogenesis. This allowed us to reduce to the list to 96 genes, although they were not apparently associated with a specific gene ontology as perhaps expected, given this is a single locus that is potentially driven by just one gene. As with the period intercept phenotype, we are now in the process of knocking out the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* allele in the *`r kableExtra::text_spec("Cab", color = "#43AA8B")`* her7venus background to assess if any of these genes play a role in determining the size of the PSM and to functionally validate the hits. 
+
+Two of these genes have shown a phenotype of reduced PSM area, segment boundary problems, and segment size (**@fig-ko-psm-box** and **@fig-ko-psm-pic**). The first, *dll1*, is a known player in somitogenesis. The second, *atxn1l*, has not been associated with somitogenesis before, but is a negative regulator of Notch signalling in mice and *Drosophila* (noting that Notch is a major player in segmentation in all vertebrates).
+
+```{r}
+#| label: fig-ko-psm-box
+#| echo: false
+#| fig.cap: 'Unsegmented PSM area for *Cab* embryos with CRISPR-Cas9 knock-outs [@campenhoutGuidelinesOptimizedGene2019] of *fzd3*, *tcf25*, *atxn1l* and *dll* compared to controls. Figure generated by Ali Seleit.'
+knitr::include_graphics(here::here("book/plots/ali/20221123_email_attachments/Graph4.png"), auto_pdf = T)
+```
+
+```{r}
+#| label: fig-ko-psm-pic
+#| echo: false
+#| fig.cap: 'Illustrative images of differences in somite segmentation for *Cab* embryos with CRISPR-Cas9 knock-outs [@campenhoutGuidelinesOptimizedGene2019] of *fzd3*, *tcf25*, *atxn1l* and *dll1* compared to controls. The *atxn1l* and *dll1* knock-outs show reduced PSM area, segment boundary problems, and segment size. Figure generated by Ali Seleit.'
+knitr::include_graphics(here::here("book/plots/ali/20221123_email_attachments/picture5.png"), auto_pdf = T)
+```
