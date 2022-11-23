@@ -129,3 +129,20 @@ bsub -o /dev/null -q datamover "cp -r /nfs/ftp/private/indigene_ftp/upload/Ali/K
 
 # First batch `Kaga-Cab_F2_First200WGS`: 186 - 1 (171) = 185
 # Second batch `Kaga-Cab_F2_Fish201-400_WGS`: 192
+
+####################
+# Run old version of R to use with Bioconductor
+####################
+ssh proxy-codon
+bsub -q short -M 50000 -Is bash
+cd /hps/software/users/birney/ian/repos/somites
+module load singularity-3.7.0-gcc-9.3.0-dp5ffrp
+singularity shell --bind /hps/nobackup/birney/users/ian/R_tmp/R_3.6/rstudio_db:/var/lib/rstudio-server \
+                  --bind /hps/nobackup/birney/users/ian/R_tmp/R_3.6/tmp:/tmp \
+                  --bind /hps/nobackup/birney/users/ian/R_tmp/R_3.6/run:/run \
+                  docker://rocker/tidyverse:3.6
+# Then run rserver, setting path of config file containing library path
+rstudio-server kill-all
+rserver \
+    --rsession-config-file /hps/software/users/birney/ian/repos/somites/workflow/envs/R_3.6/rsession.conf \
+    --server-user brettell
