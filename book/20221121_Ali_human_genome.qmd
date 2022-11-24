@@ -1,9 +1,22 @@
 # Ali per chromosome plot
 
 ```{r}
-library(BSgenome.Hsapiens.UCSC.hg19)
 library(ggbio)
-llibrary(GenomicRanges)
-library(IRanges)
+library(BSgenome.Hsapiens.UCSC.hg19)
+library(ggcoverage)
+library(ggplot2)
+data(genesymbol, package = "biovizBase")
+wh <- genesymbol[c("BRCA1", "NBR1")] #i just defined 2 random genes hat they recommend in the tutorial
+wh <- range(wh, ignore.strand = TRUE)
+bg <- BSgenome.Hsapiens.UCSC.hg19
+p.bg <- autoplot(bg, which = wh)
+p.bg
+p.bg + zoom(1/100)
+autoplot(bg, which = resize(wh, width = width(wh)/50), geom = "segment")
+```
+
+```{r}
+# Choose genes on chr1
+genesymbol[seqnames(genesymbol) == "chr1"]
 ```
 
