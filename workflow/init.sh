@@ -140,9 +140,11 @@ module load singularity-3.7.0-gcc-9.3.0-dp5ffrp
 singularity shell --bind /hps/nobackup/birney/users/ian/R_tmp/R_3.6/rstudio_db:/var/lib/rstudio-server \
                   --bind /hps/nobackup/birney/users/ian/R_tmp/R_3.6/tmp:/tmp \
                   --bind /hps/nobackup/birney/users/ian/R_tmp/R_3.6/run:/run \
-                  docker://rocker/tidyverse:3.6
+                  /hps/nobackup/birney/users/ian/containers/somites/R_3.6.sif
 # Then run rserver, setting path of config file containing library path
 rstudio-server kill-all
 rserver \
     --rsession-config-file /hps/software/users/birney/ian/repos/somites/workflow/envs/R_3.6/rsession.conf \
     --server-user brettell
+
+ssh -L 8787:hl-codon-37-04:8787 proxy-codon
